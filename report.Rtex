@@ -1,0 +1,84 @@
+\documentclass{article}
+
+\usepackage{siunitx} % Provides the \SI{}{} command for typesetting SI units
+\usepackage{graphicx} % Required for the inclusion of images
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+\renewcommand{\labelenumi}{\alph{enumi}.}
+
+
+\title{Enterococcus Assay qPCR Report \\ \rinline{metadata["File Name"]}} % Title
+\date{\today} % Date for the report
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\begin{tabular}{l r}
+Date Performed: \rinline{metadata["Run Started"]} \\ % Date the experiment was performed
+User: \rinline{metadata["Created By User"]} \\ 
+Protocol: \rinline{metadata["Protocol File Name"]} \\
+Sample Volume: \rinline{metadata["Sample Vol"]} \si{\micro\litre} 
+\end{tabular}
+\end{center}
+
+%----------------------------------------------------------------------------
+
+\section{Standard Curve QC Results}
+
+Both enterococcus and sketa standard curves must have an $r^2$ that is greater than \rinline{r2.min},
+and an efficiency that is between \rinline{eff.min} and \rinline{eff.max}. \\
+
+
+\begin{center}
+\begin{tabular}{c c c}
+\hline\hline 
+Measure & Result & Pass? \\ [0.5ex]
+\hline
+Ent $r^2$ & \rinline{ent.r2} & \rinline{ent.StdQC["r2"]} \\
+Ent efficiency & \rinline{ent.Efficiency} & \rinline{ent.StdQC["eff"]} \\
+Sketa $r^2$ & \rinline{sketa.r2} & \rinline{sketa.StdQC["r2"]} \\
+Sketa efficiency & \rinline{sketa.Efficiency} & \rinline{sketa.StdQC["eff"]} \\ [1ex]
+\hline
+\end{tabular}
+\end{center}
+
+%----------------------------------------------------------------------------
+
+\section{NTC and NEC QC Results}
+
+Both the NTCs (qPCR blanks) and NECs (extraction blanks) must all be non-detects. \\
+
+\begin{center}
+\begin{tabular}{c c}
+\hline\hline 
+Measure & Pass? \\ [0.5ex]
+\hline
+NTC & \rinline{controls["NTC"]} \\
+NEC & \rinline{controls["NEC"]} \\ [1ex]
+\hline
+\end{tabular}
+\end{center}
+%----------------------------------------------------------------------------
+\pagebreak
+\section{Inhibition QC Results} 
+
+The calibrator internal control  Ct on this plate was \rinline{sk.calibrator}. In order to pass,
+the difference between the sample IC Ct and the calibrator Ct must be less than \rinline{thres}.
+
+
+%% begin.rcode echo=FALSE, results="asis"
+% print(xtable(sketaDataTrim), include.rownames=FALSE, sanitize.text.function=function(x){x})
+%% end.rcode
+
+%----------------------------------------------------------------------------
+\pagebreak
+\section{Enterococcus Concentration Estimation}
+
+%% begin.rcode echo=FALSE, results="asis"
+% print(xtable(resultsTrim), scalebox = 0.93, include.rownames=FALSE, sanitize.text.function=function(x){x})
+%% end.rcode
+
+\end{document}

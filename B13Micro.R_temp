@@ -1,0 +1,20 @@
+# Rscript B13Micro.R 1359585702 user.filename
+library(XML)
+
+ts <- commandArgs(TRUE)[1] # timestamp
+uf <- commandArgs(TRUE)[2] # user file name
+
+# outputf <- paste("/var/www/b13micro/files/test.xml", sep = "/");
+outputf <- paste("/var/www/b13micro/files/", ts, ".xml", sep = "");
+
+# Read in user files.
+
+micro <- read.csv(paste("/var/www/b13micro/files/", ts, ".csv", sep = ""), stringsAsFactors = FALSE)
+
+# Output to xml for google maps
+docu <- xmlOutputDOM()
+docu$addTag("markers", close=FALSE)	
+url <- (sprintf("marker stationid=\"1234\" latitude=\"133455\" longitude=\"123345\""))
+docu$addTag(url)
+docu$closeTag()
+saveXML(docu$value(), file=outputf, doctype = NULL)

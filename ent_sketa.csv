@@ -1,0 +1,76 @@
+File Name,admin_2012-07-26 13-03-43_environmental la rapid NS.pcrd,,,,,
+Created By User,admin,,,,,
+Notes,20120726 environmental la rapid NS,,,,,
+ID,,,,,,
+Run Started,7/26/2012 1:04:01 PM UTC -07:00,,,,,
+Run Ended,7/26/2012 2:39:14 PM UTC -07:00,,,,,
+Sample Vol,25,,,,,
+Lid Temp,105,,,,,
+Protocol File Name,ent1_taqman.prcl,,,,,
+Plate Setup File Name,la rapid normal plate.pltd,,,,,
+Base Serial Number,CC011379,,,,,
+Optical Head Serial Number,785BR4283,,,,,
+CFX Manager Version,2.1.1022.0523. ,,,,,
+,,,,,,
+Well group,All Wells,,,,,
+Amplification step,4,,,,,
+Melt step,,,,,,
+,,,,,,
+,,,,,,
+Well,Fluor,Target,Content,Sample,Cq,Starting Quantity (SQ)
+A01,FAM,ent,Std-01,calibrator,22.58,1.00E+05
+A02,FAM,ent,Std-01,calibrator,22.61,1.00E+05
+A03,FAM,ent,Std-02,,25.98,1.00E+04
+A04,FAM,ent,Std-02,,25.92,1.00E+04
+A05,FAM,ent,Std-03,,29.35,1.00E+03
+A06,FAM,ent,Std-03,,29.17,1.00E+03
+A07,FAM,ent,Std-04,,32.42,1.00E+02
+A08,FAM,ent,Std-04,,32.43,1.00E+02
+A09,FAM,ent,Std-05,,36.52,1.00E+01
+A10,FAM,ent,Std-05,,36.54,1.00E+01
+A11,FAM,ent,NTC,NTC,N/A,N/A
+A12,FAM,ent,Neg Ctrl,NEC,N/A,N/A
+B01,FAM,ent,Unkn-01,CB2,N/A,N/A
+B02,FAM,ent,Unkn-01,CB2,N/A,N/A
+B03,FAM,ent,Unkn-02,S02 (1-18),38.16,2.72E+00
+B04,FAM,ent,Unkn-02,S02 (1-18),38.06,2.91E+00
+B05,FAM,ent,Unkn-03,12-Jan,31.49,2.39E+02
+B06,FAM,ent,Unkn-03,12-Jan,31.14,3.01E+02
+B07,FAM,ent,Unkn-04,S01 (MC-2),35.73,1.39E+01
+B08,FAM,ent,Unkn-04,S01 (MC-2),35.4,1.73E+01
+B09,FAM,ent,Unkn-05,S09 (mdRH-2),35.2,1.98E+01
+B10,FAM,ent,Unkn-05,S09 (mdRH-2),36.21,1.01E+01
+B11,FAM,ent,Unkn-06,S04 (2-07),N/A,N/A
+B12,FAM,ent,Unkn-06,S04 (2-07),37.27,4.95E+00
+C01,FAM,ent,Unkn-07,CB2 1:5,N/A,N/A
+C02,FAM,ent,Unkn-07,CB2 1:5,N/A,N/A
+C03,FAM,ent,Unkn-08,cal 1:5,24.86,2.04E+04
+C04,FAM,ent,Unkn-08,cal 1:5,24.77,2.16E+04
+E01,FAM,sketa,Std-06,calibrator,24.4,1.00E+05
+E02,FAM,sketa,Std-06,calibrator,24.34,1.00E+05
+E03,FAM,sketa,Std-07,,27.71,1.00E+04
+E04,FAM,sketa,Std-07,,27.61,1.00E+04
+E05,FAM,sketa,Std-08,,30.95,1.00E+03
+E06,FAM,sketa,Std-08,,30.8,1.00E+03
+E07,FAM,sketa,Std-09,,34.05,1.00E+02
+E08,FAM,sketa,Std-09,,34.88,1.00E+02
+E09,FAM,sketa,Std-10,,37.11,1.00E+01
+E10,FAM,sketa,Std-10,,38.03,1.00E+01
+E11,FAM,sketa,NTC,NTC,38.48,N/A
+E12,FAM,sketa,Neg Ctrl,Neg Ctrl,24.54,8.78E+04
+F01,FAM,sketa,Unkn-09,CB2,29.46,2.89E+03
+F02,FAM,sketa,Unkn-09,CB2,29.46,2.89E+03
+F03,FAM,sketa,Unkn-10,S02 (1-18),24.22,1.09E+05
+F04,FAM,sketa,Unkn-10,S02 (1-18),24.22,1.09E+05
+F05,FAM,sketa,Unkn-11,12-Jan,24.23,1.09E+05
+F06,FAM,sketa,Unkn-11,12-Jan,24.19,1.11E+05
+F07,FAM,sketa,Unkn-12,S01 (MC-2),24.13,1.16E+05
+F08,FAM,sketa,Unkn-12,S01 (MC-2),24.22,1.10E+05
+F09,FAM,sketa,Unkn-13,S09 (mdRH-2),24.27,1.05E+05
+F10,FAM,sketa,Unkn-13,S09 (mdRH-2),24.21,1.10E+05
+F11,FAM,sketa,Unkn-14,S04 (2-07),24.3,1.03E+05
+F12,FAM,sketa,Unkn-14,S04 (2-07),24.46,9.29E+04
+G01,FAM,sketa,Unkn-15,CB2 1:5,31.83,5.56E+02
+G02,FAM,sketa,Unkn-15,CB2 1:5,31.83,5.59E+02
+G03,FAM,sketa,Unkn-16,cal 1:5,26.59,2.11E+04
+G04,FAM,sketa,Unkn-16,cal 1:5,26.39,2.42E+04

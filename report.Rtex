@@ -66,8 +66,8 @@ NEC & \rinline{controls["NEC"]} \\ [1ex]
 \pagebreak
 \section{Inhibition QC Results} 
 
-The calibrator internal control (IC) Ct on this plate was \rinline{sk.calibrator}. In order to pass,
-the difference between the mean sample IC Ct ($\text{sketaCt}_{mean}$) and the calibrator Ct (i.e., $\Delta \text{Ct}_{mean}$)
+The sketa calibrator internal control Ct on this plate was \rinline{sk.calibrator}. In order to pass,
+the difference between the mean sample sketa Ct ($\text{sketaCt}_{mean}$) and the calibrator Ct (i.e., $\Delta \text{Ct}_{mean}$)
 must be less than \rinline{thres}. Note that the threshold level and pass/fail designations assume that the sample has not
 been diluted. 
 
@@ -86,7 +86,7 @@ in the following way:
 $$ \log_{10}{CE} = \frac{\Delta\text{Ct}_{samp, cal}}{slope} + \log_{10}{cal} $$
 
 where $slope$ is the slope of the enterococcus standard curve (\rinline{ent.Slope} for this plate),
-$cal$ is the enterococcus calibrator expected CE (which should be $10^{5}$), and 
+$cal$ is the enterococcus calibrator expected CE, and 
 $\Delta\text{Ct}_{samp, cal}$ is the difference in Ct between the mean of the calibrators and 
 the sample. These values are then transformed to CE per filter (assumed to be 100 ml), and are reported below.
 Samples indicated to be inhibited by sketa controls are labeled as such. Uninhibited CE estimates that are below the detection 

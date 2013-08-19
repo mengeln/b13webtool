@@ -21,7 +21,7 @@ cfxtest <- read.csv(file,
 
 ### Pull metadata
 
-meta <- read.csv(file, nrows = 13, header = FALSE, stringsAsFactors=FALSE)[, 1:2]
+meta <- read.csv(file, nrows = 13, header = FALSE)[, 1:2]
 metadata <- meta[, 2]
 names(metadata) <- meta[, 1]
 metadata <- gsub("_", " ", metadata)
@@ -87,7 +87,7 @@ controls <- negQC(entData)
 sketaQC <- function(data=sketaData, threshold=thres){
   sk.unkn <- data[grepl("Unkn", data$Content), ]
   Ct.sk.calibrator <- mean(data$Cq[data$Sample == "calibrator"])
-
+  
   sk.calibrator <<- Ct.sk.calibrator
   sk.unkn$sk.dct <- sk.unkn$Cq - Ct.sk.calibrator
   sk.unkn$Inhibition <- ifelse(sk.unkn$sk.dct > threshold,
@@ -99,9 +99,11 @@ sketaQC <- function(data=sketaData, threshold=thres){
 sketaData <- sketaQC(sketaData)
 
 sketaDataTrim <- sketaData[, c("Sample", "sk.Ct", "sk.dct", "Inhibition")]
+
 sketaDataTrim <- ddply(sketaDataTrim, .(Sample), summarize, sk.Ct = mean(sk.Ct, na.rm=TRUE),
                        sk.dct = mean(sk.dct, na.rm=TRUE), Inhibtion = ifelse(all(Inhibition == "PASS"), "PASS", "FAIL"))
 names(sketaDataTrim) <- c("Sample", "sketaCt$_{mean}$", "$\\Delta$Ct$_{mean}$", "Pass?")
+
 # Ct to copy number (dct quantification model)
 
 dct <- function(data, ulPerRxn=5, mlFiltered=100, ulCE=500, ulCErecovered=300, ulPE=100, cal=1e5/500){
@@ -119,7 +121,11 @@ dct <- function(data, ulPerRxn=5, mlFiltered=100, ulCE=500, ulCErecovered=300, u
 }
 
 entData <- dct(entData)
-
+entData <- ddply(entData, .(Sample), function(df){
+  df$Mean <- NA
+  df$Mean[1] <- round(log10(mean(df$cellPer100ml)), digits=3)
+  df
+})
 
 sketaDataMean <- ddply(sketaData, .(Sample), summarize, sk.Ct = mean(sk.Ct, na.rm=TRUE),
                        sk.dct = mean(sk.dct, na.rm=TRUE),
@@ -131,9 +137,17 @@ result <- merge(entData, sketaDataMean)
 # Inhibited flag
 result$log10cellPer100ml[result$Inhibition == "FAIL"] <- "inhibited"
 
-resultsTrim <- subset(result, select = c(Sample, Target, Cq, log10cellPer100ml))
+resultsTrim <- subset(result, select = c(Sample, Target, Cq, log10cellPer100ml, Mean))
 names(resultsTrim)[3:4] <- c("Ct", "$\\log_{10}$ cells/100 \\si{\\milli\\litre}")
 resultsTrim$Ct[resultsTrim$Ct == m] <- "N/A"
+
+resultsTrim <- ddply(resultsTrim, .(Sample), function(df){
+  
+  if(any(df$"$\\log_{10}$ cells/100 \\si{\\milli\\litre}" == "inhibited"))
+    df$Mean[!is.na(df$Mean)] <- "inhibited" 
+  df
+})
+resultsTrim <- arrange(resultsTrim, Sample, Mean)
 
 # Generate report
 oname <- tail(strsplit(file, "/")[[1]], 1)

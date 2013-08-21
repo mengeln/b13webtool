@@ -1,6 +1,9 @@
 suppressPackageStartupMessages(library("optparse"))
 
-source("ABI_to_CFX.r")
+options(stringsAsFactor = FALSE)
+library(Hmisc)
+
+#source("ABI_to_CFX.r")
 source("enteroTaq.r")
 source("processHF183.r")
 source("qpcrDB.r")
@@ -24,13 +27,13 @@ if(opt$platform == "ABI")
 if(opt$assay == "ent") {
   result <- process_enteroTaq(opt$file)
   p <- "enteroTaqEnviron"
-}
-else {
+} else {
   result <- process_HF183(opt$file)
   p <- "HF183_duplex"
 }
 
 
-submitData(result, opt$organization, p)
+
+#submitData(result, opt$organization, p)
 
 cat("Test Return")

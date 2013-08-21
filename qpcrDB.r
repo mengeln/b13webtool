@@ -18,7 +18,7 @@ insertInto <- function(data, table){
   })
 }
 
-connector <- function()dbConnect("SQLite", "test.db")
+connector <- function()dbConnect("SQLite", "b13Micro.db")
 
 submitData <- function(combinedData, organization, protocol){
   con <- connector()

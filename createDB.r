@@ -4,7 +4,7 @@ options(useFancyQuotes =FALSE)
 con <- connector()
 
 statement <- Reduce(function(x, y)paste(x, y, collpase="
-                                        "), readLines("M:\\qPCR_data\\scripts\\b13micro\\qpcrSchema.sql"))
+                                        "), readLines("qpcrSchema.sql"))
 statements <- strsplit(statement, ";")[[1]]
 statements <- head(statements, length(statements)-1)
 lapply(statements, function(s){

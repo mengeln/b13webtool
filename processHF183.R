@@ -1,6 +1,7 @@
-
+library(reshape2)
 
 process_HF183 <- function (file) {
+options(stringsAsFactors=FALSE)
   
   eff.max <- 2.1
   eff.min <- 1.87
@@ -173,10 +174,14 @@ process_HF183 <- function (file) {
   resultsTrim2$Mean[is.na(resultsTrim2$"1") & is.na(resultsTrim2$"2")] <- "ND"
   names(resultsTrim2)[3:5] <- c("Ct$_{Rep 1}$", "Ct$_{Rep 2}$", "Mean $\\log_{10}$ cells/100 \\si{\\milli\\litre}")
   
+  # Generate report
+  oname <- tail(strsplit(file, "/")[[1]], 1)
+  outputName <- substr(oname, 1, nchar(oname)-4)
+
   
   # Knit PDF#
   if(.Platform$OS == "unix")
-    knit("/var/scripts/b13micro/HFreport.Rtex", paste0("/var/www/b13micro/files/", outputName, ".tex"))
+    knit("/var/scripts/b13micro/b13webtool/HFreport.Rtex", paste0("/var/www/b13micro/files/", outputName, ".tex"))
   else
     knit("HFreport.Rtex", "../tests/report.tex")
   

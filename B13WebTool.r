@@ -1,12 +1,23 @@
 suppressPackageStartupMessages(library("optparse"))
 
 options(stringsAsFactor = FALSE)
-library(Hmisc)
 
-#source("ABI_to_CFX.r")
-source("enteroTaq.r")
-source("processHF183.r")
-source("qpcrDB.r")
+`%nin%` <- function (x, table) {
+  match(x, table, nomatch = 0) == 0
+}
+
+if(.Platform$OS == "unix"){
+  #source("ABI_to_CFX.r")
+  source("enteroTaq.r")
+  source("processHF183.r")
+  source("qpcrDB.r")
+} else {
+  source("ABI_to_CFX.r")
+  source("enteroTaq.r")
+  source("processHF183.r")
+  source("qpcrDB.r")
+}
+
 
 option_list <- list(
   make_option(c("-f", "--file"), type="character", 
@@ -34,6 +45,6 @@ if(opt$assay == "ent") {
 
 
 
-#submitData(result, opt$organization, p)
+submitData(result, opt$organization, p)
 
 cat("Test Return")

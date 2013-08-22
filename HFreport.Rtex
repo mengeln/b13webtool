@@ -77,9 +77,13 @@ been diluted.
 %% end.rcode
 \pagebreak
 \subsection{IAC}
-The IAC internal control Ct (i.e., IAC simplex reactions in the sample negative controls) on this was was \rinline{IACcal}.
-In order to pass, the difference between the $\text{IAC Ct}_{mean}$ for a given sample and the calibrator Ct (i.e., $\Delta \text{Ct}_{mean}$),
-must be less than \rinline{IACthres}.
+
+The IAC internal control Ct (i.e., IAC simplex reactions in the sample negative controls) on this was was \rinline{IACcal}, 
+and the accetable upper bound is a Ct of \rinline{IACinterference}. IAC reactions with Cts greater than this value are 
+considered to be inhibited. However, Ct increases can also be caused by competition in the multiplex reaction if the 
+quantity of sample DNA is high. Failing IACs are marked to denote possible competition effects if the sample Ct was less
+than \rinline{IACcompetition}.
+
 
 %% begin.rcode echo=FALSE, results="asis"
 % print(xtable(IACinhib), include.rownames=FALSE, sanitize.text.function=function(x){x})

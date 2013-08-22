@@ -4,7 +4,8 @@ library(plyr)
 library(lubridate)
 
 process_enteroTaq <- function (file) {
-
+  options(stringsAsFactors=FALSE)
+  
   eff.max <- 2.1
   eff.min <- 1.87
   r2.min <- 0.98
@@ -150,7 +151,10 @@ process_enteroTaq <- function (file) {
   outputName <- substr(oname, 1, nchar(oname)-4)
   
   # direct output to a file
-  knit("/var/scripts/b13micro/report.Rtex", paste0("/var/www/b13micro/files/", outputName, ".tex"))
+  if(.Platform$OS == "unix")
+    knit("/var/scripts/b13micro/report.Rtex", paste0("/var/www/b13micro/files/", outputName, ".tex"))
+  else
+    knit("report.Rtex", paste0("../tests/", outputName, ".tex"))
  
   
   #Return results to be sent to database
@@ -158,6 +162,7 @@ process_enteroTaq <- function (file) {
   result$Date <- metadata["Run Started"]
   names(result)[names(result) %in% c("cellPerRxn", "cellPer100ml", "log10cellPer100ml", "sk.Ct", "sk.dct")] <- 
     c("QuantPerReaction", "QuantPerFilter", "log10QuantPerFilter", "sk_Ct", "sk_dct")
+  result$IAC_Ct <- NA
   result$Quantifier <- "cell_equivalents"
   result$yint <- ent.yint 
   result$Slope <- ent.Slope

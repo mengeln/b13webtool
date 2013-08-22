@@ -175,10 +175,19 @@ process_HF183 <- function (file) {
   
   
   # Knit PDF#
-  knit("HFreport.tex", "report.tex")
+  if(.Platform$OS == "unix")
+    knit("/var/scripts/b13micro/HFreport.Rtex", paste0("/var/www/b13micro/files/", outputName, ".tex"))
+  else
+    knit("HFreport.Rtex", "../tests/report.tex")
   
   ## Return result ##
+  result$Project <- "Bight13" 
+  result$Inhibition <- ifelse(result$"Pass?.x" == "FAIL", "FAIL", ifelse(
+    result[, "Pass?.y"] == "FAIL" & !result$Competition, "FAIL", ifelse(
+      result$"Pass?.y" == "FAIL" & result$Competition, "Competition", "PASS")))
+  names(result)[names(result) %in% c("Eff", "copiesPerRxn", "copiesPer100ml", "log10copiesPer100ml",
+                "sketa Ct$_{mean}$", "$\\Delta$Ct$_{mean}$", "IAC Ct$_{mean}$")] <-
+    c("Efficiency", "QuantPerReaction", "QuantPerFilter", "log10QuantPerFilter", "sk_Ct", "sk_dct", "IAC_Ct")
+  result$Quantifier <- "copies"
   result
 }
-
-process_HF183("HF183_multiplex_test_data.csv")

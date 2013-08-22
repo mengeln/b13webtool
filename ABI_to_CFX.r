@@ -2,9 +2,11 @@
 
 
 abiToCfx <- function (abiFile) {
+  options(stringsAsFactors=FALSE)
+  
   data <- read.csv(abiFile , skip =8)
   
-  data_subset <- data[, c("Well", "Sample.Name", "Target.Name", "Task", "Reporter", "CÑ.", "Quantity")]
+  data_subset <- data[, c("Well", "Sample.Name", "Target.Name", "Task", "Reporter", "C?.", "Quantity")]
   names(data_subset) <- c("Well", "Sample", "Target", "Content", "Fluor", "Cq", "Starting Quantity (SQ)")
   data_subset$Cq[data_subset$Cq == "Undetermined"] <- "N/A"
   data_subset$Content[data_subset$Content == "UNKNOWN"] <- "Unkn"

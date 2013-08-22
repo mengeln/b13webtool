@@ -18,7 +18,12 @@ insertInto <- function(data, table){
   })
 }
 
-connector <- function()dbConnect("SQLite", "b13Micro.db")
+connector <- function(){
+  if(.Platform$OS == "unix")
+    dbConnect("SQLite", "/var/www/b13micro/files/b13Micro.db")
+  else
+    dbConnect("SQLite", "b13Micro.db")
+}
 
 submitData <- function(combinedData, organization, protocol){
   con <- connector()
@@ -63,7 +68,7 @@ submitData <- function(combinedData, organization, protocol){
   
   # Insert reaction data
   reaction <- inputData[, c("SampleID", "MixID", "Well", "Content", "Cq", "QuantPerReaction", "Quantifier",
-                            "QuantPerFilter", "log10QuantPerFilter", "sk_Ct", "sk_dct", "Inhibition")]
+                            "QuantPerFilter", "log10QuantPerFilter", "sk_Ct", "sk_dct", "IAC_Ct", "Inhibition")]
 
   reaction$ND <- ifelse(reaction$log10QuantPerFilter == "ND", "ND", "=")
    reaction <<- reaction 

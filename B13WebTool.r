@@ -7,10 +7,10 @@ options(stringsAsFactor = FALSE)
 }
 
 if(.Platform$OS == "unix"){
-  source("ABI_to_CFX.r", encoding="UTF-8")
-  source("enteroTaq.r")
-  source("processHF183.r")
-  source("qpcrDB.r")
+  source("/var/scripts/b13micro/b13webtool/ABI_to_CFX.r", encoding="UTF-8")
+  source("/var/scripts/b13micro/b13webtool/enteroTaq.r")
+  source("/var/scripts/b13micro/b13webtool/processHF183.R")
+  source("/var/scripts/b13micro/b13webtool/qpcrDB.r")
 } else {
   source("ABI_to_CFX.r")
   source("enteroTaq.r")

@@ -1,13 +1,13 @@
 \documentclass{article}
-
+\usepackage{longtable}
 \usepackage{siunitx} % Provides the \SI{}{} command for typesetting SI units
 \usepackage{graphicx} % Required for the inclusion of images
-\usepackage[margin=1.0in]{geometry}
+\usepackage[margin=0.8in]{geometry}
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
 \renewcommand{\labelenumi}{\alph{enumi}.}
 
 
-\title{qPCR Report \\ Enterococcus TaqEnviron Assay \\ \rinline{metadata["File Name"]}} % Title
+\title{qPCR Report \\ HF183 Assay  \\ \rinline{metadata["File Name"]}} % Title
 \date{\today} % Date for the report
 \author{}
 
@@ -18,9 +18,9 @@
 \begin{center}
 \begin{tabular}{l r}
 Date Performed: \rinline{metadata["Run Started"]} \\ % Date the experiment was performed
-User: \rinline{metadata["Created By User"]} \\
+User: \rinline{metadata["Created By User"]} \\ 
 Protocol: \rinline{metadata["Protocol File Name"]} \\
-Sample Volume: \rinline{metadata["Sample Vol"]} \si{\micro\litre}
+Sample Volume: \rinline{metadata["Sample Vol"]} \si{\micro\litre} 
 \end{tabular}
 \end{center}
 
@@ -28,17 +28,17 @@ Sample Volume: \rinline{metadata["Sample Vol"]} \si{\micro\litre}
 
 \section{Standard Curve QC Results}
 
-Both enterococcus and sketa standard curves must have an $r^2$ that is greater than \rinline{r2.min},
+Both HF183 and sketa standard curves must have an $r^2$ that is greater than \rinline{r2.min},
 and an efficiency that is between \rinline{eff.min} and \rinline{eff.max}. \\
 
 
 \begin{center}
 \begin{tabular}{c c c}
-\hline\hline
+\hline\hline 
 Measure & Result & Pass? \\ [0.5ex]
 \hline
-Ent $r^2$ & \rinline{ent.r2} & \rinline{ent.StdQC["r2"]} \\
-Ent efficiency & \rinline{ent.Efficiency} & \rinline{ent.StdQC["eff"]} \\
+Ent $r^2$ & \rinline{HF.r2} & \rinline{HF.StdQC["r2"]} \\
+Ent efficiency & \rinline{HF.Efficiency} & \rinline{HF.StdQC["eff"]} \\
 Sketa $r^2$ & \rinline{sketa.r2} & \rinline{sketa.StdQC["r2"]} \\
 Sketa efficiency & \rinline{sketa.Efficiency} & \rinline{sketa.StdQC["eff"]} \\ [1ex]
 \hline
@@ -54,7 +54,7 @@ in any replicates will cause these tests to fail. \\
 
 \begin{center}
 \begin{tabular}{c c}
-\hline\hline
+\hline\hline 
 Measure & Pass? \\ [0.5ex]
 \hline
 NTC & \rinline{controls["NTC"]} \\
@@ -64,37 +64,44 @@ NEC & \rinline{controls["NEC"]} \\ [1ex]
 \end{center}
 %----------------------------------------------------------------------------
 \pagebreak
-\section{Inhibition QC Results}
-
+\section{Inhibition QC Results} 
+\subsection{Sketa}
 The sketa calibrator internal control Ct on this plate was \rinline{sk.calibrator}. In order to pass,
-the difference between the mean sample sketa Ct ($\text{sketaCt}_{mean}$) and the calibrator Ct (i.e., $\Delta \text{Ct}_{mean}$)
+the difference between the $\text{sketa Ct}_{mean}$ for a given sample and the calibrator Ct (i.e., $\Delta \text{Ct}_{mean}$)
 must be less than \rinline{thres}. Note that the threshold level and pass/fail designations assume that the sample has not
-been diluted.
+been diluted. 
 
 
 %% begin.rcode echo=FALSE, results="asis"
 % print(xtable(sketaDataTrim), include.rownames=FALSE, sanitize.text.function=function(x){x})
 %% end.rcode
+\pagebreak
+\subsection{IAC}
+The IAC internal control Ct (i.e., IAC simplex reactions in the sample negative controls) on this was was \rinline{IACcal}.
+In order to pass, the difference between the $\text{IAC Ct}_{mean}$ for a given sample and the calibrator Ct (i.e., $\Delta \text{Ct}_{mean}$),
+must be less than \rinline{IACthres}.
+
+%% begin.rcode echo=FALSE, results="asis"
+% print(xtable(IACinhib), include.rownames=FALSE, sanitize.text.function=function(x){x})
+%% end.rcode
 
 %----------------------------------------------------------------------------
 \pagebreak
-\section{Enterococcus Cell Equivalence Estimation}
+\section{HF183 Copy Number Estimation}
 
-Cell equivalents (CE) per reaction is calculated using the $\Delta$Ct method, in which samples are compared to the calibrator
+Copy number (CN) per reaction is calculated using the direct interpolation method, in which samples are compared to the standard curve
 in the following way:
 
-$$ \log_{10}{CE} = \frac{\Delta\text{Ct}_{samp, cal}}{slope} + \log_{10}{cal} $$
+$$ \log_{10}{CN} = \frac{\text{Ct}_{samp} - yint}{slope} $$
 
-where $slope$ is the slope of the enterococcus standard curve (\rinline{ent.Slope} for this plate),
-$cal$ is the enterococcus calibrator expected CE, and
-$\Delta\text{Ct}_{samp, cal}$ is the difference in Ct between the mean of the calibrators and
-the sample. These values are then transformed to CE per filter (assumed to be 100 ml), and are reported below.
-Samples indicated to be inhibited by sketa controls are labeled as such. Uninhibited CE estimates that are below the detection
+where $slope$ is the slope of the HF183 standard curve (\rinline{HF.Slope} for this plate),
+$yint$ is the y-intercept of the HF183 standard curve. These values are then transformed to CN per filter (assumed to be 100 ml), and are reported below.
+Samples indicated to be inhibited by sketa controls are labeled as such. Uninhibited CN estimates that are below the detection 
 limit (set to a Ct of \rinline{m}) are denoted by ``ND''. Any detected inhibition among sample replicates causes the mean
-to be labeled as ``inhibited''. Remember that these CE estimates (both replicate and mean) are reported on a logarithmic scale.
+to be labeled as ``inhibited''. Remember that these CN estimates are reported on a logarithmic scale.
 
 %% begin.rcode echo=FALSE, results="asis"
-% print(xtable(resultsTrim), scalebox = 0.93, include.rownames=FALSE, sanitize.text.function=function(x){x})
+% print(xtable(resultsTrim2), include.rownames=FALSE, sanitize.text.function=function(x){x}, tabular.environment="longtable", floating=FALSE)
 %% end.rcode
 
 \end{document}

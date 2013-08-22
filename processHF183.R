@@ -1,13 +1,26 @@
 
-process_HF183 <- function(cfxtest, meta, eff.max=2.1,
-                         eff.min=1.87, r2.min=0.98,
-                         m=45, thres=1.7, IACthres = 1.7){
-  ### Pull metadata 
+
+process_HF183 <- function (file) {
   
+  eff.max <- 2.1
+  eff.min <- 1.87
+  r2.min <- 0.98
+  m <- 45  # Ct to assign to unamplified wells
+  thres <- 1.7 # inhibition threshold
+  
+  cfxtest <- read.csv(file,
+                      skip=19,
+                      stringsAsFactors=FALSE)
+  
+  ### Pull metadata
+  
+  meta <- read.csv(file, nrows = 13, header = FALSE)[, 1:2]
   metadata <- meta[, 2]
   names(metadata) <- meta[, 1]
   metadata <- gsub("_", " ", metadata)
+  
   # data Clean Up 
+  
   names(cfxtest)[names(cfxtest) == "Starting.Quantity..SQ."] <- "CopyPeruL"
   
   cfxtest$Cq[cfxtest$Cq == "N/A"] <- m
@@ -92,20 +105,26 @@ process_HF183 <- function(cfxtest, meta, eff.max=2.1,
   
   IACcal <- mean(IACdata$Cq[IACdata$Content %in% "NEC"])
   
-  IACinterference <- 4*sd(IACdata$Cq, na.rm=TRUE)
+  IACstd <- IACdata[IACdata$Content == "Std", ]
+  IACstd <- IACstd[order(IACstd$CopyPeruL, decreasing =FALSE), ]
+  Istd <- ddply(IACstd, .(CopyPeruL), summarize, Cq = mean(Cq, na.rm=TRUE))
+  Istd$compare <- Istd$Cq - Istd$Cq[Istd$CopyPeruL == min(Istd$CopyPeruL)]
+  ROQ <- max(Istd$CopyPeruL[Istd$compare < 0.75])
   
+  IACcompetition <- predict(HF.model, data.frame(Log10CopyPeruL = log10(ROQ)))
+  
+  IACinterference <- IACcal + 4*sd(Istd$Cq[Istd$compare < 0.75], na.rm=TRUE)
   
   IACinhib <- ddply(IACdata[IACdata$Content == "Unkn", ], .(Sample), function(df){ 
     mean <- mean(df$Cq, na.rm=TRUE)
-    delta <- mean - IACcal
+    interference <- mean > IACinterference 
     data.frame(Sample = unique(df$Sample),
                Ctmean = mean,
-               deltaCt = delta,
-               "PASS?" = ifelse(delta < IACthres, "PASS", "FAIL")
+               "PASS?" = ifelse(!interference, "PASS", "FAIL")
                )
   })
   IACinhib$Ctmean[IACinhib$Ctmean == m] <- "ND"
-  names(IACinhib) <- c("Sample", "IAC Ct$_{mean}$", "$\\Delta$Ct$_{mean}$", "Pass?")
+  names(IACinhib) <- c("Sample", "IAC Ct$_{mean}$", "Pass?")
   
   # CCE interpolation
   directCT <- function(data, ulPerRxn=2, mlFiltered=100, ulCE=500, ulCErecovered=300, ulPE=100){
@@ -127,13 +146,14 @@ process_HF183 <- function(cfxtest, meta, eff.max=2.1,
   HFData2 <- directCT(HFData)
   if(nrow(HFData2) > 0) {
   HFData2$Date <- metadata["Run Started"]
-  HFData2$Date <- parse_date_time(substr(HFData2$Date, 1, nchar(HFData2$Date)-11), "%m/%d/%Y %I:%M:%s %p")
   }
   
   
   
   ### Integrate results ###
   result <- Reduce(function(x,y)merge(x,y, by="Sample"), list(HFData2, sketaDataTrim, IACinhib))
+  result$Competition <- result$"Pass?.y" == "FAIL" & result$Cq < IACcompetition 
+  IACinhib$Competition <- ifelse(result$Competition[match(IACinhib$Sample, result$Sample)], "Possible", NA)
   resultsTrim <- rbind.fill(lapply(split(result, result$Sample), function(df){
     inhibition <- df$"Pass?.x" == "PASS" & df$"Pass?.y" == "PASS"
     res <- df[, c("Sample", "Target", "Cq", "log10copiesPer100ml", "copiesPer100ml")]
@@ -155,8 +175,10 @@ process_HF183 <- function(cfxtest, meta, eff.max=2.1,
   
   
   # Knit PDF#
-  knit("M:/qPCR_data/microData_scripts/HFreport.tex", "results/report.tex")
+  knit("HFreport.tex", "report.tex")
   
   ## Return result ##
   result
 }
+
+process_HF183("HF183_multiplex_test_data.csv")

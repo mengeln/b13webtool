@@ -3,7 +3,7 @@ library(reshape2)
 library(xtable)
 library(knitr)
 library(plyr)
-process_HF183 <- function (file) {
+process_HF183 <- function (file, org) {
 options(stringsAsFactors=FALSE)
 
   

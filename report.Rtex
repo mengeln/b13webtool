@@ -17,8 +17,8 @@
 
 \begin{center}
 \begin{tabular}{l r}
+Organization: \rinline{org} \\
 Date Performed: \rinline{metadata["Run Started"]} \\ % Date the experiment was performed
-User: \rinline{metadata["Created By User"]} \\
 Protocol: \rinline{metadata["Protocol File Name"]} \\
 Sample Volume: \rinline{metadata["Sample Vol"]} \si{\micro\litre}
 \end{tabular}

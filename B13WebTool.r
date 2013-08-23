@@ -36,10 +36,10 @@ if(opt$platform == "ABI")
   abiToCfx(opt$file)
 
 if(opt$assay == "ent") {
-  result <- process_enteroTaq(opt$file)
+  result <- process_enteroTaq(opt$file, opt$organization)
   p <- "enteroTaqEnviron"
 } else {
-  result <- process_HF183(opt$file)
+  result <- process_HF183(opt$file, opt$organization)
   p <- "HF183_duplex"
 }
 

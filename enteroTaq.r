@@ -3,7 +3,7 @@ library(knitr)
 library(plyr)
 library(lubridate)
 
-process_enteroTaq <- function (file) {
+process_enteroTaq <- function (file, org) {
   options(stringsAsFactors=FALSE)
   
   eff.max <- 2.1

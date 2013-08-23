@@ -1,6 +1,8 @@
+library(xtable)
+library(knitr)
+library(plyr)
 
-
-process_HF183 <- function (file) {
+process_HF183 <- function (file) { # argument should be a path to a properly formatted csv file
   
   eff.max <- 2.1
   eff.min <- 1.87
@@ -44,7 +46,7 @@ process_HF183 <- function (file) {
   HFStandard <- HFData[grepl("Std", HFData$Content), ]
   HFStandard$Log10CopyPeruL <- log10(as.numeric(HFStandard$CopyPeruL)) 
   
-  HF.model <- lm(data = HFStandard,  Cq ~ Log10CopyPeruL)
+  HF.model <- lm(data = HFStandard,  Cq ~ Log10CopyPeruL) # create standard curve model
   HF.yint <- coef(HF.model)[[1]]
   HF.Slope <- coef(HF.model)[[2]]
   HF.r2 <- summary(HF.model)$r.squared

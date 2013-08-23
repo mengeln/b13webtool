@@ -4,7 +4,7 @@ abiToCfx <- function (abiFile) {
   options(stringsAsFactors=FALSE)
   
   data <- read.csv(abiFile , skip =8)
-  
+  print(str(data))
   data_subset <- data[, c("Well", "Sample.Name", "Target.Name", "Task", "Reporter", paste0("C", intToUtf8(209), "."), "Quantity")]
   names(data_subset) <- c("Well", "Sample", "Target", "Content", "Fluor", "Cq", "Starting Quantity (SQ)")
   data_subset$Cq[data_subset$Cq == "Undetermined"] <- "N/A"
@@ -26,8 +26,8 @@ abiToCfx <- function (abiFile) {
   meta <- cbind(metaNames, metaValues)
   colnames(meta) <- NULL
   
-  write.table(meta, abiFile, row.names=FALSE, col.names=FALSE, sep=",")
-  write.table(data_subset, abiFile, row.names=FALSE, append=TRUE, sep=",")
+#   write.table(meta, abiFile, row.names=FALSE, col.names=FALSE, sep=",")
+#   write.table(data_subset, abiFile, row.names=FALSE, append=TRUE, sep=",")
 }
 
 

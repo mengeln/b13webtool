@@ -7,7 +7,7 @@ options(stringsAsFactor = FALSE)
 }
 
 if(.Platform$OS == "unix"){
-  source("/var/scripts/b13micro/b13webtool/ABI_to_CFX.r")
+  source("/var/scripts/b13micro/b13webtool/ABI_to_CFX.r", encoding="UTF-8")
   source("/var/scripts/b13micro/b13webtool/enteroTaq.r")
   source("/var/scripts/b13micro/b13webtool/processHF183.R")
   source("/var/scripts/b13micro/b13webtool/qpcrDB.r")
@@ -45,6 +45,6 @@ if(opt$assay == "ent") {
 
 
 
-#submitData(result, opt$organization, p)
+submitData(result, opt$organization, p)
 
 cat("Test Return")

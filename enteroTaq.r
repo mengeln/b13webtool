@@ -2,6 +2,7 @@ library(xtable)
 library(knitr)
 library(plyr)
 library(lubridate)
+library(reshape2)
 
 process_enteroTaq <- function (file, org) {
   options(stringsAsFactors=FALSE)
@@ -69,15 +70,23 @@ process_enteroTaq <- function (file, org) {
   
   # Negative Control QC
   
-  negQC <- function(data, criterionNTC = m, criterionNEC = m){
-    NTC <- data$Cq[data$Sample == "NTC"]
-    NEC <- data$Cq[data$Sample == "NEC"]
-    
-    c(NTC = ifelse(all(NTC >= criterionNTC), "PASS", "FAIL"),
-      NEC = ifelse(all(NEC >= criterionNEC), "PASS", "FAIL"))
+  controlFrame <- function (data, assay) {
+    cData <- data[data$Sample %in% c("NTC", "NEC"),]
+    cData <- ddply(cData, .(Sample), function(df){
+      df$Replicate <- paste0("Ct$_{Rep", 1:nrow(df), "}$")
+      df
+    })
+    controlDF <- dcast(cData, Sample ~ Replicate, value.var="Cq")
+    controlDF$"PASS?" <- apply(controlDF[, -1], 1, function(x)ifelse(all(x == m), "PASS", "FAIL"))
+    controlDF[controlDF ==m] <- "N/A"
+    controlDF$Assay <- assay
+    controlDF
   }
+  controlDF <- controlFrame(entData, "Entero1A")
+  controlSk <- controlFrame(sketaData, "Sketa22")
   
-  controls <- negQC(entData)
+  controlsDF <- rbind(controlDF, controlSk[controlSk$Sample == "NTC",])
+  controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
   
   # Inhibition QC
   
@@ -119,8 +128,7 @@ process_enteroTaq <- function (file, org) {
   
   entData <- dct(entData)
   entData <- ddply(entData, .(Sample), function(df){
-    df$Mean <- NA
-    df$Mean[1] <- round(log10(mean(df$cellPer100ml)), digits=3)
+    df$Mean <- round(log10(mean(df$cellPer100ml)), digits=3)
     df
   })
   
@@ -135,16 +143,24 @@ process_enteroTaq <- function (file, org) {
   result$log10cellPer100ml[result$Inhibition == "FAIL"] <- "inhibited"
   
   resultsTrim <- subset(result, select = c(Sample, Target, Cq, log10cellPer100ml, Mean))
-  names(resultsTrim)[3:4] <- c("Ct", "$\\log_{10}$ cells/100 \\si{\\milli\\litre}")
+  names(resultsTrim)[3:4] <- c("Ct", "log10")
   resultsTrim$Ct[resultsTrim$Ct == m] <- "N/A"
   
   resultsTrim <- ddply(resultsTrim, .(Sample), function(df){
-    
-    if(any(df$"$\\log_{10}$ cells/100 \\si{\\milli\\litre}" == "inhibited"))
+    df$Replicate <- 1:nrow(df)
+    if(any(df$log10 == "inhibited"))
       df$Mean[!is.na(df$Mean)] <- "inhibited" 
     df
   })
-  resultsTrim <- arrange(resultsTrim, Sample, Mean)
+  
+  #resultsTrim <- arrange(resultsTrim, Sample, Mean)
+  rmelt <- melt(resultsTrim, id.vars=c("Sample", "Target", "Replicate"))
+  resultsTrim2 <- dcast(rmelt, Sample + Target  ~ Replicate + variable, value.var="value")
+  
+  resultsTrim2 <- resultsTrim2[, c("Sample", "Target", "1_Ct", "2_Ct", "1_log10", "2_log10",
+                                   "1_Mean")]
+  names(resultsTrim2) <- c("Sample", "Target", "Ct$_{Rep 1}$", "Ct$_{Rep 2}$", "$\\log_{10}$ copies/100 \\si{\\milli\\litre}$_{Rep1}$",
+                           "$\\log_{10}$ copies/100 \\si{\\milli\\litre}$_{Rep2}$", "Mean $\\log_{10}$ copies/100 \\si{\\milli\\litre}")
   
   # Generate report
   oname <- tail(strsplit(file, "/")[[1]], 1)
@@ -154,7 +170,7 @@ process_enteroTaq <- function (file, org) {
   if(.Platform$OS == "unix")
     knit("/var/scripts/b13micro/report.Rtex", paste0("/var/www/b13micro/files/", outputName, ".tex"))
   else
-    knit("report.Rtex", paste0("../tests/", outputName, ".tex"))
+    knit("report.Rtex", "../tests/report.tex")
  
   
   #Return results to be sent to database

@@ -52,19 +52,12 @@ Sketa efficiency & \rinline{sketa.Efficiency} & \rinline{sketa.StdQC["eff"]} \\ 
 Both the NTCs (qPCR blanks) and NECs (extraction blanks) must be non-detects. Detectable signals
 in any replicates will cause these tests to fail. \\
 
-\begin{center}
-\begin{tabular}{c c}
-\hline\hline 
-Measure & Pass? \\ [0.5ex]
-\hline
-NTC & \rinline{controls["NTC"]} \\
-NEC & \rinline{controls["NEC"]} \\ [1ex]
-\hline
-\end{tabular}
-\end{center}
+%% begin.rcode echo=FALSE, results="asis"
+% print(xtable(controlsDF), include.rownames=FALSE, sanitize.text.function=function(x){x})
+%% end.rcode
 %----------------------------------------------------------------------------
 \pagebreak
-\section{Inhibition QC Results} 
+\section{Sample Processing and Inhibition Control QC Results} 
 \subsection{Sketa}
 The sketa calibrator internal control Ct on this plate was \rinline{sk.calibrator}. In order to pass,
 the difference between the $\text{sketa Ct}_{mean}$ for a given sample and the calibrator Ct (i.e., $\Delta \text{Ct}_{mean}$)

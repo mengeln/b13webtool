@@ -69,16 +69,24 @@ options(stringsAsFactors=FALSE)
   sketa.StdQC <- standardQC(sketa.Efficiency, sketa.r2)
   
   # Controls
-  negQC <- function(data, criterionNTC = m, criterionNEC = m){
-    NTC <- data$Cq[data$Sample == "NTC"]
-    NEC <- data$Cq[data$Sample == "NEC"]
-    
-    c(NTC = ifelse(all(NTC >= criterionNTC), "PASS", "FAIL"),
-      NEC = ifelse(all(NEC >= criterionNEC), "PASS", "FAIL"))
-  }
-  
-  controls <- negQC(HFData)
-  
+controlFrame <- function (data, assay) {
+  cData <- data[data$Sample %in% c("NTC", "NEC"),]
+  cData <- ddply(cData, .(Sample), function(df){
+    df$Replicate <- paste0("Ct$_{Rep", 1:nrow(df), "}$")
+    df
+  })
+  controlDF <- dcast(cData, Sample ~ Replicate, value.var="Cq")
+  controlDF$"PASS?" <- apply(controlDF[, -1], 1, function(x)ifelse(all(x == m), "PASS", "FAIL"))
+  controlDF[controlDF ==m] <- "N/A"
+  controlDF$Assay <- assay
+  controlDF
+}
+controlDF <- controlFrame(HFData, "Entero1A")
+controlSk <- controlFrame(sketaData, "Sketa22")
+
+controlsDF <- rbind(controlDF, controlSk[controlSk$Sample == "NTC",])
+controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
+
   # Sketa Inhibition QC
   
   sketaQC <- function(data=sketaData, threshold=thres){
@@ -158,7 +166,7 @@ options(stringsAsFactors=FALSE)
   ### Integrate results ###
   result <- Reduce(function(x,y)merge(x,y, by="Sample"), list(HFData2, sketaDataTrim, IACinhib))
   result$Competition <- result$"Pass?.y" == "FAIL" & result$Cq < IACcompetition 
-  IACinhib$Competition <- ifelse(result$Competition[match(IACinhib$Sample, result$Sample)], "Possible", NA)
+  IACinhib$Competition <- ifelse(result$Competition[match(IACinhib$Sample, result$Sample)], "Yes", NA)
   resultsTrim <- rbind.fill(lapply(split(result, result$Sample), function(df){
     inhibition <- df$"Pass?.x" == "PASS" & df$"Pass?.y" == "PASS"
     res <- df[, c("Sample", "Target", "Cq", "log10copiesPer100ml", "copiesPer100ml")]
@@ -172,12 +180,16 @@ options(stringsAsFactors=FALSE)
   resultsTrim <- arrange(resultsTrim, Sample, Mean)
 
   names(resultsTrim)[3] <- c("Ct")
-  resultsTrim2 <- dcast(resultsTrim, Sample + Target ~ Replicate, value.var="Ct")
-  resultsTrim2 <- resultsTrim2[, c("Sample", "Target", "1", "2")]
-  resultsTrim2$Mean <- resultsTrim$Mean[match(resultsTrim2$Sample, resultsTrim$Sample)]
-  resultsTrim2$Mean[is.na(resultsTrim2$"1") & is.na(resultsTrim2$"2")] <- "ND"
-  names(resultsTrim2)[3:5] <- c("Ct$_{Rep 1}$", "Ct$_{Rep 2}$", "Mean $\\log_{10}$ cells/100 \\si{\\milli\\litre}")
-  
+
+  rmelt <- melt(resultsTrim, id.vars=c("Sample", "Target", "Replicate"))
+  resultsTrim2 <- dcast(rmelt, Sample + Target  ~ Replicate + variable, value.var="value")
+
+  resultsTrim2 <- resultsTrim2[, c("Sample", "Target", "1_Ct", "2_Ct", "1_log10copiesPer100ml", "2_log10copiesPer100ml",
+                                   "1_Mean")]
+  resultsTrim2[is.na(resultsTrim2$"1_Ct") & is.na(resultsTrim2$"2_Ct"), c("1_Mean")] <- "ND"
+  names(resultsTrim2) <- c("Sample", "Target", "Ct$_{Rep 1}$", "Ct$_{Rep 2}$", "$\\log_{10}$ copies/100 \\si{\\milli\\litre}$_{Rep1}$",
+                           "$\\log_{10}$ copies/100 \\si{\\milli\\litre}$_{Rep2}$", "Mean $\\log_{10}$ copies/100 \\si{\\milli\\litre}")
+
   # Generate report
   oname <- tail(strsplit(file, "/")[[1]], 1)
   outputName <- substr(oname, 1, nchar(oname)-4)

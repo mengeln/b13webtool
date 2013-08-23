@@ -3,6 +3,7 @@ library(reshape2)
 library(xtable)
 library(knitr)
 library(plyr)
+# file <- "C:/Users/yipingc/Desktop/b13webtool/HF183_multiplex_test_data.csv"
 process_HF183 <- function (file, org) {
 options(stringsAsFactors=FALSE)
 
@@ -11,8 +12,8 @@ options(stringsAsFactors=FALSE)
   eff.min <- 1.87
   r2.min <- 0.98
   m <- 45  # Ct to assign to unamplified wells
-  thres <- 1.7 # inhibition threshold
-  
+  thres <- 3.0 # sketa sample processing control failure threshold
+
   cfxtest <- read.csv(file,
                       skip=19,
                       stringsAsFactors=FALSE)
@@ -116,24 +117,25 @@ controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
   
   # IAC Inhibition QC
   
-  IACcal <- mean(IACdata$Cq[IACdata$Content %in% "NEC"])
+#   IACcal <- mean(IACdata$Cq[IACdata$Content %in% "NEC"])
   
   IACstd <- IACdata[IACdata$Content == "Std", ]
   IACstd <- IACstd[order(IACstd$CopyPeruL, decreasing =FALSE), ]
   Istd <- ddply(IACstd, .(CopyPeruL), summarize, Cq = mean(Cq, na.rm=TRUE))
   Istd$compare <- Istd$Cq - Istd$Cq[Istd$CopyPeruL == min(Istd$CopyPeruL)]
-  ROQ <- max(Istd$CopyPeruL[Istd$compare < 0.75])
+  ROQ <- Istd$Cq[Istd$compare < 0.75 & Istd$compare > - 0.75]
+  Max.comp <- max(Istd$CopyPeruL[Istd$compare < 0.75 & Istd$compare > - 0.75])
   
-  IACcompetition <- predict(HF.model, data.frame(Log10CopyPeruL = log10(ROQ)))
+  IACcompetition <- predict(HF.model, data.frame(Log10CopyPeruL = log10(Max.comp)))
   
-  IACinterference <- IACcal + 4*sd(Istd$Cq[Istd$compare < 0.75], na.rm=TRUE)
+  IACinterference <- mean(ROQ) + 4*sd(ROQ, na.rm=TRUE)
   
   IACinhib <- ddply(IACdata[IACdata$Content == "Unkn", ], .(Sample), function(df){ 
     mean <- mean(df$Cq, na.rm=TRUE)
-    interference <- mean > IACinterference 
+    inhibited <- mean > IACinterference 
     data.frame(Sample = unique(df$Sample),
                Ctmean = mean,
-               "PASS?" = ifelse(!interference, "PASS", "FAIL")
+               "PASS?" = ifelse(!inhibited, "PASS", "FAIL")
                )
   })
   IACinhib$Ctmean[IACinhib$Ctmean == m] <- "ND"
@@ -165,7 +167,7 @@ controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
   
   ### Integrate results ###
   result <- Reduce(function(x,y)merge(x,y, by="Sample"), list(HFData2, sketaDataTrim, IACinhib))
-  result$Competition <- result$"Pass?.y" == "FAIL" & result$Cq < IACcompetition 
+  result$Competition <- result$"Pass?.y" == "FAIL" & result$Cq < IACcompetition  # need to modify in the future for accidental overdose of iac
   IACinhib$Competition <- ifelse(result$Competition[match(IACinhib$Sample, result$Sample)], "Yes", NA)
   resultsTrim <- rbind.fill(lapply(split(result, result$Sample), function(df){
     inhibition <- df$"Pass?.x" == "PASS" & df$"Pass?.y" == "PASS"

@@ -70,6 +70,7 @@ options(stringsAsFactors=FALSE)
   
   # Controls
 controlFrame <- function (data, assay) {
+  data$Sample <- toupper(data$Sample)
   cData <- data[data$Sample %in% c("NTC", "NEC"),]
   cData <- ddply(cData, .(Sample), function(df){
     df$Replicate <- paste0("Ct$_{Rep", 1:nrow(df), "}$")

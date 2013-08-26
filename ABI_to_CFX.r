@@ -1,11 +1,16 @@
-library(Unicode)
+
 
 abiToCfx <- function (abiFile) {
   options(stringsAsFactors=FALSE)
   
   data <- read.csv(abiFile , skip =8)
-  
-  data_subset <- data[, c("Well", "Sample.Name", "Target.Name", "Task", "Reporter", intToUtf8(c(67, 1090)), "Quantity")]
+  cols <- c("Well", "Sample.Name", "Target.Name", "Task", "Reporter", intToUtf8(c(67, 1090)), "Quantity")
+  cols <- sapply(cols, function(x)rawToChar(charToRaw(x)))
+  cols <- gsub("\\.", "", cols)
+  cols[6] <- substr(cols[6], 1, 2)
+  names(data) <- gsub("\\.", "", names(data))
+  names(data) <- sapply(names(data), function(x)rawToChar(charToRaw(x)))
+  data_subset <- data[, cols]
   names(data_subset) <- c("Well", "Sample", "Target", "Content", "Fluor", "Cq", "Starting Quantity (SQ)")
   data_subset$Cq[data_subset$Cq == "Undetermined"] <- "N/A"
   data_subset$Content[data_subset$Content == "UNKNOWN"] <- "Unkn"

@@ -28,7 +28,7 @@ options(stringsAsFactors=FALSE)
   # data Clean Up 
   
   names(cfxtest)[names(cfxtest) == "Starting.Quantity..SQ."] <- "CopyPeruL"
-  
+  cfxtest$CopyPeruL <- as.numeric(cfxtest$CopyPeru)
   cfxtest$Cq[cfxtest$Cq == "N/A"] <- m
   cfxtest$Cq <- as.numeric(cfxtest$Cq)
   cfxtest$Target <- tolower(cfxtest$Target)
@@ -93,7 +93,10 @@ controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
   
   sketaQC <- function(data=sketaData, threshold=thres){
     sk.unkn <- data[grepl("Unkn", data$Content), ]
-    Ct.sk.calibrator <- mean(data$Cq[data$Sample == "calibrator"])
+    calibrators <- data$Cq[data$Sample == "calibrator"]
+    if(length(calibrators) == 0)
+      calibrators <- sketaStandard$Cq[sketaStandard$CopyPeruL == max(sketaStandard$CopyPeruL)]
+    Ct.sk.calibrator <- mean(calibrators)
     
     sk.calibrator <<- Ct.sk.calibrator
     sk.unkn$sk.dct <- sk.unkn$Cq - Ct.sk.calibrator
@@ -104,7 +107,6 @@ controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
   }
   
   sketaData <- sketaQC(sketaData)
-  
   sketaDataTrim <- sketaData[, c("Sample", "sk.Ct", "sk.dct", "Inhibition")]
   
   sketaDataTrim <- ddply(sketaDataTrim, .(Sample), function(df){
@@ -166,6 +168,7 @@ controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
   
   ### Integrate results ###
   result <- Reduce(function(x,y)merge(x,y, by="Sample"), list(HFData2, sketaDataTrim, IACinhib))
+
   result$Competition <- result$"Pass?.y" == "FAIL" & result$Cq < IACcompetition  # need to modify in the future for accidental overdose of iac
   IACinhib$Competition <- ifelse(result$Competition[match(IACinhib$Sample, result$Sample)], "Yes", NA)
   resultsTrim <- rbind.fill(lapply(split(result, result$Sample), function(df){

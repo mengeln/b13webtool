@@ -87,7 +87,8 @@ controlDF <- controlFrame(HFData, "Entero1A")
 controlSk <- controlFrame(sketaData, "Sketa22")
 
 controlsDF <- rbind(controlDF, controlSk[controlSk$Sample == "NTC",])
-controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
+numCols <- ncol(controlsDF)
+controlsDF <- controlsDF[, c(numCols, 1:(numCols - 1))]
 
   # Sketa Inhibition QC
   
@@ -171,8 +172,10 @@ controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
 
   result$Competition <- result$"Pass?.y" == "FAIL" & result$Cq < IACcompetition  # need to modify in the future for accidental overdose of iac
   IACinhib$Competition <- ifelse(result$Competition[match(IACinhib$Sample, result$Sample)], "Yes", NA)
+
   resultsTrim <- rbind.fill(lapply(split(result, result$Sample), function(df){
-    inhibition <- df$"Pass?.x" == "PASS" & df$"Pass?.y" == "PASS"
+    inhibition <- !all(rbind(df$"Pass?.x" == "PASS", df$"Pass?.y" == "PASS"))
+  
     res <- df[, c("Sample", "Target", "Cq", "log10copiesPer100ml", "copiesPer100ml")]
     res$Mean <- NA
     res$Mean[1] <- ifelse(any(inhibition), "inhibited", round(log10(mean(res$copiesPer100ml)), digits=2))

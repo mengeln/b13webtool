@@ -4,14 +4,10 @@ abiToCfx <- function (abiFile) {
   options(stringsAsFactors=FALSE)
   
   data <- read.csv(abiFile , skip =8)
-  cols <- c("Well", "Sample.Name", "Target.Name", "Task", "Reporter", intToUtf8(c(67, 1090)), "Quantity")
-  cols <- sapply(cols, function(x)rawToChar(charToRaw(x)))
-  cols <- gsub("\\.", "", cols)
-  cols[6] <- substr(cols[6], 1, 2)
-  names(data) <- gsub("\\.", "", names(data))
-  names(data) <- sapply(names(data), function(x)rawToChar(charToRaw(x)))
+  cols <- c("Well", "Sample.Name", "Target.Name", "Task", "Reporter", "Quantity")
   data_subset <- data[, cols]
-  names(data_subset) <- c("Well", "Sample", "Target", "Content", "Fluor", "Cq", "Starting Quantity (SQ)")
+  names(data_subset) <- c("Well", "Sample", "Target", "Content", "Fluor", "Starting Quantity (SQ)")
+  data_subset$Cq <- data[, 7]
   data_subset$Cq[data_subset$Cq == "Undetermined"] <- "N/A"
   data_subset$Content[data_subset$Content == "UNKNOWN"] <- "Unkn"
   data_subset$Content[data_subset$Content == "STANDARD"] <- "Std"
@@ -30,7 +26,7 @@ abiToCfx <- function (abiFile) {
   metaValues <-c(file, NA, NA, NA, endtime, endtime, 25, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA)
   meta <- cbind(metaNames, metaValues)
   colnames(meta) <- NULL
-  
+  print(data_subset)
 #   write.table(meta, abiFile, row.names=FALSE, col.names=FALSE, sep=",")
 #   write.table(data_subset, abiFile, row.names=FALSE, append=TRUE, sep=",")
 }

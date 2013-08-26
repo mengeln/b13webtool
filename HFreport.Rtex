@@ -71,10 +71,10 @@ been diluted.
 \pagebreak
 \subsection{IAC}
 
-The IAC internal control Ct (i.e., IAC simplex reactions in the sample negative controls) on this was was \rinline{IACcal}, 
+The mean Ct of the internal amplication controls (IAC) unaffected by competition on this plate was \rinline{mean(ROQ)}, 
 and the accetable upper bound is a Ct of \rinline{IACinterference}. IAC reactions with Cts greater than this value are 
 considered to be inhibited. However, Ct increases can also be caused by competition in the multiplex reaction if the 
-quantity of sample DNA is high. Failing IACs are marked to denote possible competition effects if the sample Ct was less
+quantity of sample DNA is high. Failing IACs are marked to denote competition effects if the sample Ct was less
 than \rinline{IACcompetition}.
 
 

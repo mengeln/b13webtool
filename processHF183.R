@@ -118,8 +118,6 @@ controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
   
   # IAC Inhibition QC
   
-#   IACcal <- mean(IACdata$Cq[IACdata$Content %in% "NEC"])
-  
   IACstd <- IACdata[IACdata$Content == "Std", ]
   IACstd <- IACstd[order(IACstd$CopyPeruL, decreasing =FALSE), ]
   Istd <- ddply(IACstd, .(CopyPeruL), summarize, Cq = mean(Cq, na.rm=TRUE))

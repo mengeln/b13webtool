@@ -27,7 +27,7 @@ process_enteroTaq <- function (file, org) {
   # data Clean Up 
   
   names(cfxtest)[names(cfxtest) == "Starting.Quantity..SQ."] <- "CopyPeruL"
-  
+  cfxtest$CopyPeruL <- as.numeric(cfxtest$CopyPeru)
   cfxtest$Cq[cfxtest$Cq == "N/A"] <- m
   cfxtest$Cq <- as.numeric(cfxtest$Cq)
   cfxtest$Target <- tolower(cfxtest$Target)

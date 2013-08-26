@@ -35,7 +35,7 @@ options(stringsAsFactors=FALSE)
   
   # Subset by target
   HFData <- cfxtest[cfxtest$Target == "hf183", ]
-  sketaData <- cfxtest[cfxtest$Target == "sketa22", ]
+  sketaData <- cfxtest[cfxtest$Target == "sketa22" | cfxtest$Target == "sketa", ]
   IACdata <- cfxtest[cfxtest$Target == "iac", ]
   
   

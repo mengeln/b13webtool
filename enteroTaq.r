@@ -35,7 +35,7 @@ process_enteroTaq <- function (file, org) {
   # Subset by target
   
   entData <- cfxtest[cfxtest$Target == "ent", ]
-  sketaData <- cfxtest[cfxtest$Target == "sketa", ]
+  sketaData <- cfxtest[cfxtest$Target == "sketa22" | cfxtest$Target == "sketa", ]  
   
   # Standard Curve
   

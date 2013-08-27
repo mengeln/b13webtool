@@ -94,9 +94,7 @@ controlsDF <- controlsDF[, c(numCols, 1:(numCols - 1))]
   
   sketaQC <- function(data=sketaData, threshold=thres){
     sk.unkn <- data[grepl("Unkn", data$Content), ]
-    calibrators <- data$Cq[data$Sample == "calibrator"]
-    if(length(calibrators) == 0)
-      calibrators <- sketaStandard$Cq[sketaStandard$CopyPeruL == max(sketaStandard$CopyPeruL)]
+    calibrators <- sketaData$Cq[toupper(sketaData$Sample) == "NEC"]
     Ct.sk.calibrator <- mean(calibrators)
     
     sk.calibrator <<- Ct.sk.calibrator

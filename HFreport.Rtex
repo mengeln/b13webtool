@@ -59,9 +59,9 @@ in any replicates will cause these tests to fail. \\
 \pagebreak
 \section{Sample Processing and Inhibition Control QC Results} 
 \subsection{Sketa}
-The sketa calibrator internal control Ct on this plate was \rinline{sk.calibrator}. In order to pass,
-the difference between the $\text{sketa Ct}_{mean}$ for a given sample and the calibrator Ct (i.e., $\Delta \text{Ct}_{mean}$)
-must be less than \rinline{thres}. Note that the threshold level and pass/fail designations assume that the sample has not
+The sketa control Ct on this plate was \rinline{sk.calibrator}. In order to pass,
+the difference between the $\text{sketa Ct}_{mean}$ for a given sample and the control Ct (i.e., $\Delta \text{Ct}_{mean}$)
+must be less than \rinline{thres} Ct. Note that the threshold level and pass/fail designations assume that the sample has not
 been diluted. 
 
 
@@ -71,11 +71,11 @@ been diluted.
 \pagebreak
 \subsection{IAC}
 
-The mean Ct of the internal amplication controls (IAC) unaffected by competition on this plate was \rinline{mean(ROQ)}, 
+The mean Ct of the internal amplication controls (IAC) unaffected by inhibition on this plate was \rinline{mean(ROQ)}, 
 and the accetable upper bound is a Ct of \rinline{IACinterference}. IAC reactions with Cts greater than this value are 
 considered to be inhibited. However, Ct increases can also be caused by competition in the multiplex reaction if the 
-quantity of sample DNA is high. Failing IACs are marked to denote competition effects if the sample Ct was less
-than \rinline{IACcompetition}.
+quantity of sample DNA is high. Failing IACs are marked to denote competition effects if the sample HF183 Ct was less
+than \rinline{IACcompetition}, which is the competition threshold determined based on the calibration curve on this plate.
 
 
 %% begin.rcode echo=FALSE, results="asis"
@@ -93,7 +93,7 @@ $$ \log_{10}{CN} = \frac{\text{Ct}_{samp} - yint}{slope} $$
 
 where $slope$ is the slope of the HF183 standard curve (\rinline{HF.Slope} for this plate),
 $yint$ is the y-intercept of the HF183 standard curve. These values are then transformed to CN per filter (assumed to be 100 ml), and are reported below.
-Samples indicated to be inhibited by sketa controls are labeled as such. Uninhibited CN estimates that are below the detection 
+Samples that failed either Sketa or IAC controls are labeled as "inhibited". Uninhibited CN estimates that are below the detection 
 limit (set to a Ct of \rinline{m}) are denoted by ``ND''. Any detected inhibition among sample replicates causes the mean
 to be labeled as ``inhibited''. Remember that these CN estimates are reported on a logarithmic scale.
 

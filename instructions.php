@@ -57,8 +57,8 @@ ol.alpha { color: #0f0f0f; }
 
 <p>
     This tool is designed to take output from qPCR assay run on a Bio-Rad CFX96, ABI StepOnePlus, or ABI 7500 qPCR platform, perform automatic quality control assessment, and target
-    concentration calculation (Enterococcus or HF183), and return all results in a pdf. The quality control assessments include performance of standard curves,
-    negative controls, and inhibition flagging based on the salmon control assay (or internal amplification control).
+    concentration calculation (<i>Enterococcus</i> or HF183), and return all results in a pdf report. The quality control assessments include performance of standard curves,
+    negative controls, and sample processing and inhibition flagging based on the salmon control assay (and/or the internal amplification control assay).
 </p>
 <p>
     In order to successfully analyze your data, you will need to do the following:
@@ -68,10 +68,10 @@ ol.alpha { color: #0f0f0f; }
 	and assay. From the template, you should only need to enter the names of your samples to complete the plate setup. 
 </p>
 <p>
-    2) Export the results of the qPCR reaction from the Bio-Rad lab manager into a comma separated values (csv) format file
+    2) Export the results of the qPCR reaction from the Bio-Rad lab manager (or equivalent software on your qPCR platform) into a comma separated values (csv) format file
 </p>
 <p>
-    3) Drag and drop the csv file over the front page of this tool. Assuming there are no errors, you will then be able to view and download the results of the
+    3) Drag and drop the csv file over the front page of this tool (or use the browse and uploading function). Assuming there are no errors, you will then be able to view and download the results of the
     analysis.
 </p>
 <br>
@@ -84,16 +84,16 @@ ol.alpha { color: #0f0f0f; }
     1) Select the correct assay:
 </p>
 <p>
-    Enterococcus Taq Environmental: The plate should be divided in equal parts between reactions targeting enterococcus (label the "Target" as "ent"), and the other targeting
+    <i>Enterococcus</i> Taq Environmental: The plate should be divided in equal parts between reactions targeting <i>Enterococcus</i> (label the "Target" as "ent"), and the other targeting
     the sketa sample processing control (label the "Target" as "sketa"). Each sample should have at least one "ent" reaction and at least one "sketa" reaction
 (duplicates are recommended). Additionally, four point standard curves with 10 fold dilutions from 10<sup>5</sup> to 10<sup>2</sup> are required for both targets. These are recommended to consist of a dilution series from 10    <sup>5</sup> to 10<sup>1</sup> copies/&#181;l, with a dilution factor of 10, and each standard reaction duplicated. Importantly, the calibrator must be labeled
     as "calibrator" in the "Sample" column (usually the 10<sup>5</sup> dilution). Finally, each plate should contain duplicate NTC (qPCR blank) and NEC (extraction
     blank). These well must be marked as "NTC" and "NEC" in the "Sample" column.
 </p>
 <p>
-    HF183: The sketa side of the plate can be set up in the same way as the enterococcus assay, except that for both sketa and HF183 NTC and
+    HF183: The sketa side of the plate can be set up in the same way as the <i>Enterococcus</i> assay, except that for both sketa and HF183 NTC and
 	NEC wells will be in triplicate, rathern than duplicate. HF183 requires a six point standard curve with 
-	10 fold dilutions from 10<sup>6</sup> to 10<sup>1</sup>. Every HF183 well should be a duplex with an internal amplication control (IAC). Even though every well with
+	10 fold dilutions from 10<sup>6</sup> to 10<sup>1</sup> copies per 2 ul. Every HF183 reaction well should be a duplex with an internal amplification control (IAC). Even though every well with
 	IAC should have the same amount of IAC material in it, wells used in the standard curve should label the same starting quantity for both targets.
 	 
 </p>
@@ -117,10 +117,10 @@ ol.alpha { color: #0f0f0f; }
     1) Check that your input file is a .csv file.
 </p>
 <p>
-    1) Check that your samples are labeled the same way for Enterococcus and Sketa assays.
+    1) Check that your samples are labeled the same way for <i>Enterococcus</i> and Sketa assays.
 </p>
 <p>
-    2) Check that the calibrator is labeled correctly.
+    2) Check that the calibrator (if <i>Enterococcus</i> assay) is labeled correctly.
 </p>
 <p>
     3) Check that the NTC and NEC are labeled correctly.

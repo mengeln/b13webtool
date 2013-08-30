@@ -5,7 +5,7 @@ library(knitr)
 library(plyr)
 # file <- "C:/Users/yipingc/Desktop/b13webtool/HF183_multiplex_test_data.csv"
 process_HF183 <- function (file, org) {
-options(stringsAsFactors=FALSE)
+  options(stringsAsFactors=FALSE)
 
   
   eff.max <- 2.1
@@ -32,6 +32,8 @@ options(stringsAsFactors=FALSE)
   cfxtest$Cq[cfxtest$Cq == "N/A"] <- m
   cfxtest$Cq <- as.numeric(cfxtest$Cq)
   cfxtest$Target <- tolower(cfxtest$Target)
+  cfxtest$Content[grepl("Std", cfxtest$Content)] <- "Std"
+  cfxtest$Content[grepl("Unkn", cfxtest$Content)] <- "Unkn"
   
   # Subset by target
   HFData <- cfxtest[cfxtest$Target == "hf183", ]
@@ -83,7 +85,7 @@ controlFrame <- function (data, assay) {
   controlDF$Assay <- assay
   controlDF
 }
-controlDF <- controlFrame(HFData, "Entero1A")
+controlDF <- controlFrame(HFData, "HF183")
 controlSk <- controlFrame(sketaData, "Sketa22")
 
 controlsDF <- rbind(controlDF, controlSk[controlSk$Sample == "NTC",])

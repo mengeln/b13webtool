@@ -37,8 +37,8 @@ and an efficiency that is between \rinline{eff.min} and \rinline{eff.max}. \\
 \hline\hline 
 Measure & Result & Pass? \\ [0.5ex]
 \hline
-Ent $r^2$ & \rinline{HF.r2} & \rinline{HF.StdQC["r2"]} \\
-Ent efficiency & \rinline{HF.Efficiency} & \rinline{HF.StdQC["eff"]} \\
+HF183 $r^2$ & \rinline{HF.r2} & \rinline{HF.StdQC["r2"]} \\
+HF183 efficiency & \rinline{HF.Efficiency} & \rinline{HF.StdQC["eff"]} \\
 Sketa $r^2$ & \rinline{sketa.r2} & \rinline{sketa.StdQC["r2"]} \\
 Sketa efficiency & \rinline{sketa.Efficiency} & \rinline{sketa.StdQC["eff"]} \\ [1ex]
 \hline

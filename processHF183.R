@@ -202,7 +202,7 @@ controlsDF <- controlsDF[, c(numCols, 1:(numCols - 1))]
   
   # Knit PDF#
   if(.Platform$OS == "unix")
-    knit("/var/scripts/b13micro/b13webtool/HFreport.Rtex", paste0("/var/www/b13micro/files/", outputName, ".tex"))
+    knit("/var/scripts/qpcr/qpcr/HFreport.Rtex", paste0("/var/www/qpcr/files/", outputName, ".tex"))
   else
     knit("HFreport.Rtex", "../tests/report.tex")
   

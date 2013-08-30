@@ -1,0 +1,116 @@
+File Name,Entero_example.pcrd,,,,,
+Created By User,admin,,,,,
+Notes,20130314 Ent and HF plate ME,,,,,
+ID,,,,,,
+Run Started,3/14/2013 3:22:19 PM UTC -07:00,,,,,
+Run Ended,3/14/2013 4:57:35 PM UTC -07:00,,,,,
+Sample Vol,25,,,,,
+Lid Temp,105,,,,,
+Protocol File Name,entero 1a 1 min.prcl,,,,,
+Plate Setup File Name,bight13_Entero plate setup.pltd,,,,,
+Base Serial Number,CC011706,,,,,
+Optical Head Serial Number,785BR4308,,,,,
+CFX Manager Version,3.0.1216.0723. ,,,,,
+,,,,,,
+Well group,All Wells,,,,,
+Amplification step,4,,,,,
+Melt step,,,,,,
+,,,,,,
+,,,,,,
+Well,Fluor,Target,Content,Sample,Cq,Starting Quantity (SQ)
+A01,FAM,ent,Std-1,,28.31,1.00E+05
+A02,FAM,ent,Std-1,,25.13,1.00E+05
+A03,FAM,ent,Std-2,,28.24,1.00E+04
+A04,FAM,ent,Std-2,,28.46,1.00E+04
+A05,FAM,ent,Std-3,,31.64,1.00E+03
+A06,FAM,ent,Std-3,,32.02,1.00E+03
+B01,FAM,ent,Std-4,,34.64,1.00E+02
+B02,FAM,ent,Std-4,,34.89,1.00E+02
+B03,FAM,ent,Pos Ctrl,calibrator,38.34,4.26E+00
+B04,FAM,ent,Pos Ctrl,calibrator,37.58,8.04E+00
+B05,FAM,ent,Pos Ctrl,calibrator,N/A,N/A
+B06,FAM,ent,Pos Ctrl,calibrator,N/A,N/A
+C01,FAM,ent,Unkn,1,36,1.52E+03
+C02,FAM,ent,Unkn,1,36.7,1.74E+03
+C03,FAM,ent,Unkn,2,33.81,1.87E+02
+C04,FAM,ent,Unkn,2,33.71,2.03E+02
+C05,FAM,ent,Unkn,3,28.9,1.12E+04
+C06,FAM,ent,Unkn,3,28.42,1.67E+04
+D01,FAM,ent,Unkn,4,31.5,1.28E+03
+D02,FAM,ent,Unkn,4,31.28,1.54E+03
+D03,FAM,ent,Unkn,5,34.27,1.27E+02
+D04,FAM,ent,Unkn,5,34.25,1.29E+02
+D05,FAM,ent,Unkn,6,32.11,7.73E+02
+D06,FAM,ent,Unkn,6,32.11,7.67E+02
+E01,FAM,ent,Unkn,7,33.19,3.13E+02
+E02,FAM,ent,Unkn,7,33.46,2.51E+02
+E03,FAM,ent,Unkn,8,34.89,7.61E+01
+E04,FAM,ent,Unkn,8,34.8,8.21E+01
+E05,FAM,ent,Unkn,9,33.75,1.97E+02
+E06,FAM,ent,Unkn,9,34.11,1.45E+02
+F01,FAM,ent,Unkn,10,33.26,2.96E+02
+F02,FAM,ent,Unkn,10,33.54,2.34E+02
+F03,FAM,ent,Unkn,11,35.05,6.65E+01
+F04,FAM,ent,Unkn,11,36.25,2.45E+01
+F05,FAM,ent,Unkn,12,34.34,1.20E+02
+F06,FAM,ent,Unkn,12,35.09,6.39E+01
+G01,FAM,ent,Unkn,13,35.15,6.13E+01
+G02,FAM,ent,Unkn,13,35.24,5.68E+01
+G03,FAM,ent,Unkn,14,33.13,3.30E+02
+G04,FAM,ent,Unkn,14,33.35,2.73E+02
+G05,FAM,ent,Unkn,15,32.45,5.79E+02
+G06,FAM,ent,Unkn,15,33.15,3.23E+02
+H01,FAM,ent,Unkn,16,32.5,5.58E+02
+H02,FAM,ent,Unkn,16,32.96,3.79E+02
+H03,FAM,ent,Neg Ctrl,nec,N/A,5.36E+00
+H04,FAM,ent,Neg Ctrl,nec,N/A,8.59E+00
+H05,FAM,ent,NTC,NTC,39,N/A
+H06,FAM,ent,NTC,NTC,N/A,N/A
+A07,FAM,sketa,Std-5,,20.96,1.00E+05
+A08,FAM,sketa,Std-5,,20.89,1.00E+05
+A09,FAM,sketa,Std-6,,24.31,1.00E+04
+A10,FAM,sketa,Std-6,,24.44,1.00E+04
+A11,FAM,sketa,Std-7,,28.2,1.00E+03
+A12,FAM,sketa,Std-7,,28.27,1.00E+03
+B07,FAM,sketa,Std-8,,31.66,1.00E+02
+B08,FAM,sketa,Std-8,,32.05,1.00E+02
+B09,FAM,sketa,Pos Ctrl,calibrator,20.99,7.82E+00
+B10,FAM,sketa,Pos Ctrl,calibrator,21.01,1.41E+01
+B11,FAM,sketa,Pos Ctrl,calibrator,20.99,N/A
+B12,FAM,sketa,Pos Ctrl,calibrator,21.01,N/A
+C07,FAM,sketa,Unkn,1,25,N/A
+C08,FAM,sketa,Unkn,1,25.6,N/A
+C09,FAM,sketa,Unkn,2,21.40500111,N/A
+C10,FAM,sketa,Unkn,2,21.36569362,N/A
+C11,FAM,sketa,Unkn,3,21.53152069,N/A
+C12,FAM,sketa,Unkn,3,21.17854571,N/A
+D07,FAM,sketa,Unkn,4,21.22864911,N/A
+D08,FAM,sketa,Unkn,4,21.69114085,N/A
+D09,FAM,sketa,Unkn,5,21.82595412,N/A
+D10,FAM,sketa,Unkn,5,21.19000993,N/A
+D11,FAM,sketa,Unkn,6,21.15685585,N/A
+D12,FAM,sketa,Unkn,6,20.99026379,N/A
+E07,FAM,sketa,Unkn,7,21.26179019,N/A
+E08,FAM,sketa,Unkn,7,21.56465106,N/A
+E09,FAM,sketa,Unkn,8,21.29604042,N/A
+E10,FAM,sketa,Unkn,8,21.20313639,N/A
+E11,FAM,sketa,Unkn,9,21.78893034,N/A
+E12,FAM,sketa,Unkn,9,21.59947352,N/A
+F07,FAM,sketa,Unkn,10,21.85995075,N/A
+F08,FAM,sketa,Unkn,10,21.82914412,5.64E+00
+F09,FAM,sketa,Unkn,11,20.90450344,N/A
+F10,FAM,sketa,Unkn,11,21.40573936,N/A
+F11,FAM,sketa,Unkn,12,21.17284598,N/A
+F12,FAM,sketa,Unkn,12,21.82135869,N/A
+G07,FAM,sketa,Unkn,13,21.56296683,2.80E+00
+G08,FAM,sketa,Unkn,13,21.03355941,3.11E+00
+G09,FAM,sketa,Unkn,14,21.59164884,N/A
+G10,FAM,sketa,Unkn,14,21.19704248,N/A
+G11,FAM,sketa,Unkn,15,21.70100798,N/A
+G12,FAM,sketa,Unkn,15,21.71722857,N/A
+H07,FAM,sketa,Unkn,16,21.37048175,N/A
+H08,FAM,sketa,Unkn,16,21.59826007,N/A
+H09,FAM,sketa,Neg Ctrl,nec,21.48670086,N/A
+H10,FAM,sketa,Neg Ctrl,nec,21.2380318,N/A
+H11,FAM,sketa,NTC,NTC,N/A,N/A
+H12,FAM,sketa,NTC,NTC,N/A,N/A

@@ -7,10 +7,10 @@ options(stringsAsFactor = FALSE)
 }
 
 if(.Platform$OS == "unix"){
-  source("/var/scripts/b13micro/b13webtool/ABI_to_CFX.r")
-  source("/var/scripts/b13micro/b13webtool/enteroTaq.r")
-  source("/var/scripts/b13micro/b13webtool/processHF183.R")
-  source("/var/scripts/b13micro/b13webtool/qpcrDB.r")
+  source("/var/scripts/qpcr/qpcr/ABI_to_CFX.r")
+  source("/var/scripts/qpcr/qpcr/enteroTaq.r")
+  source("/var/scripts/qpcr/qpcr/processHF183.R")
+  source("/var/scripts/qpcr/qpcr/qpcrDB.r")
 } else {
   source("ABI_to_CFX.r")
   source("enteroTaq.r")

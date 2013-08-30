@@ -169,7 +169,7 @@ process_enteroTaq <- function (file, org) {
   
   # direct output to a file
   if(.Platform$OS == "unix")
-    knit("/var/scripts/b13micro/report.Rtex", paste0("/var/www/b13micro/files/", outputName, ".tex"))
+    knit("/var/scripts/qpcr/qpcr/report.Rtex", paste0("/var/www/qpcr/files/", outputName, ".tex"))
   else
     knit("report.Rtex", "../tests/report.tex")
  

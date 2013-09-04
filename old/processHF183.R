@@ -5,7 +5,7 @@ library(knitr)
 library(plyr)
 # file <- "C:/Users/yipingc/Desktop/b13webtool/HF183_multiplex_test_data.csv"
 process_HF183 <- function (file, org) {
-  options(stringsAsFactors=FALSE)
+options(stringsAsFactors=FALSE)
 
   
   eff.max <- 2.1
@@ -32,8 +32,6 @@ process_HF183 <- function (file, org) {
   cfxtest$Cq[cfxtest$Cq == "N/A"] <- m
   cfxtest$Cq <- as.numeric(cfxtest$Cq)
   cfxtest$Target <- tolower(cfxtest$Target)
-  cfxtest$Content[grepl("Std", cfxtest$Content)] <- "Std"
-  cfxtest$Content[grepl("Unkn", cfxtest$Content)] <- "Unkn"
   
   # Subset by target
   HFData <- cfxtest[cfxtest$Target == "hf183", ]
@@ -85,7 +83,7 @@ controlFrame <- function (data, assay) {
   controlDF$Assay <- assay
   controlDF
 }
-controlDF <- controlFrame(HFData, "HF183")
+controlDF <- controlFrame(HFData, "Entero1A")
 controlSk <- controlFrame(sketaData, "Sketa22")
 
 controlsDF <- rbind(controlDF, controlSk[controlSk$Sample == "NTC",])
@@ -103,12 +101,11 @@ controlsDF <- controlsDF[, c(numCols, 1:(numCols - 1))]
     sk.unkn$sk.dct <- sk.unkn$Cq - Ct.sk.calibrator
     sk.unkn$Inhibition <- ifelse(sk.unkn$sk.dct > threshold,
                                  "FAIL", "PASS")
-    names(sk.unkn)[names(sk.unkn)=="Cq"] <- "sk.Ct"
+    names(sk.unkn)[6] <- "sk.Ct"
     sk.unkn
   }
   
   sketaData <- sketaQC(sketaData)
-
   sketaDataTrim <- sketaData[, c("Sample", "sk.Ct", "sk.dct", "Inhibition")]
   
   sketaDataTrim <- ddply(sketaDataTrim, .(Sample), function(df){
@@ -143,7 +140,7 @@ controlsDF <- controlsDF[, c(numCols, 1:(numCols - 1))]
   })
   IACinhib$Ctmean[IACinhib$Ctmean == m] <- "ND"
   names(IACinhib) <- c("Sample", "IAC Ct$_{mean}$", "Pass?")
-
+  
   # CCE interpolation
   directCT <- function(data, ulPerRxn=2, mlFiltered=100, ulCE=500, ulCErecovered=300, ulPE=100){
     data$r2 <- HF.r2

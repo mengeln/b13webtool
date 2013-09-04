@@ -31,8 +31,6 @@ process_enteroTaq <- function (file, org) {
   cfxtest$Cq[cfxtest$Cq == "N/A"] <- m
   cfxtest$Cq <- as.numeric(cfxtest$Cq)
   cfxtest$Target <- tolower(cfxtest$Target)
-  cfxtest$Content[grepl("Std", cfxtest$Content)] <- "Std"
-  cfxtest$Content[grepl("Unkn", cfxtest$Content)] <- "Unkn"
   
   # Subset by target
   
@@ -101,7 +99,7 @@ process_enteroTaq <- function (file, org) {
     sk.unkn$sk.dct <- sk.unkn$Cq - Ct.sk.calibrator
     sk.unkn$Inhibition <- ifelse(sk.unkn$sk.dct > threshold,
                                  "FAIL", "PASS")
-    names(sk.unkn)[names(sk.unkn)=="Cq"] <- "sk.Ct"
+    names(sk.unkn)[6] <- "sk.Ct"
     sk.unkn
   }
   
@@ -162,8 +160,8 @@ process_enteroTaq <- function (file, org) {
   
   resultsTrim2 <- resultsTrim2[, c("Sample", "Target", "1_Ct", "2_Ct", "1_log10", "2_log10",
                                    "1_Mean")]
-  names(resultsTrim2) <- c("Sample", "Target", "Ct$_{Rep 1}$", "Ct$_{Rep 2}$", "$\\log_{10}$ cells/100 \\si{\\milli\\litre}$_{Rep1}$",
-                           "$\\log_{10}$ cells/100 \\si{\\milli\\litre}$_{Rep2}$", "Mean $\\log_{10}$ cells/100 \\si{\\milli\\litre}")
+  names(resultsTrim2) <- c("Sample", "Target", "Ct$_{Rep 1}$", "Ct$_{Rep 2}$", "$\\log_{10}$ copies/100 \\si{\\milli\\litre}$_{Rep1}$",
+                           "$\\log_{10}$ copies/100 \\si{\\milli\\litre}$_{Rep2}$", "Mean $\\log_{10}$ copies/100 \\si{\\milli\\litre}")
   
   # Generate report
   oname <- tail(strsplit(file, "/")[[1]], 1)

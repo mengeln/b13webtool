@@ -4,7 +4,6 @@ abiToCfx <- function (abiFile) {
   options(stringsAsFactors=FALSE)
   
   data <- read.csv(abiFile , skip =8)
-  print(names(data))
   cols <- c("Well", "Sample.Name", "Target.Name", "Task", "Reporter", "Quantity")
   data_subset <- data[, cols]
   names(data_subset) <- c("Well", "Sample", "Target", "Content", "Fluor", "Starting Quantity (SQ)")

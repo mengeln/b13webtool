@@ -45,6 +45,6 @@ if(opt$assay == "ent") {
 
 
 
-#submitData(result, opt$organization, p)
+submitData(result, opt$organization, p, opt$platform)
 
 cat("Test Return")

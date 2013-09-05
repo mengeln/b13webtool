@@ -20,12 +20,12 @@ insertInto <- function(data, table){
 
 connector <- function(){
   if(.Platform$OS == "unix")
-    dbConnect("SQLite", "/var/www/b13micro/files/b13Micro.db")
+    dbConnect("SQLite", "/var/www/qPCR/files/qPCR.db")
   else
-    dbConnect("SQLite", "b13Micro.db")
+    dbConnect("SQLite", "qPCR.db")
 }
 
-submitData <- function(combinedData, organization, protocol){
+submitData <- function(data, organization, protocol, platform){
   con <- connector()
   on.exit(dbDisconnect(con))
   # Check/add organization to DB
@@ -35,7 +35,7 @@ submitData <- function(combinedData, organization, protocol){
     dbGetQuery(con, insertInto(oname, "LabTech")[[1]])
     orgs <- dbGetQuery(con, paste0("SELECT Organization, TechID FROM LabTech WHERE Organization=", sQuote(oname$Organization)))
   }
-  
+  combinedData <- data$result
   combinedData$TechID <- orgs$TechID[1]
   
   # Throw out data already in the DB
@@ -44,12 +44,14 @@ submitData <- function(combinedData, organization, protocol){
   
   inputData <- combinedData[combinedData$Date %nin% currentPlates$TimeStamp |
                               combinedData$TechID %nin% currentPlates$TechID, ]
-  if(nrow(inputData) == 0) return(odbcClose(con))
+  if(nrow(inputData) == 0) return(NULL)
   
   
   # Insert new plate
   plates <- data.frame(TimeStamp = unique(inputData$Date))
   plates$Protocol <- protocol
+  plates$Platform <- platform
+  plates$TechID <- orgs$TechID
   lapply(insertInto(plates, "Plate"), function(q)dbGetQuery(con, q))
   
   PlateID <- dbGetQuery(con, paste0("SELECT DISTINCT(PlateID) FROM plate WHERE TimeStamp =", sQuote(unique(plates$TimeStamp))))
@@ -75,11 +77,19 @@ submitData <- function(combinedData, organization, protocol){
   lapply(insertInto(reaction, "reaction"), function(q)dbGetQuery(con, q))
   
   # Insert standards data
-  standards <- unique(inputData[, c("PlateID", "Slope", "yint", "r2", "Efficiency")])
+  standards <- unique(inputData[, c("PlateID", "Slope", "yint", "r2", "Efficiency", "Calibrator")])
   standards$Target <- dbGetQuery(con, paste0("SELECT Target FROM mixture WHERE MixID=", unique(inputData$MixID)))[1, 1]
-  
+  sketaStandards <- data$sketaStd
+  sketaStandards$PlateID <- standards$PlateID
+  standards <- rbind.fill(standards, sketaStandards)
   lapply(insertInto(standards, "standard"), function(q)dbGetQuery(con, q))
   
+  # Insert negative control data
+  negs <- data$NegControl
+  negs$PlateID <- standards$PlateID
+  lapply(insertInto(negs, "negativecontrol"), function(q)dbGetQuery(con, q))
+  
+  return(NULL)
   
 }
 

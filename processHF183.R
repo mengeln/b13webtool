@@ -6,14 +6,14 @@ library(plyr)
 # file <- "C:/Users/yipingc/Desktop/b13webtool/HF183_multiplex_test_data.csv"
 process_HF183 <- function (file, org) {
   options(stringsAsFactors=FALSE)
-
+  
   
   eff.max <- 2.1
   eff.min <- 1.87
   r2.min <- 0.98
   m <- 45  # Ct to assign to unamplified wells
   thres <- 3.0 # sketa sample processing control failure threshold
-
+  
   cfxtest <- read.csv(file,
                       skip=19,
                       stringsAsFactors=FALSE)
@@ -65,6 +65,7 @@ process_HF183 <- function (file, org) {
   
   
   sketa.model <- lm(data = sketaStandard,  Cq ~ Log10CopyPeruL)
+  sketa.yint <- coef(sketa.model)[[1]]
   sketa.Slope <- coef(sketa.model)[[2]]
   sketa.r2 <- summary(sketa.model)$r.squared
   sketa.Efficiency <- 10^(-1/coef(sketa.model)[[2]])
@@ -72,26 +73,29 @@ process_HF183 <- function (file, org) {
   sketa.StdQC <- standardQC(sketa.Efficiency, sketa.r2)
   
   # Controls
-controlFrame <- function (data, assay) {
-  data$Sample <- toupper(data$Sample)
-  cData <- data[data$Sample %in% c("NTC", "NEC"),]
-  cData <- ddply(cData, .(Sample), function(df){
-    df$Replicate <- paste0("Ct$_{Rep", 1:nrow(df), "}$")
-    df
-  })
-  controlDF <- dcast(cData, Sample ~ Replicate, value.var="Cq")
-  controlDF$"PASS?" <- apply(controlDF[, -1], 1, function(x)ifelse(all(x == m), "PASS", "FAIL"))
-  controlDF[controlDF ==m] <- "N/A"
-  controlDF$Assay <- assay
-  controlDF
-}
-controlDF <- controlFrame(HFData, "HF183")
-controlSk <- controlFrame(sketaData, "Sketa22")
-
-controlsDF <- rbind(controlDF, controlSk[controlSk$Sample == "NTC",])
-numCols <- ncol(controlsDF)
-controlsDF <- controlsDF[, c(numCols, 1:(numCols - 1))]
-
+  controlFrame <- function (data, assay) {
+    data$Sample <- toupper(data$Sample)
+    cData <- data[data$Sample %in% c("NTC", "NEC"),]
+    cData <- ddply(cData, .(Sample), function(df){
+      df$Replicate <- paste0("Ct$_{Rep", 1:nrow(df), "}$")
+      df
+    })
+    controlDF <- dcast(cData, Sample ~ Replicate, value.var="Cq")
+    controlDF$"PASS?" <- apply(controlDF[, -1], 1, function(x)ifelse(all(x == m), "PASS", "FAIL"))
+    controlDF[controlDF ==m] <- "N/A"
+    controlDF$Assay <- assay
+    controlDF
+  }
+  controlDF <- controlFrame(HFData, "HF183")
+  controlSk <- controlFrame(sketaData, "Sketa22")
+  
+  controlsDF <- rbind(controlDF, controlSk[controlSk$Sample == "NTC",])
+  numCols <- ncol(controlsDF)
+  controlsDF <- controlsDF[, c(numCols, 1:(numCols - 1))]
+  
+  dbCtrl <- melt(controlsDF[, names(controlsDF) %nin% "PASS?"], id.vars=c("Assay", "Sample"))
+  dbCtrl$variable <- as.numeric(gsub(".*?Rep(\\d).*", "\\1", dbCtrl$variable))
+  names(dbCtrl)[names(dbCtrl) %in% c("Assay", "Sample", "variable", "value")] <- c("Target", "Type", "Rep", "Ct")
   # Sketa Inhibition QC
   
   sketaQC <- function(data=sketaData, threshold=thres){
@@ -108,7 +112,7 @@ controlsDF <- controlsDF[, c(numCols, 1:(numCols - 1))]
   }
   
   sketaData <- sketaQC(sketaData)
-
+  
   sketaDataTrim <- sketaData[, c("Sample", "sk.Ct", "sk.dct", "Inhibition")]
   
   sketaDataTrim <- ddply(sketaDataTrim, .(Sample), function(df){
@@ -139,11 +143,11 @@ controlsDF <- controlsDF[, c(numCols, 1:(numCols - 1))]
     data.frame(Sample = unique(df$Sample),
                Ctmean = mean,
                "PASS?" = ifelse(!inhibited, "PASS", "FAIL")
-               )
+    )
   })
   IACinhib$Ctmean[IACinhib$Ctmean == m] <- "ND"
   names(IACinhib) <- c("Sample", "IAC Ct$_{mean}$", "Pass?")
-
+  
   # CCE interpolation
   directCT <- function(data, ulPerRxn=2, mlFiltered=100, ulCE=500, ulCErecovered=300, ulPE=100){
     data$r2 <- HF.r2
@@ -163,20 +167,20 @@ controlsDF <- controlsDF[, c(numCols, 1:(numCols - 1))]
   
   HFData2 <- directCT(HFData)
   if(nrow(HFData2) > 0) {
-  HFData2$Date <- metadata["Run Started"]
+    HFData2$Date <- metadata["Run Started"]
   }
   
   
   
   ### Integrate results ###
   result <- Reduce(function(x,y)merge(x,y, by="Sample"), list(HFData2, sketaDataTrim, IACinhib))
-
+  
   result$Competition <- result$"Pass?.y" == "FAIL" & result$Cq < IACcompetition  # need to modify in the future for accidental overdose of iac
   IACinhib$Competition <- ifelse(result$Competition[match(IACinhib$Sample, result$Sample)], "Yes", NA)
-
+  
   resultsTrim <- rbind.fill(lapply(split(result, result$Sample), function(df){
     inhibition <- !all(rbind(df$"Pass?.x" == "PASS", df$"Pass?.y" == "PASS"))
-  
+    
     res <- df[, c("Sample", "Target", "Cq", "log10copiesPer100ml", "copiesPer100ml")]
     res$Mean <- NA
     res$Mean[1] <- ifelse(any(inhibition), "inhibited", round(log10(mean(res$copiesPer100ml)), digits=2))
@@ -186,22 +190,22 @@ controlsDF <- controlsDF[, c(numCols, 1:(numCols - 1))]
     subset(res, select=-c(copiesPer100ml))
   }))
   resultsTrim <- arrange(resultsTrim, Sample, Mean)
-
+  
   names(resultsTrim)[3] <- c("Ct")
-
+  
   rmelt <- melt(resultsTrim, id.vars=c("Sample", "Target", "Replicate"))
   resultsTrim2 <- dcast(rmelt, Sample + Target  ~ Replicate + variable, value.var="value")
-
+  
   resultsTrim2 <- resultsTrim2[, c("Sample", "Target", "1_Ct", "2_Ct", "1_log10copiesPer100ml", "2_log10copiesPer100ml",
                                    "1_Mean")]
   resultsTrim2[is.na(resultsTrim2$"1_Ct") & is.na(resultsTrim2$"2_Ct"), c("1_Mean")] <- "ND"
   names(resultsTrim2) <- c("Sample", "Target", "Ct$_{Rep 1}$", "Ct$_{Rep 2}$", "$\\log_{10}$ copies/100 \\si{\\milli\\litre}$_{Rep1}$",
                            "$\\log_{10}$ copies/100 \\si{\\milli\\litre}$_{Rep2}$", "Mean $\\log_{10}$ copies/100 \\si{\\milli\\litre}")
-
+  
   # Generate report
   oname <- tail(strsplit(file, "/")[[1]], 1)
   outputName <- substr(oname, 1, nchar(oname)-4)
-
+  
   
   # Knit PDF#
   if(.Platform$OS == "unix")
@@ -215,8 +219,15 @@ controlsDF <- controlsDF[, c(numCols, 1:(numCols - 1))]
     result[, "Pass?.y"] == "FAIL" & !result$Competition, "FAIL", ifelse(
       result$"Pass?.y" == "FAIL" & result$Competition, "Competition", "PASS")))
   names(result)[names(result) %in% c("Eff", "copiesPerRxn", "copiesPer100ml", "log10copiesPer100ml",
-                "sketa Ct$_{mean}$", "$\\Delta$Ct$_{mean}$", "IAC Ct$_{mean}$")] <-
+                                     "sketa Ct$_{mean}$", "$\\Delta$Ct$_{mean}$", "IAC Ct$_{mean}$")] <-
     c("Efficiency", "QuantPerReaction", "QuantPerFilter", "log10QuantPerFilter", "sk_Ct", "sk_dct", "IAC_Ct")
   result$Quantifier <- "copies"
-  result
+  result$Calibrator <- NA
+  list(result = result, sketaStd = data.frame(Target = "sketa",
+                                              Slope = sketa.Slope, 
+                                              yint = sketa.yint, 
+                                              r2 = sketa.r2,
+                                              Efficiency = sketa.Efficiency,
+                                              Calibrator = sk.calibrator),
+       NegControl = dbCtrl)
 }

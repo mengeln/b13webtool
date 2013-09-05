@@ -63,7 +63,7 @@ process_enteroTaq <- function (file, org) {
   sketaStandard$Log10CopyPeruL <- log10(as.numeric(sketaStandard$CopyPeruL)) 
   
   sketa.model <- lm(data = sketaStandard,  Cq ~ Log10CopyPeruL)
-  # sketa.yint <- coef(sketa.model)[[1]]
+  sketa.yint <- coef(sketa.model)[[1]]
   sketa.Slope <- coef(sketa.model)[[2]]
   sketa.r2 <- summary(sketa.model)$r.squared
   sketa.Efficiency <- 10^(-1/coef(sketa.model)[[2]])
@@ -90,6 +90,9 @@ process_enteroTaq <- function (file, org) {
   
   controlsDF <- rbind(controlDF, controlSk[controlSk$Sample == "NTC",])
   controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
+  dbCtrl <- melt(controlsDF[, names(controlsDF) %nin% "PASS?"], id.vars=c("Assay", "Sample"))
+  dbCtrl$variable <- as.numeric(gsub(".*?Rep(\\d).*", "\\1", dbCtrl$variable))
+  names(dbCtrl)[names(dbCtrl) %in% c("Assay", "Sample", "variable", "value")] <- c("Target", "Type", "Rep", "Ct")
   
   # Inhibition QC
   
@@ -116,7 +119,7 @@ process_enteroTaq <- function (file, org) {
   # Ct to copy number (dct quantification model)
   
   dct <- function(data, ulPerRxn=5, mlFiltered=100, ulCE=500, ulCErecovered=300, ulPE=100, cal=1e5/500){
-    Ct.ent.calibrator <- mean(data$Cq[data$Sample == "calibrator"])
+    Ct.ent.calibrator <<- mean(data$Cq[data$Sample == "calibrator"])
     
     data$ent.dct <- data$Cq - Ct.ent.calibrator
     data$cellPerRxn <- 10^(data$ent.dct/ent.Slope  + log10(cal))
@@ -187,5 +190,12 @@ process_enteroTaq <- function (file, org) {
   result$Slope <- ent.Slope
   result$r2 <- ent.r2 
   result$Efficiency <- ent.Efficiency
-  result
+  result$Calibrator <- Ct.ent.calibrator
+  list(result = result, sketaStd = data.frame(Target = "sketa",
+                                              Slope = sketa.Slope, 
+                                              yint = sketa.yint, 
+                                              r2 = sketa.r2,
+                                              Efficiency = sketa.Efficiency,
+                                              Calibrator = sk.calibrator),
+       NegControl = dbCtrl)
 }

@@ -1,0 +1,60 @@
+\documentclass{article}
+
+\usepackage{siunitx} % Provides the \SI{}{} command for typesetting SI units
+\usepackage{graphicx} % Required for the inclusion of images
+\usepackage[margin=1.0in]{geometry}
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+\renewcommand{\labelenumi}{\alph{enumi}.}
+
+
+\title{qPCR Report \\ Inter-lab Calibration Study Day 1 Assay \\ \rinline{metadata["File Name"]}} % Title
+\date{\today} % Date for the report
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+\begin{tabular}{l r}
+Organization: \rinline{org} \\
+Date Performed: \rinline{metadata["Run Started"]} \\ % Date the experiment was performed
+Protocol: \rinline{metadata["Protocol File Name"]} \\
+Sample Volume: \rinline{metadata["Sample Vol"]} \si{\micro\litre}
+\end{tabular}
+\end{center}
+
+%----------------------------------------------------------------------------
+
+\section{Standard Curve QC Results}
+
+Both enterococcus and HF183 standard curves must have an $r^2$ that is greater than \rinline{r2.min},
+and an efficiency that is between \rinline{eff.min} and \rinline{eff.max}. \\
+
+
+\begin{center}
+\begin{tabular}{c c c}
+\hline\hline
+Measure & Result & Pass? \\ [0.5ex]
+\hline
+Ent $r^2$ & \rinline{ent.r2} & \rinline{ent.StdQC["r2"]} \\
+Ent efficiency & \rinline{ent.Efficiency} & \rinline{ent.StdQC["eff"]} \\
+HF183 $r^2$ & \rinline{HF183.r2} & \rinline{HF183.StdQC["r2"]} \\
+HF183 efficiency & \rinline{HF183.Efficiency} & \rinline{HF183.StdQC["eff"]} \\ [1ex]
+\hline
+\end{tabular}
+\end{center}
+
+%----------------------------------------------------------------------------
+
+\section{NTC and NEC QC Results}
+
+Both the NTCs (qPCR blanks) and NECs (extraction blanks) must be non-detects. Detectable signals
+in any replicates will cause these tests to fail. \\
+
+%% begin.rcode echo=FALSE, results="asis"
+% print(xtable(controlsDF), include.rownames=FALSE, sanitize.text.function=function(x){x})
+%% end.rcode
+
+
+\end{document}

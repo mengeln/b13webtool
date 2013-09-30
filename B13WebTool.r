@@ -11,11 +11,17 @@ if(.Platform$OS == "unix"){
   source("/var/scripts/qpcr/qpcr/enteroTaq.r")
   source("/var/scripts/qpcr/qpcr/processHF183.R")
   source("/var/scripts/qpcr/qpcr/qpcrDB.r")
+  source("/var/scripts/qpcr/qpcr/interCalDay1.r")
+  source("/var/scripts/qpcr/qpcr/interCalDay2.r")
+  source("/var/scripts/qpcr/qpcr/interCalDay3.r")
 } else {
   source("ABI_to_CFX.r")
   source("enteroTaq.r")
   source("processHF183.r")
   source("qpcrDB.r")
+  source("interCalDay1.r")
+  source("interCalDay2.r")
+  source("interCalDay3.r")
 }
 
 
@@ -38,13 +44,19 @@ if(opt$platform == "ABI")
 if(opt$assay == "ent") {
   result <- process_enteroTaq(opt$file, opt$organization)
   p <- "enteroTaqEnviron"
-} else {
+} else if(opt$assay == "HF183"){
   result <- process_HF183(opt$file, opt$organization)
   p <- "HF183_duplex"
+} else if(opt$assay == "day1"){
+  result <- interCalDay1(opt$file, opt$organization)
+} else if(opt$assay == "day2"){
+  result <- interCalDay2(opt$file, opt$organization)
+} else if(opt$assay == "day3"){
+  result <- interCalDay3(opt$file, opt$organization)
 }
 
 
 
-submitData(result, opt$organization, p, opt$platform)
+# submitData(result, opt$organization, p, opt$platform)
 
 cat("Test Return")

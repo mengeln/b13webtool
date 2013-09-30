@@ -56,4 +56,16 @@ in any replicates will cause these tests to fail. \\
 % print(xtable(controlsDF), include.rownames=FALSE, sanitize.text.function=function(x){x})
 %% end.rcode
 
+%----------------------------------------------------------------------------
+
+\pagebreak
+\section{Sample Processing and Inhibition Control QC Results}
+
+The mean sketa Ct in the NECs was \rinline{NECmean}. A large difference between
+this and the calibrator Ct would indicate a degraded calibrator.
+
+%% begin.rcode echo=FALSE, results="asis"
+% print(xtable(sketaDataTrim), include.rownames=FALSE, sanitize.text.function=function(x){x})
+%% end.rcode
+
 \end{document}

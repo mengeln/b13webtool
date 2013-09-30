@@ -58,11 +58,17 @@ in any replicates will cause these tests to fail. \\
 \pagebreak
 \section{Sample Processing and Inhibition Control QC Results}
 
-The sketa calibrator internal control Ct on this plate was \rinline{sk.calibrator}. In order to pass,
+The mean sketa calibrator internal control Ct on this plate was \rinline{sk.calibrator}. In order to pass,
 the difference between the mean sample sketa Ct ($\text{sketaCt}_{mean}$) and the calibrator Ct (i.e., $\Delta \text{Ct}_{mean}$)
 must be less than \rinline{thres}. Note that the threshold level and pass/fail designations assume that the sample has not
 been diluted.
 
+Additionally, the mean sketa Ct in the NECs was \rinline{NECmean}. A large difference between
+this and the calibrator Ct would indicate a degraded calibrator.
+
+%% begin.rcode echo=FALSE, results="asis"
+% print(xtable(sketaDataTrim), include.rownames=FALSE, sanitize.text.function=function(x){x})
+%% end.rcode
 
 %% begin.rcode echo=FALSE, results="asis"
 % print(xtable(sketaDataTrim), include.rownames=FALSE, sanitize.text.function=function(x){x})

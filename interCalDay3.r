@@ -84,10 +84,16 @@ interCalDay3 <- function (file, org) {
   names(dbCtrl)[names(dbCtrl) %in% c("Assay", "Sample", "variable", "value")] <- c("Target", "Type", "Rep", "Ct")
   
   # Inhibition QC
+  NECmean <- sketaData$Cq[grepl("NEC", sketaData$Sample)]
+  
+  calibratorQC <- data.frame(CalibratorCt = sketaData$Cq[grepl("calibrator", data$Sample)])
+  calibratorQC$delta <- calibratorQC$CalibratorCt - NECmean
+  calibrator$PASS <- ifelse(calibratorQC$delta > thres, "FAIL", "PASS")
+  names(calibrator) <- c("Calibrator Ct", "\\delta Ct", "PASS?")
   
   sketaQC <- function(data=sketaData, threshold=thres){
     sk.unkn <- data[grepl("Unkn", data$Content), ]
-    Ct.sk.calibrator <- mean(data$Cq[data$Sample == "calibrator"])
+    Ct.sk.calibrator <- mean(data$Cq[grepl("calibrator", data$Sample)]) 
     
     sk.calibrator <<- Ct.sk.calibrator
     sk.unkn$sk.dct <- sk.unkn$Cq - Ct.sk.calibrator

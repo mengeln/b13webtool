@@ -39,8 +39,6 @@ Measure & Result & Pass? \\ [0.5ex]
 \hline
 HF183 $r^2$ & \rinline{HF.r2} & \rinline{HF.StdQC["r2"]} \\
 HF183 efficiency & \rinline{HF.Efficiency} & \rinline{HF.StdQC["eff"]} \\
-Sketa $r^2$ & \rinline{sketa.r2} & \rinline{sketa.StdQC["r2"]} \\
-Sketa efficiency & \rinline{sketa.Efficiency} & \rinline{sketa.StdQC["eff"]} \\ [1ex]
 \hline
 \end{tabular}
 \end{center}

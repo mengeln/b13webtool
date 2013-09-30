@@ -60,22 +60,10 @@ process_HF183 <- function (file, org) {
   
   HF.StdQC <- standardQC(HF.Efficiency, HF.r2)
   
-  sketaStandard <- sketaData[grepl("Std", sketaData$Content), ]
-  sketaStandard$Log10CopyPeruL <- log10(as.numeric(sketaStandard$CopyPeruL)) 
-  
-  
-  sketa.model <- lm(data = sketaStandard,  Cq ~ Log10CopyPeruL)
-  sketa.yint <- coef(sketa.model)[[1]]
-  sketa.Slope <- coef(sketa.model)[[2]]
-  sketa.r2 <- summary(sketa.model)$r.squared
-  sketa.Efficiency <- 10^(-1/coef(sketa.model)[[2]])
-  
-  sketa.StdQC <- standardQC(sketa.Efficiency, sketa.r2)
-  
   # Controls
   controlFrame <- function (data, assay) {
     data$Sample <- toupper(data$Sample)
-    cData <- data[data$Sample %in% c("NTC", "NEC"),]
+    cData <- data[grepl("NTC|NEC", data$Sample),] 
     cData <- ddply(cData, .(Sample), function(df){
       df$Replicate <- paste0("Ct$_{Rep", 1:nrow(df), "}$")
       df
@@ -100,7 +88,7 @@ process_HF183 <- function (file, org) {
   
   sketaQC <- function(data=sketaData, threshold=thres){
     sk.unkn <- data[grepl("Unkn", data$Content), ]
-    calibrators <- sketaData$Cq[toupper(sketaData$Sample) == "NEC"]
+    calibrators <- sketaData$Cq[grepl("NEC", toupper(sketaData$Sample))
     Ct.sk.calibrator <- mean(calibrators)
     
     sk.calibrator <<- Ct.sk.calibrator

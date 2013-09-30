@@ -71,6 +71,12 @@ interCalday2 <- function (file, org) {
   sketa.StdQC <- standardQC(sketa.Efficiency, sketa.r2)
   
   # Negative Control QC
+  NECmean <- sketaData$Cq[grepl("NEC", sketaData$Sample)]
+  
+  calibratorQC <- data.frame(CalibratorCt = sketaData$Cq[grepl("calibrator", data$Sample)])
+  calibratorQC$delta <- calibratorQC$CalibratorCt - NECmean
+  calibrator$PASS <- ifelse(calibratorQC$delta > thres, "FAIL", "PASS")
+  names(calibrator) <- c("Calibrator Ct", "\\delta Ct", "PASS?")
   
   controlFrame <- function (data, assay) {
     data$Sample <- toupper(data$Sample)

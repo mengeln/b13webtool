@@ -97,6 +97,10 @@ interCalDay2 <- function (file, org) {
   controlsDF <- rbind(controlDF, controlSk[controlSk$Sample == "NTC",])
   controlsDF <- controlsDF[, c(ncol(controlsDF), 1:(ncol(controlsDF) -1))]
   
+  # Generate report
+  oname <- tail(strsplit(file, "/")[[1]], 1)
+  outputName <- substr(oname, 1, nchar(oname)-4)
+  
   # direct output to a file
   if(.Platform$OS == "unix")
     knit("/var/scripts/qpcr/qpcr/day2report.Rtex", paste0("/var/www/qpcr/files/", outputName, ".tex"))

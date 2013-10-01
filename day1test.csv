@@ -1,0 +1,62 @@
+File Name,day1test,,,,,
+Created By User,admin,,,,,
+Notes,,,,,,
+ID,,,,,,
+Run Started,8/28/2013 2:16:47 PM UTC -07:00,,,,,
+Run Ended,8/28/2013 3:52:04 PM UTC -07:00,,,,,
+Sample Vol,25,,,,,
+Lid Temp,105,,,,,
+Protocol File Name,entero 1a.prcl,,,,,
+Plate Setup File Name,qPCR training entero.pltd,,,,,
+Base Serial Number,CC011698,,,,,
+Optical Head Serial Number,785BR4301,,,,,
+CFX Manager Version,3.0.1216.0723. ,,,,,
+,,,,,,
+Well group,top,,,,,
+Amplification step,4,,,,,
+Melt step,,,,,,
+,,,,,,
+,,,,,,
+Well,Fluor,Target,Content,Sample,Cq,Starting Quantity (SQ)
+C05,FAM,ent,NTC,NTC,N/A,N/A
+C06,FAM,ent,NTC,NTC,N/A,N/A
+B05,FAM,ent,Pos Ctrl-01,calibrator,25.25,2.34E+04
+B06,FAM,ent,Pos Ctrl-01,calibrator,25.23,2.36E+04
+A01,FAM,ent,Std-01,,23.27,1.00E+05
+A02,FAM,ent,Std-01,,23.42,1.00E+05
+A03,FAM,ent,Std-02,,26.21,1.00E+04
+A04,FAM,ent,Std-02,,26.21,1.00E+04
+A05,FAM,ent,Std-03,,29.66,1.00E+03
+A06,FAM,ent,Std-03,,30.01,1.00E+03
+B01,FAM,ent,Std-04,,33.33,1.00E+02
+B02,FAM,ent,Std-04,,33.22,1.00E+02
+B03,FAM,ent,Std-05,,N/A,1.00E+01
+B04,FAM,ent,Std-05,,36.74,1.00E+01
+C05,FAM,hf183,NTC,NTC,N/A,N/A
+C06,FAM,hf183,NTC,NTC,N/A,N/A
+A01,FAM,hf183,Std-01,,25.95,1.00E+06
+A02,FAM,hf183,Std-01,,24.3,1.00E+06
+A03,FAM,hf183,Std-02,,30.57,1.00E+05
+A04,FAM,hf183,Std-02,,N/A,1.00E+05
+A05,FAM,hf183,Std-03,,N/A,1.00E+04
+A06,FAM,hf183,Std-03,,N/A,1.00E+04
+B01,FAM,hf183,Std-04,,N/A,1.00E+03
+B02,FAM,hf183,Std-04,,N/A,1.00E+03
+B03,FAM,hf183,Std-05,,N/A,1.00E+02
+B04,FAM,hf183,Std-05,,N/A,1.00E+02
+B05,FAM,hf183,Std-06,,N/A,1.00E+01
+B06,FAM,hf183,Std-06,,N/A,1.00E+01
+C05,VIC,IAC,NTC,NTC,34.54,N/A
+C06,VIC,IAC,NTC,NTC,35.22,N/A
+A01,VIC,IAC,Std-01,,N/A,1.00E+06
+A02,VIC,IAC,Std-01,,N/A,1.00E+06
+A03,VIC,IAC,Std-02,,34.85,1.00E+05
+A04,VIC,IAC,Std-02,,33.78,1.00E+05
+A05,VIC,IAC,Std-03,,34.17,1.00E+04
+A06,VIC,IAC,Std-03,,34.84,1.00E+04
+B01,VIC,IAC,Std-04,,34.56,1.00E+03
+B02,VIC,IAC,Std-04,,33.77,1.00E+03
+B03,VIC,IAC,Std-05,,34.49,1.00E+02
+B04,VIC,IAC,Std-05,,34.41,1.00E+02
+B05,VIC,IAC,Std-06,,34.32,1.00E+01
+B06,VIC,IAC,Std-06,,33.82,1.00E+01

@@ -63,7 +63,7 @@ interCalDay3 <- function (file, org) {
   
   controlFrame <- function (data, assay) {
     data$Sample <- toupper(data$Sample)
-    cData <- data[data$Sample %in% c("NTC", "NEC"),]
+    cData <- data[grepl("NTC|NEC", data$Sample),]
     cData <- ddply(cData, .(Sample), function(df){
       df$Replicate <- paste0("Ct$_{Rep", 1:nrow(df), "}$")
       df
@@ -78,18 +78,15 @@ interCalDay3 <- function (file, org) {
   controlSk <- controlFrame(sketaData, "Sketa22")
   
   controlsDF <- rbind(controlDF, controlSk[controlSk$Sample == "NTC",])
-  controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
-  dbCtrl <- melt(controlsDF[, names(controlsDF) %nin% "PASS?"], id.vars=c("Assay", "Sample"))
-  dbCtrl$variable <- as.numeric(gsub(".*?Rep(\\d).*", "\\1", dbCtrl$variable))
-  names(dbCtrl)[names(dbCtrl) %in% c("Assay", "Sample", "variable", "value")] <- c("Target", "Type", "Rep", "Ct")
-  
+  controlsDF <- controlsDF[, c(ncol(controlsDF), 1:(ncol(controlsDF) -1))]
+ 
   # Inhibition QC
-  NECmean <- sketaData$Cq[grepl("NEC", sketaData$Sample)]
+  NECmean <- mean(sketaData$Cq[grepl("NEC", sketaData$Sample)], na.rm=TRUE)
   
-  calibratorQC <- data.frame(CalibratorCt = sketaData$Cq[grepl("calibrator", data$Sample)])
+  calibratorQC <- data.frame(CalibratorCt = sketaData$Cq[grepl("calibrator", sketaData$Sample)])
   calibratorQC$delta <- calibratorQC$CalibratorCt - NECmean
-  calibrator$PASS <- ifelse(calibratorQC$delta > thres, "FAIL", "PASS")
-  names(calibrator) <- c("Calibrator Ct", "\\delta Ct", "PASS?")
+  calibratorQC$PASS <- ifelse(calibratorQC$delta > thres, "FAIL", "PASS")
+  names(calibratorQC) <- c("Calibrator Ct", "$\\Delta$ Ct", "PASS?")
   
   sketaQC <- function(data=sketaData, threshold=thres){
     sk.unkn <- data[grepl("Unkn", data$Content), ]
@@ -171,5 +168,5 @@ interCalDay3 <- function (file, org) {
   if(.Platform$OS == "unix")
     knit("/var/scripts/qpcr/qpcr/day3report.Rtex", paste0("/var/www/qpcr/files/", outputName, ".tex"))
   else
-    knit("report.Rtex", "../tests/day3report.tex")
+    knit("day3report.Rtex", "../tests/report.tex")
 }

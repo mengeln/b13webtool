@@ -37,8 +37,8 @@ interCalDay1 <- function (file, org) {
   # Subset by target
   
   entData <- cfxtest[cfxtest$Target == "ent", ]
-  HF183Data <- cfxtest[cfxtest$Target == "HF183", ]  
-  
+  HF183Data <- cfxtest[cfxtest$Target == "hf183", ]  
+
   # Standard Curve
   
   standardQC <- function(eff, r2, ef.max=eff.max, ef.min=eff.min, r2.m=r2.min) {
@@ -86,7 +86,7 @@ interCalDay1 <- function (file, org) {
     controlDF
   }
   controlDF <- controlFrame(entData, "Entero1A")
-  controlSk <- controlFrame(HF183, "HF183")
+  controlSk <- controlFrame(HF183Data, "HF183")
   
   controlsDF <- rbind(controlDF, controlSk[controlSk$Sample == "NTC",])
   controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
@@ -95,6 +95,6 @@ interCalDay1 <- function (file, org) {
   if(.Platform$OS == "unix")
     knit("/var/scripts/qpcr/qpcr/day1report.Rtex", paste0("/var/www/qpcr/files/", outputName, ".tex"))
   else
-    knit("report.Rtex", "../tests/report.tex")
+    knit("day1report.Rtex", "../tests/report.tex")
 }
   

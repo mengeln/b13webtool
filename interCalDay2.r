@@ -4,7 +4,7 @@ library(plyr)
 library(lubridate)
 library(reshape2)
 
-interCalday2 <- function (file, org) {
+interCalDay2 <- function (file, org) {
   options(stringsAsFactors=FALSE)
   
   eff.max <- 2.1
@@ -71,16 +71,16 @@ interCalday2 <- function (file, org) {
   sketa.StdQC <- standardQC(sketa.Efficiency, sketa.r2)
   
   # Negative Control QC
-  NECmean <- sketaData$Cq[grepl("NEC", sketaData$Sample)]
+  NECmean <- mean(sketaData$Cq[grepl("NEC", sketaData$Sample)], na.rm=TRUE)
   
-  calibratorQC <- data.frame(CalibratorCt = sketaData$Cq[grepl("calibrator", data$Sample)])
+  calibratorQC <- data.frame(CalibratorCt = sketaData$Cq[grepl("calibrator", sketaData$Sample)])
   calibratorQC$delta <- calibratorQC$CalibratorCt - NECmean
-  calibrator$PASS <- ifelse(calibratorQC$delta > thres, "FAIL", "PASS")
-  names(calibrator) <- c("Calibrator Ct", "\\delta Ct", "PASS?")
+  calibratorQC$PASS <- ifelse(calibratorQC$delta > thres, "FAIL", "PASS")
+  names(calibratorQC) <- c("Calibrator Ct", "$\\Delta$ Ct", "PASS?")
   
   controlFrame <- function (data, assay) {
     data$Sample <- toupper(data$Sample)
-    cData <- data[data$Sample %in% c("NTC", "NEC"),]
+    cData <- data[grepl("NTC|NEC", data$Sample),] 
     cData <- ddply(cData, .(Sample), function(df){
       df$Replicate <- paste0("Ct$_{Rep", 1:nrow(df), "}$")
       df
@@ -95,11 +95,11 @@ interCalday2 <- function (file, org) {
   controlSk <- controlFrame(sketaData, "Sketa22")
   
   controlsDF <- rbind(controlDF, controlSk[controlSk$Sample == "NTC",])
-  controlsDF <- controlsDF[, c(5, 1, 2, 3, 4)]
+  controlsDF <- controlsDF[, c(ncol(controlsDF), 1:(ncol(controlsDF) -1))]
   
   # direct output to a file
   if(.Platform$OS == "unix")
     knit("/var/scripts/qpcr/qpcr/day2report.Rtex", paste0("/var/www/qpcr/files/", outputName, ".tex"))
   else
-    knit("report.Rtex", "../tests/report.tex")
+    knit("day2report.Rtex", "../tests/report.tex")
 }

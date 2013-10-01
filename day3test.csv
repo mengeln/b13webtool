@@ -1,0 +1,64 @@
+File Name,Day3Test,,,,,
+Created By User,admin,,,,,
+Notes,,,,,,
+ID,,,,,,
+Run Started,8/28/2013 2:16:47 PM UTC -07:00,,,,,
+Run Ended,8/28/2013 3:52:04 PM UTC -07:00,,,,,
+Sample Vol,25,,,,,
+Lid Temp,105,,,,,
+Protocol File Name,entero 1a.prcl,,,,,
+Plate Setup File Name,qPCR training entero.pltd,,,,,
+Base Serial Number,CC011698,,,,,
+Optical Head Serial Number,785BR4301,,,,,
+CFX Manager Version,3.0.1216.0723. ,,,,,
+,,,,,,
+Well group,top,,,,,
+Amplification step,4,,,,,
+Melt step,,,,,,
+,,,,,,
+,,,,,,
+Well,Fluor,Target,Content,Sample,Cq,Starting Quantity (SQ)
+C03,FAM,ent,Neg Ctrl,NEC1,N/A,N/A
+C04,FAM,ent,Neg Ctrl,NEC1,N/A,N/A
+C04,FAM,ent,Neg Ctrl,NEC1,N/A,N/A
+C03,FAM,ent,Neg Ctrl,NEC2,N/A,N/A
+C04,FAM,ent,Neg Ctrl,NEC2,N/A,N/A
+C04,FAM,ent,Neg Ctrl,NEC2,N/A,N/A
+C05,FAM,ent,NTC,NTC,N/A,N/A
+C06,FAM,ent,NTC,NTC,N/A,N/A
+C06,FAM,ent,NTC,NTC,N/A,N/A
+B05,FAM,ent,Pos Ctrl-01,calibrator,25.25,2.34E+04
+B06,FAM,ent,Pos Ctrl-01,calibrator,25.23,2.36E+04
+A01,FAM,ent,Std-01,,23.27,1.00E+05
+A02,FAM,ent,Std-01,,23.42,1.00E+05
+A03,FAM,ent,Std-02,,26.21,1.00E+04
+A04,FAM,ent,Std-02,,26.21,1.00E+04
+A05,FAM,ent,Std-03,,29.66,1.00E+03
+A06,FAM,ent,Std-03,,30.01,1.00E+03
+B01,FAM,ent,Std-04,,33.33,1.00E+02
+B02,FAM,ent,Std-04,,33.22,1.00E+02
+B03,FAM,ent,Std-05,,N/A,1.00E+01
+B04,FAM,ent,Std-05,,36.74,1.00E+01
+C01,FAM,ent,Unkn-01,sewage,28.35,2.83E+03
+C02,FAM,ent,Unkn-01,sewage,28.4,2.72E+03
+C09,FAM,sketa,Neg Ctrl,NEC1,22.84,2.09E-01
+C10,FAM,sketa,Neg Ctrl,NEC1,22.99,1.91E-01
+C10,FAM,sketa,Neg Ctrl,NEC1,22.99,1.91E-01
+C09,FAM,sketa,Neg Ctrl,NEC2,22.84,2.09E-01
+C10,FAM,sketa,Neg Ctrl,NEC2,22.99,1.91E-01
+C10,FAM,sketa,Neg Ctrl,NEC2,22.99,1.91E-01
+C11,FAM,sketa,NTC,NTC,N/A,N/A
+C12,FAM,sketa,NTC,NTC,N/A,N/A
+C12,FAM,sketa,NTC,NTC,N/A,N/A
+B09,FAM,sketa,Pos Ctrl-02,calibrator,23.12,1.75E-01
+B10,FAM,sketa,Pos Ctrl-02,calibrator,23.18,1.68E-01
+A07,FAM,sketa,Std-07,,22.89,2.00E-01
+A08,FAM,sketa,Std-07,,22.99,2.00E-01
+A09,FAM,sketa,Std-08,,26.39,2.00E-02
+A10,FAM,sketa,Std-08,,26.36,2.00E-02
+A11,FAM,sketa,Std-09,,30.32,2.00E-03
+A12,FAM,sketa,Std-09,,30.18,2.00E-03
+B07,FAM,sketa,Std-10,,33.68,2.00E-04
+B08,FAM,sketa,Std-10,,33.5,2.00E-04
+C07,FAM,sketa,Unkn-02,sewage,23.78,1.15E-01
+C08,FAM,sketa,Unkn-02,sewage,24.05,9.64E-02

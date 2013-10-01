@@ -1,0 +1,85 @@
+File Name,day4test,,,,,
+Created By User,admin,,,,,
+Notes,,,,,,
+ID,,,,,,
+Run Started,8/29/2013 2:49:16 PM UTC -07:00,,,,,
+Run Ended,8/29/2013 4:15:02 PM UTC -07:00,,,,,
+Sample Vol,25,,,,,
+Lid Temp,105,,,,,
+Protocol File Name,entero 1a taqman.prcl,,,,,
+Plate Setup File Name,qPCR trainingHF183.pltd,,,,,
+Base Serial Number,CT005460,,,,,
+Optical Head Serial Number,785BR7906,,,,,
+CFX Manager Version,3.0.1224.1015. ,,,,,
+,,,,,,
+Well group,Top,,,,,
+Amplification step,4,,,,,
+Melt step,,,,,,
+,,,,,,
+,,,,,,
+Well,Fluor,Target,Content,Sample,Cq,Starting Quantity (SQ)
+C03,FAM,hf183,Neg Ctrl,NEC1,N/A,N/A
+C04,FAM,hf183,Neg Ctrl,NEC1,N/A,N/A
+C04,FAM,hf183,Neg Ctrl,NEC1,N/A,N/A
+C03,FAM,hf183,Neg Ctrl,NEC2,N/A,N/A
+C04,FAM,hf183,Neg Ctrl,NEC2,N/A,N/A
+C04,FAM,hf183,Neg Ctrl,NEC2,N/A,N/A
+C05,FAM,hf183,NTC,NTC,N/A,N/A
+C05,FAM,hf183,NTC,NTC,N/A,N/A
+C06,FAM,hf183,NTC,NTC,N/A,N/A
+A01,FAM,hf183,Std-01,,25.95,1.00E+06
+A02,FAM,hf183,Std-01,,24.3,1.00E+06
+A03,FAM,hf183,Std-02,,30.57,1.00E+05
+A04,FAM,hf183,Std-02,,N/A,1.00E+05
+A05,FAM,hf183,Std-03,,N/A,1.00E+04
+A06,FAM,hf183,Std-03,,N/A,1.00E+04
+B01,FAM,hf183,Std-04,,N/A,1.00E+03
+B02,FAM,hf183,Std-04,,N/A,1.00E+03
+B03,FAM,hf183,Std-05,,N/A,1.00E+02
+B04,FAM,hf183,Std-05,,N/A,1.00E+02
+B05,FAM,hf183,Std-06,,N/A,1.00E+01
+B06,FAM,hf183,Std-06,,N/A,1.00E+01
+C01,FAM,hf183,Unkn-01,sewage,22.92,2.54E+06
+C02,FAM,hf183,Unkn-01,sewage,23.94,1.65E+06
+C03,VIC,IAC,Neg Ctrl,NEC1,34.01,5.68E-03
+C04,VIC,IAC,Neg Ctrl,NEC1,34.39,3.70E+04
+C04,VIC,IAC,Neg Ctrl,NEC1,34.39,3.70E+04
+C03,VIC,IAC,Neg Ctrl,NEC2,34.01,5.68E-03
+C04,VIC,IAC,Neg Ctrl,NEC2,34.39,3.70E+04
+C04,VIC,IAC,Neg Ctrl,NEC2,34.39,3.70E+04
+C05,VIC,IAC,NTC,NTC,34.54,N/A
+C05,VIC,IAC,NTC,NTC,34.54,N/A
+C06,VIC,IAC,NTC,NTC,35.22,N/A
+A01,VIC,IAC,Std-01,,N/A,1.00E+06
+A02,VIC,IAC,Std-01,,N/A,1.00E+06
+A03,VIC,IAC,Std-02,,34.85,1.00E+05
+A04,VIC,IAC,Std-02,,33.78,1.00E+05
+A05,VIC,IAC,Std-03,,34.17,1.00E+04
+A06,VIC,IAC,Std-03,,34.84,1.00E+04
+B01,VIC,IAC,Std-04,,34.56,1.00E+03
+B02,VIC,IAC,Std-04,,33.77,1.00E+03
+B03,VIC,IAC,Std-05,,34.49,1.00E+02
+B04,VIC,IAC,Std-05,,34.41,1.00E+02
+B05,VIC,IAC,Std-06,,34.32,1.00E+01
+B06,VIC,IAC,Std-06,,33.82,1.00E+01
+C01,VIC,IAC,Unkn-01,sewage,N/A,N/A
+C02,VIC,IAC,Unkn-01,sewage,N/A,N/A
+C09,FAM,sketa,Neg Ctrl,NEC1,22.96,1.48E-01
+C09,FAM,sketa,Neg Ctrl,NEC1,22.96,1.48E-01
+C10,FAM,sketa,Neg Ctrl,NEC1,23.16,1.30E-01
+C09,FAM,sketa,Neg Ctrl,NEC2,22.96,1.48E-01
+C09,FAM,sketa,Neg Ctrl,NEC2,22.96,1.48E-01
+C10,FAM,sketa,Neg Ctrl,NEC2,23.16,1.30E-01
+C11,FAM,sketa,NTC,NTC,N/A,N/A
+C12,FAM,sketa,NTC,NTC,N/A,N/A
+C12,FAM,sketa,NTC,NTC,N/A,N/A
+A07,FAM,sketa,Std-07,,21.99,2.00E-01
+A08,FAM,sketa,Std-07,,23.13,2.00E-01
+A09,FAM,sketa,Std-08,,25.57,2.00E-02
+A10,FAM,sketa,Std-08,,26.21,2.00E-02
+A11,FAM,sketa,Std-09,,28.89,2.00E-03
+A12,FAM,sketa,Std-09,,29.61,2.00E-03
+B07,FAM,sketa,Std-10,,33.11,2.00E-04
+B08,FAM,sketa,Std-10,,32.48,2.00E-04
+C07,FAM,sketa,Unkn-02,sewage,28.44,3.64E-03
+C08,FAM,sketa,Unkn-02,sewage,28.46,3.60E-03

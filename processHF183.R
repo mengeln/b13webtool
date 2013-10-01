@@ -88,7 +88,7 @@ process_HF183 <- function (file, org) {
   
   sketaQC <- function(data=sketaData, threshold=thres){
     sk.unkn <- data[grepl("Unkn", data$Content), ]
-    calibrators <- sketaData$Cq[grepl("NEC", toupper(sketaData$Sample))
+    calibrators <- sketaData$Cq[grepl("NEC", toupper(sketaData$Sample))]
     Ct.sk.calibrator <- mean(calibrators)
     
     sk.calibrator <<- Ct.sk.calibrator
@@ -201,21 +201,21 @@ process_HF183 <- function (file, org) {
   else
     knit("HFreport.Rtex", "../tests/report.tex")
   
-  ## Return result ##
-  result$Project <- "Bight13" 
-  result$Inhibition <- ifelse(result$"Pass?.x" == "FAIL", "FAIL", ifelse(
-    result[, "Pass?.y"] == "FAIL" & !result$Competition, "FAIL", ifelse(
-      result$"Pass?.y" == "FAIL" & result$Competition, "Competition", "PASS")))
-  names(result)[names(result) %in% c("Eff", "copiesPerRxn", "copiesPer100ml", "log10copiesPer100ml",
-                                     "sketa Ct$_{mean}$", "$\\Delta$Ct$_{mean}$", "IAC Ct$_{mean}$")] <-
-    c("Efficiency", "QuantPerReaction", "QuantPerFilter", "log10QuantPerFilter", "sk_Ct", "sk_dct", "IAC_Ct")
-  result$Quantifier <- "copies"
-  result$Calibrator <- NA
-  list(result = result, sketaStd = data.frame(Target = "sketa",
-                                              Slope = sketa.Slope, 
-                                              yint = sketa.yint, 
-                                              r2 = sketa.r2,
-                                              Efficiency = sketa.Efficiency,
-                                              Calibrator = sk.calibrator),
-       NegControl = dbCtrl)
+#   ## Return result ##
+#   result$Project <- "Bight13" 
+#   result$Inhibition <- ifelse(result$"Pass?.x" == "FAIL", "FAIL", ifelse(
+#     result[, "Pass?.y"] == "FAIL" & !result$Competition, "FAIL", ifelse(
+#       result$"Pass?.y" == "FAIL" & result$Competition, "Competition", "PASS")))
+#   names(result)[names(result) %in% c("Eff", "copiesPerRxn", "copiesPer100ml", "log10copiesPer100ml",
+#                                      "sketa Ct$_{mean}$", "$\\Delta$Ct$_{mean}$", "IAC Ct$_{mean}$")] <-
+#     c("Efficiency", "QuantPerReaction", "QuantPerFilter", "log10QuantPerFilter", "sk_Ct", "sk_dct", "IAC_Ct")
+#   result$Quantifier <- "copies"
+#   result$Calibrator <- NA
+#   list(result = result, sketaStd = data.frame(Target = "sketa",
+#                                               Slope = sketa.Slope, 
+#                                               yint = sketa.yint, 
+#                                               r2 = sketa.r2,
+#                                               Efficiency = sketa.Efficiency,
+#                                               Calibrator = sk.calibrator),
+#        NegControl = dbCtrl)
 }

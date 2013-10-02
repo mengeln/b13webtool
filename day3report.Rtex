@@ -28,7 +28,7 @@ Sample Volume: \rinline{metadata["Sample Vol"]} \si{\micro\litre}
 
 \section{Standard Curve QC Results}
 
-Both enterococcus and sketa standard curves must have an $r^2$ that is greater than \rinline{r2.min},
+The enterococcus standard curve must have an $r^2$ that is greater than \rinline{r2.min},
 and an efficiency that is between \rinline{eff.min} and \rinline{eff.max}. \\
 
 
@@ -58,13 +58,12 @@ in any replicates will cause these tests to fail. \\
 \pagebreak
 \section{Sample Processing and Inhibition Control QC Results}
 
-The mean sketa calibrator internal control Ct on this plate was \rinline{sk.calibrator}. In order to pass,
-the difference between the mean sample sketa Ct ($\text{sketaCt}_{mean}$) and the calibrator Ct (i.e., $\Delta \text{Ct}_{mean}$)
+The mean sketa control Ct (i.e., the NEC) on this plate was \rinline{sk.calibrator}. In order to pass,
+the difference between the mean sample sketa Ct ($\text{sketaCt}_{mean}$) and the NEC Ct (i.e., $\Delta \text{Ct}_{mean}$)
 must be less than \rinline{thres}. Note that the threshold level and pass/fail designations assume that the sample has not
 been diluted. \\
 
-Additionally, the mean sketa Ct in the NECs was \rinline{NECmean}. A large difference between
-this and the calibrator Ct would indicate a degraded calibrator.
+Additionally, the mean sketa Ct in the NECs was \rinline{NECmean}. A large difference between this value and the sketa calibrator would indicate some sort of problem.
 
 %% begin.rcode echo=FALSE, results="asis"
 % print(xtable(calibratorQC), include.rownames=FALSE, sanitize.text.function=function(x){x})
@@ -94,5 +93,24 @@ to be labeled as ``inhibited''. Remember that these CE estimates (both replicate
 %% begin.rcode echo=FALSE, results="asis"
 % print(xtable(resultsTrim2), scalebox = 0.93, include.rownames=FALSE, sanitize.text.function=function(x){x})
 %% end.rcode
+%----------------------------------------------------------------------------
+\pagebreak
+\section{Enterococcus Cell Equivalence Estimation}
 
+Cell equivalents (CE) per reaction is calculated using the $\Delta$Ct method, in which samples are compared to the calibrator
+in the following way:
+
+$$ \log_{10}{CE} = \frac{\Delta\text{Ct}_{samp, cal}}{slope} + \log_{10}{cal} $$
+
+where $slope$ is the slope of the enterococcus standard curve (\rinline{ent.Slope} for this plate),
+$cal$ is the enterococcus calibrator expected CE, and
+$\Delta\text{Ct}_{samp, cal}$ is the difference in Ct between the mean of the calibrators and
+the sample. These values are then transformed to CE per filter (assumed to be 100 ml), and are reported below.
+Samples indicated to be inhibited by sketa controls are labeled as such. Uninhibited CE estimates that are below the detection
+limit (set to a Ct of \rinline{m}) are denoted by ``ND''. Any detected inhibition among sample replicates causes the mean
+to be labeled as ``inhibited''. Remember that these CE estimates (both replicate and mean) are reported on a logarithmic scale.
+
+%% begin.rcode echo=FALSE, results="asis"
+% print(xtable(resultsTrim2), scalebox = 0.93, include.rownames=FALSE, sanitize.text.function=function(x){x})
+%% end.rcode
 \end{document}

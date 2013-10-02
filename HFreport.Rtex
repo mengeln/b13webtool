@@ -28,7 +28,7 @@ Sample Volume: \rinline{metadata["Sample Vol"]} \si{\micro\litre}
 
 \section{Standard Curve QC Results}
 
-Both HF183 and sketa standard curves must have an $r^2$ that is greater than \rinline{r2.min},
+The HF183 curve must have an $r^2$ that is greater than \rinline{r2.min},
 and an efficiency that is between \rinline{eff.min} and \rinline{eff.max}. \\
 
 
@@ -57,10 +57,10 @@ in any replicates will cause these tests to fail. \\
 \pagebreak
 \section{Sample Processing and Inhibition Control QC Results} 
 \subsection{Sketa}
-The sketa control Ct on this plate was \rinline{sk.calibrator}. In order to pass,
-the difference between the $\text{sketa Ct}_{mean}$ for a given sample and the control Ct (i.e., $\Delta \text{Ct}_{mean}$)
-must be less than \rinline{thres} Ct. Note that the threshold level and pass/fail designations assume that the sample has not
-been diluted. 
+The mean sketa control Ct (i.e., the NEC) on this plate was \rinline{sk.calibrator}. In order to pass,
+the difference between the mean sample sketa Ct ($\text{sketaCt}_{mean}$) and the NEC Ct (i.e., $\Delta \text{Ct}_{mean}$)
+must be less than \rinline{thres}. Note that the threshold level and pass/fail designations assume that the sample has not
+been diluted. \\
 
 
 %% begin.rcode echo=FALSE, results="asis"
@@ -70,7 +70,7 @@ been diluted.
 \subsection{IAC}
 
 The mean Ct of the internal amplication controls (IAC) unaffected by inhibition on this plate was \rinline{mean(ROQ)}, 
-and the accetable upper bound is a Ct of \rinline{IACinterference}. IAC reactions with Cts greater than this value are 
+and the accetable inhibition threshold is a Ct of \rinline{IACinterference}. IAC reactions with Cts greater than this value are 
 considered to be inhibited. However, Ct increases can also be caused by competition in the multiplex reaction if the 
 quantity of sample DNA is high. Failing IACs are marked to denote competition effects if the sample HF183 Ct was less
 than \rinline{IACcompetition}, which is the competition threshold determined based on the calibration curve on this plate.

@@ -28,7 +28,7 @@ Sample Volume: \rinline{metadata["Sample Vol"]} \si{\micro\litre}
 
 \section{Standard Curve QC Results}
 
-Both enterococcus and sketa standard curves must have an $r^2$ that is greater than \rinline{r2.min},
+The Enterococcus calibrator, Enterococcus genomic, and sketa standard curves must have an $r^2$ that is greater than \rinline{r2.min},
 and an efficiency that is between \rinline{eff.min} and \rinline{eff.max}. \\
 
 
@@ -37,8 +37,10 @@ and an efficiency that is between \rinline{eff.min} and \rinline{eff.max}. \\
 \hline\hline
 Measure & Result & Pass? \\ [0.5ex]
 \hline
-Ent $r^2$ & \rinline{ent.r2} & \rinline{ent.StdQC["r2"]} \\
-Ent efficiency & \rinline{ent.Efficiency} & \rinline{ent.StdQC["eff"]} \\
+Ent Calibrator $r^2$ & \rinline{entCal.r2} & \rinline{entCal.StdQC["r2"]} \\
+Ent Calibrator efficiency & \rinline{entCal.Efficiency} & \rinline{entCal.StdQC["eff"]} \\
+Ent Genomic $r^2$ & \rinline{entGen.r2} & \rinline{entGen.StdQC["r2"]} \\
+Ent Genomic efficiency & \rinline{entGen.Efficiency} & \rinline{entGen.StdQC["eff"]} \\
 Sketa $r^2$ & \rinline{sketa.r2} & \rinline{sketa.StdQC["r2"]} \\
 Sketa efficiency & \rinline{sketa.Efficiency} & \rinline{sketa.StdQC["eff"]} \\ [1ex]
 \hline
@@ -60,8 +62,8 @@ in any replicates will cause these tests to fail. \\
 \pagebreak
 \section{Sample Processing and Inhibition Control QC Results}
 
-The mean sketa Ct in the NECs was \rinline{NECmean}. A large difference between
-this and the calibrator Ct would indicate a degraded calibrator.
+The mean sketa Ct in the NECs was \rinline{NECmean}. A large difference between this
+value and the sketa calibrator would indicate some sort of problem.
 
 %% begin.rcode echo=FALSE, results="asis"
 % print(xtable(calibratorQC), include.rownames=FALSE, sanitize.text.function=function(x){x})

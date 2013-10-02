@@ -47,17 +47,34 @@ interCalDay2 <- function (file, org) {
     c(eff = eff, r2 = r2)
   }
   
-  entStandard <- entData[grepl("Std", entData$Content), ]
+  ### Genomic ent standard curve
+  
+  entStandard <- entData[grepl("Std", entData$Sample), ]
   entStandard$Log10CopyPeruL <- log10(as.numeric(entStandard$CopyPeruL)) 
   
-  ent.model <- lm(data = entStandard,  Cq ~ Log10CopyPeruL)
+  entGen.model <- lm(data = entStandard,  Cq ~ Log10CopyPeruL)
   
-  ent.yint <- coef(ent.model)[[1]]
-  ent.Slope <- coef(ent.model)[[2]]
-  ent.r2 <- summary(ent.model)$r.squared
-  ent.Efficiency <- 10^(-1/coef(ent.model)[[2]])
+  entGen.yint <- coef(entGen.model)[[1]]
+  entGen.Slope <- coef(entGen.model)[[2]]
+  entGen.r2 <- summary(entGen.model)$r.squared
+  entGen.Efficiency <- 10^(-1/coef(entGen.model)[[2]])
   
-  ent.StdQC <- standardQC(ent.Efficiency, ent.r2)
+  entGen.StdQC <- standardQC(entGen.Efficiency, entGen.r2)
+  
+  ### Calibrator standard curve
+  entCalStandard <- entData[grepl("Cal", entData$Sample), ]
+  entCalStandard$Log10CopyPeruL <- log10(as.numeric(entCalStandard$CopyPeruL)) 
+  
+  entCal.model <- lm(data = entCalStandard,  Cq ~ Log10CopyPeruL)
+  
+  entCal.yint <- coef(entCal.model)[[1]]
+  entCal.Slope <- coef(entCal.model)[[2]]
+  entCal.r2 <- summary(entCal.model)$r.squared
+  entCal.Efficiency <- 10^(-1/coef(entCal.model)[[2]])
+  
+  entCal.StdQC <- standardQC(entCal.Efficiency, entCal.r2)
+  
+  ### Sketa Standard Curve
   
   sketaStandard <- sketaData[grepl("Std", sketaData$Content), ]
   sketaStandard$Log10CopyPeruL <- log10(as.numeric(sketaStandard$CopyPeruL)) 

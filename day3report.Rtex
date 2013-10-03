@@ -94,23 +94,5 @@ to be labeled as ``inhibited''. Remember that these CE estimates (both replicate
 % print(xtable(resultsTrim2), scalebox = 0.93, include.rownames=FALSE, sanitize.text.function=function(x){x})
 %% end.rcode
 %----------------------------------------------------------------------------
-\pagebreak
-\section{Enterococcus Cell Equivalence Estimation}
 
-Cell equivalents (CE) per reaction is calculated using the $\Delta$Ct method, in which samples are compared to the calibrator
-in the following way:
-
-$$ \log_{10}{CE} = \frac{\Delta\text{Ct}_{samp, cal}}{slope} + \log_{10}{cal} $$
-
-where $slope$ is the slope of the enterococcus standard curve (\rinline{ent.Slope} for this plate),
-$cal$ is the enterococcus calibrator expected CE, and
-$\Delta\text{Ct}_{samp, cal}$ is the difference in Ct between the mean of the calibrators and
-the sample. These values are then transformed to CE per filter (assumed to be 100 ml), and are reported below.
-Samples indicated to be inhibited by sketa controls are labeled as such. Uninhibited CE estimates that are below the detection
-limit (set to a Ct of \rinline{m}) are denoted by ``ND''. Any detected inhibition among sample replicates causes the mean
-to be labeled as ``inhibited''. Remember that these CE estimates (both replicate and mean) are reported on a logarithmic scale.
-
-%% begin.rcode echo=FALSE, results="asis"
-% print(xtable(resultsTrim2), scalebox = 0.93, include.rownames=FALSE, sanitize.text.function=function(x){x})
-%% end.rcode
 \end{document}

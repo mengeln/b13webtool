@@ -90,7 +90,7 @@ interCalDay2 <- function (file, org) {
   # Negative Control QC
   NECmean <- mean(sketaData$Cq[grepl("NEC", sketaData$Sample)], na.rm=TRUE)
   
-  calibratorQC <- data.frame(CalibratorCt = sketaData$Cq[grepl("calibrator", sketaData$Sample)])
+  calibratorQC <- data.frame(CalibratorCt = sketaData$Cq[sketaData$Sample == "Cal"])
   calibratorQC$delta <- calibratorQC$CalibratorCt - NECmean
   calibratorQC$PASS <- ifelse(calibratorQC$delta > thres, "FAIL", "PASS")
   names(calibratorQC) <- c("Calibrator Ct", "$\\Delta$ Ct", "PASS?")

@@ -18,68 +18,126 @@ Melt step,,,,,,
 ,,,,,,
 ,,,,,,
 Well,Fluor,Target,Content,Sample,Cq,Starting Quantity (SQ)
-C03,FAM,hf183,Neg Ctrl,NEC1,N/A,N/A
-C04,FAM,hf183,Neg Ctrl,NEC1,N/A,N/A
-C04,FAM,hf183,Neg Ctrl,NEC1,N/A,N/A
-C03,FAM,hf183,Neg Ctrl,NEC2,N/A,N/A
-C04,FAM,hf183,Neg Ctrl,NEC2,N/A,N/A
-C04,FAM,hf183,Neg Ctrl,NEC2,N/A,N/A
-C05,FAM,hf183,NTC,NTC,N/A,N/A
-C05,FAM,hf183,NTC,NTC,N/A,N/A
-C06,FAM,hf183,NTC,NTC,N/A,N/A
-A01,FAM,hf183,Std-01,,25.95,1.00E+06
-A02,FAM,hf183,Std-01,,24.3,1.00E+06
-A03,FAM,hf183,Std-02,,30.57,1.00E+05
-A04,FAM,hf183,Std-02,,N/A,1.00E+05
-A05,FAM,hf183,Std-03,,N/A,1.00E+04
-A06,FAM,hf183,Std-03,,N/A,1.00E+04
-B01,FAM,hf183,Std-04,,N/A,1.00E+03
-B02,FAM,hf183,Std-04,,N/A,1.00E+03
-B03,FAM,hf183,Std-05,,N/A,1.00E+02
-B04,FAM,hf183,Std-05,,N/A,1.00E+02
-B05,FAM,hf183,Std-06,,N/A,1.00E+01
-B06,FAM,hf183,Std-06,,N/A,1.00E+01
-C01,FAM,hf183,Unkn-01,sewage,22.92,2.54E+06
-C02,FAM,hf183,Unkn-01,sewage,23.94,1.65E+06
-C03,VIC,IAC,Neg Ctrl,NEC1,34.01,5.68E-03
-C04,VIC,IAC,Neg Ctrl,NEC1,34.39,3.70E+04
-C04,VIC,IAC,Neg Ctrl,NEC1,34.39,3.70E+04
-C03,VIC,IAC,Neg Ctrl,NEC2,34.01,5.68E-03
-C04,VIC,IAC,Neg Ctrl,NEC2,34.39,3.70E+04
-C04,VIC,IAC,Neg Ctrl,NEC2,34.39,3.70E+04
-C05,VIC,IAC,NTC,NTC,34.54,N/A
-C05,VIC,IAC,NTC,NTC,34.54,N/A
-C06,VIC,IAC,NTC,NTC,35.22,N/A
-A01,VIC,IAC,Std-01,,N/A,1.00E+06
-A02,VIC,IAC,Std-01,,N/A,1.00E+06
-A03,VIC,IAC,Std-02,,34.85,1.00E+05
-A04,VIC,IAC,Std-02,,33.78,1.00E+05
-A05,VIC,IAC,Std-03,,34.17,1.00E+04
-A06,VIC,IAC,Std-03,,34.84,1.00E+04
-B01,VIC,IAC,Std-04,,34.56,1.00E+03
-B02,VIC,IAC,Std-04,,33.77,1.00E+03
-B03,VIC,IAC,Std-05,,34.49,1.00E+02
-B04,VIC,IAC,Std-05,,34.41,1.00E+02
-B05,VIC,IAC,Std-06,,34.32,1.00E+01
-B06,VIC,IAC,Std-06,,33.82,1.00E+01
-C01,VIC,IAC,Unkn-01,sewage,N/A,N/A
-C02,VIC,IAC,Unkn-01,sewage,N/A,N/A
-C09,FAM,sketa,Neg Ctrl,NEC1,22.96,1.48E-01
-C09,FAM,sketa,Neg Ctrl,NEC1,22.96,1.48E-01
-C10,FAM,sketa,Neg Ctrl,NEC1,23.16,1.30E-01
-C09,FAM,sketa,Neg Ctrl,NEC2,22.96,1.48E-01
-C09,FAM,sketa,Neg Ctrl,NEC2,22.96,1.48E-01
-C10,FAM,sketa,Neg Ctrl,NEC2,23.16,1.30E-01
-C11,FAM,sketa,NTC,NTC,N/A,N/A
-C12,FAM,sketa,NTC,NTC,N/A,N/A
-C12,FAM,sketa,NTC,NTC,N/A,N/A
-A07,FAM,sketa,Std-07,,21.99,2.00E-01
-A08,FAM,sketa,Std-07,,23.13,2.00E-01
-A09,FAM,sketa,Std-08,,25.57,2.00E-02
-A10,FAM,sketa,Std-08,,26.21,2.00E-02
-A11,FAM,sketa,Std-09,,28.89,2.00E-03
-A12,FAM,sketa,Std-09,,29.61,2.00E-03
-B07,FAM,sketa,Std-10,,33.11,2.00E-04
-B08,FAM,sketa,Std-10,,32.48,2.00E-04
-C07,FAM,sketa,Unkn-02,sewage,28.44,3.64E-03
-C08,FAM,sketa,Unkn-02,sewage,28.46,3.60E-03
+A1,FAM,hf183,Unkn,Sew Spike 1,23.27,
+A2,FAM,hf183,Unkn,Sew Spike 1,23.27,
+A3,FAM,hf183,Unkn,Sew Spike 1,23.27,
+A4,FAM,hf183,Unkn,Sew Spike 2,23.27,
+A5,FAM,hf183,Unkn,Sew Spike 2,23.27,
+A6,FAM,hf183,Unkn,Sew Spike 2,23.27,
+A7,FAM,hf183,Unkn,Sew Spike 3,23.27,
+A8,FAM,hf183,Unkn,Sew Spike 3,23.27,
+A9,FAM,hf183,Unkn,Sew Spike 3,23.27,
+A10,FAM,hf183,Unkn,Sew Spike 4,23.27,
+A11,FAM,hf183,Unkn,Sew Spike 4,23.27,
+A12,FAM,hf183,Unkn,Sew Spike 4,23.27,
+B1,FAM,hf183,Unkn,Sew Spike 5,23.27,
+B2,FAM,hf183,Unkn,Sew Spike 5,23.27,
+B3,FAM,hf183,Unkn,Sew Spike 5,23.27,
+B4,FAM,hf183,Unkn,Sew Spike 6,23.27,
+B5,FAM,hf183,Unkn,Sew Spike 6,23.27,
+B6,FAM,hf183,Unkn,Sew Spike 6,23.27,
+B7,FAM,hf183,Neg Ctrl,NEC1,N/A,N/A
+B8,FAM,hf183,Neg Ctrl,NEC1,N/A,N/A
+B9,FAM,hf183,Neg Ctrl,NEC1,N/A,N/A
+B10,FAM,hf183,Neg Ctrl,NEC2,N/A,N/A
+B11,FAM,hf183,Neg Ctrl,NEC2,N/A,N/A
+B12,FAM,hf183,Neg Ctrl,NEC2,N/A,N/A
+C1,FAM,hf183,Std-01,HF183 Std,25.95,1.00E+06
+C2,FAM,hf183,Std-01,HF183 Std,24.3,1.00E+06
+C3,FAM,hf183,Std-01,HF183 Std,24.3,1.00E+06
+C4,FAM,hf183,Std-02,HF183 Std,30.57,1.00E+05
+C5,FAM,hf183,Std-02,HF183 Std,30.57,1.00E+05
+C6,FAM,hf183,Std-02,HF183 Std,N/A,1.00E+05
+C7,FAM,hf183,Std-03,HF183 Std,N/A,1.00E+04
+C8,FAM,hf183,Std-03,HF183 Std,N/A,1.00E+04
+C9,FAM,hf183,Std-03,HF183 Std,N/A,1.00E+04
+C10,FAM,hf183,Std-04,HF183 Std,N/A,1.00E+03
+C11,FAM,hf183,Std-04,HF183 Std,N/A,1.00E+03
+C12,FAM,hf183,Std-04,HF183 Std,N/A,1.00E+03
+D1,FAM,hf183,Std-05,HF183 Std,N/A,1.00E+02
+D2,FAM,hf183,Std-05,HF183 Std,N/A,1.00E+02
+D3,FAM,hf183,Std-05,HF183 Std,N/A,1.00E+02
+D4,FAM,hf183,Std-06,HF183 Std,N/A,1.00E+01
+D5,FAM,hf183,Std-06,HF183 Std,N/A,1.00E+01
+D6,FAM,hf183,Std-06,HF183 Std,N/A,1.00E+01
+D7,FAM,hf183,NTC,NTC,N/A,N/A
+D8,FAM,hf183,NTC,NTC,N/A,N/A
+D9,FAM,hf183,NTC,NTC,N/A,N/A
+A1,FAM,hf183,Unkn,Sew Spike 1,34.01,
+A2,FAM,hf183,Unkn,Sew Spike 1,34.39,
+A3,FAM,hf183,Unkn,Sew Spike 1,34.39,
+A4,FAM,hf183,Unkn,Sew Spike 2,34.01,
+A5,FAM,hf183,Unkn,Sew Spike 2,34.39,
+A6,FAM,hf183,Unkn,Sew Spike 2,34.39,
+A7,FAM,hf183,Unkn,Sew Spike 3,34.54,
+A8,FAM,hf183,Unkn,Sew Spike 3,34.54,
+A9,FAM,hf183,Unkn,Sew Spike 3,35.22,
+A10,FAM,hf183,Unkn,Sew Spike 4,34.01,
+A11,FAM,hf183,Unkn,Sew Spike 4,34.39,
+A12,FAM,hf183,Unkn,Sew Spike 4,34.39,
+B1,FAM,hf183,Unkn,Sew Spike 5,34.01,
+B2,FAM,hf183,Unkn,Sew Spike 5,34.39,
+B3,FAM,hf183,Unkn,Sew Spike 5,34.39,
+B4,FAM,hf183,Unkn,Sew Spike 6,34.54,
+B5,FAM,hf183,Unkn,Sew Spike 6,34.54,
+B6,FAM,hf183,Unkn,Sew Spike 6,35.22,
+B7,FAM,hf183,Neg Ctrl,NEC1,34.01,N/A
+B8,FAM,hf183,Neg Ctrl,NEC1,34.39,N/A
+B9,FAM,hf183,Neg Ctrl,NEC1,34.39,N/A
+B10,FAM,hf183,Neg Ctrl,NEC2,34.01,N/A
+B11,FAM,hf183,Neg Ctrl,NEC2,34.39,N/A
+B12,FAM,hf183,Neg Ctrl,NEC2,34.39,N/A
+C1,FAM,hf183,Std-01,HF183 Std,34.54,1.00E+06
+C2,FAM,hf183,Std-01,HF183 Std,34.54,1.00E+06
+C3,FAM,hf183,Std-01,HF183 Std,35.22,1.00E+06
+C4,FAM,hf183,Std-02,HF183 Std,34.01,1.00E+05
+C5,FAM,hf183,Std-02,HF183 Std,34.39,1.00E+05
+C6,FAM,hf183,Std-02,HF183 Std,34.39,1.00E+05
+C7,FAM,hf183,Std-03,HF183 Std,34.01,1.00E+04
+C8,FAM,hf183,Std-03,HF183 Std,34.39,1.00E+04
+C9,FAM,hf183,Std-03,HF183 Std,34.39,1.00E+04
+C10,FAM,hf183,Std-04,HF183 Std,34.54,1.00E+03
+C11,FAM,hf183,Std-04,HF183 Std,34.54,1.00E+03
+C12,FAM,hf183,Std-04,HF183 Std,35.22,1.00E+03
+D1,FAM,hf183,Std-05,HF183 Std,34.01,1.00E+02
+D2,FAM,hf183,Std-05,HF183 Std,34.39,1.00E+02
+D3,FAM,hf183,Std-05,HF183 Std,34.39,1.00E+02
+D4,FAM,hf183,Std-06,HF183 Std,34.01,1.00E+01
+D5,FAM,hf183,Std-06,HF183 Std,34.39,1.00E+01
+D6,FAM,hf183,Std-06,HF183 Std,34.39,1.00E+01
+D7,FAM,hf183,NTC,NTC,N/A,N/A
+D8,FAM,hf183,NTC,NTC,N/A,N/A
+D9,FAM,hf183,NTC,NTC,N/A,N/A
+F1,FAM,sketa,Unkn,Sew Spike 1,23.27,
+F2,FAM,sketa,Unkn,Sew Spike 1,23.27,
+F3,FAM,sketa,Unkn,Sew Spike 1,23.27,
+F4,FAM,sketa,Unkn,Sew Spike 2,23.27,
+F5,FAM,sketa,Unkn,Sew Spike 2,23.27,
+F6,FAM,sketa,Unkn,Sew Spike 2,23.27,
+F7,FAM,sketa,Unkn,Sew Spike 3,23.27,
+F8,FAM,sketa,Unkn,Sew Spike 3,23.27,
+F9,FAM,sketa,Unkn,Sew Spike 3,23.27,
+F10,FAM,sketa,Unkn,Sew Spike 4,23.27,
+F11,FAM,sketa,Unkn,Sew Spike 4,23.27,
+F12,FAM,sketa,Unkn,Sew Spike 4,23.27,
+G1,FAM,sketa,Unkn,Sew Spike 5,23.27,
+G2,FAM,sketa,Unkn,Sew Spike 5,23.27,
+G3,FAM,sketa,Unkn,Sew Spike 5,23.27,
+G4,FAM,sketa,Unkn,Sew Spike 6,23.27,
+G5,FAM,sketa,Unkn,Sew Spike 6,23.27,
+G6,FAM,sketa,Unkn,Sew Spike 6,23.27,
+G7,FAM,sketa,Neg Ctrl,NEC1,N/A,N/A
+G8,FAM,sketa,Neg Ctrl,NEC1,N/A,N/A
+G9,FAM,sketa,Neg Ctrl,NEC1,N/A,N/A
+G10,FAM,sketa,Neg Ctrl,NEC2,N/A,N/A
+G11,FAM,sketa,Neg Ctrl,NEC2,N/A,N/A
+G12,FAM,sketa,Neg Ctrl,NEC2,N/A,N/A
+H1,FAM,sketa,Pos Ctrl-01,calibrator,25.25,2.34E+04
+H2,FAM,sketa,Pos Ctrl-01,calibrator,25.23,2.36E+04
+H3,FAM,sketa,Pos Ctrl-01,calibrator,25.23,2.36E+04
+H4,FAM,sketa,Pos Ctrl-01,calibrator,25.25,2.34E+04
+H5,FAM,sketa,Pos Ctrl-01,calibrator,25.23,2.36E+04
+H6,FAM,sketa,Pos Ctrl-01,calibrator,25.23,2.36E+04
+H7,FAM,sketa,NTC,NTC,N/A,N/A
+H8,FAM,sketa,NTC,NTC,N/A,N/A
+H9,FAM,sketa,NTC,NTC,N/A,N/A

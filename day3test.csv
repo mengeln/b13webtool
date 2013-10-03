@@ -18,47 +18,81 @@ Melt step,,,,,,
 ,,,,,,
 ,,,,,,
 Well,Fluor,Target,Content,Sample,Cq,Starting Quantity (SQ)
-C03,FAM,ent,Neg Ctrl,NEC1,N/A,N/A
-C04,FAM,ent,Neg Ctrl,NEC1,N/A,N/A
-C04,FAM,ent,Neg Ctrl,NEC1,N/A,N/A
-C03,FAM,ent,Neg Ctrl,NEC2,N/A,N/A
-C04,FAM,ent,Neg Ctrl,NEC2,N/A,N/A
-C04,FAM,ent,Neg Ctrl,NEC2,N/A,N/A
-C05,FAM,ent,NTC,NTC,N/A,N/A
-C06,FAM,ent,NTC,NTC,N/A,N/A
-C06,FAM,ent,NTC,NTC,N/A,N/A
-B05,FAM,ent,Pos Ctrl-01,calibrator,25.25,2.34E+04
-B06,FAM,ent,Pos Ctrl-01,calibrator,25.23,2.36E+04
-A01,FAM,ent,Std-01,,23.27,1.00E+05
-A02,FAM,ent,Std-01,,23.42,1.00E+05
-A03,FAM,ent,Std-02,,26.21,1.00E+04
-A04,FAM,ent,Std-02,,26.21,1.00E+04
-A05,FAM,ent,Std-03,,29.66,1.00E+03
-A06,FAM,ent,Std-03,,30.01,1.00E+03
-B01,FAM,ent,Std-04,,33.33,1.00E+02
-B02,FAM,ent,Std-04,,33.22,1.00E+02
-B03,FAM,ent,Std-05,,N/A,1.00E+01
-B04,FAM,ent,Std-05,,36.74,1.00E+01
-C01,FAM,ent,Unkn-01,sewage,28.35,2.83E+03
-C02,FAM,ent,Unkn-01,sewage,28.4,2.72E+03
-C09,FAM,sketa,Neg Ctrl,NEC1,22.84,2.09E-01
-C10,FAM,sketa,Neg Ctrl,NEC1,22.99,1.91E-01
-C10,FAM,sketa,Neg Ctrl,NEC1,22.99,1.91E-01
-C09,FAM,sketa,Neg Ctrl,NEC2,22.84,2.09E-01
-C10,FAM,sketa,Neg Ctrl,NEC2,22.99,1.91E-01
-C10,FAM,sketa,Neg Ctrl,NEC2,22.99,1.91E-01
-C11,FAM,sketa,NTC,NTC,N/A,N/A
-C12,FAM,sketa,NTC,NTC,N/A,N/A
-C12,FAM,sketa,NTC,NTC,N/A,N/A
-B09,FAM,sketa,Pos Ctrl-02,calibrator,23.12,1.75E-01
-B10,FAM,sketa,Pos Ctrl-02,calibrator,23.18,1.68E-01
-A07,FAM,sketa,Std-07,,22.89,2.00E-01
-A08,FAM,sketa,Std-07,,22.99,2.00E-01
-A09,FAM,sketa,Std-08,,26.39,2.00E-02
-A10,FAM,sketa,Std-08,,26.36,2.00E-02
-A11,FAM,sketa,Std-09,,30.32,2.00E-03
-A12,FAM,sketa,Std-09,,30.18,2.00E-03
-B07,FAM,sketa,Std-10,,33.68,2.00E-04
-B08,FAM,sketa,Std-10,,33.5,2.00E-04
-C07,FAM,sketa,Unkn-02,sewage,23.78,1.15E-01
-C08,FAM,sketa,Unkn-02,sewage,24.05,9.64E-02
+A1,FAM,ent,Unkn,Sew Spike 1,23.27,
+A2,FAM,ent,Unkn,Sew Spike 1,23.27,
+A3,FAM,ent,Unkn,Sew Spike 1,23.27,
+A4,FAM,ent,Unkn,Sew Spike 2,23.27,
+A5,FAM,ent,Unkn,Sew Spike 2,23.27,
+A6,FAM,ent,Unkn,Sew Spike 2,23.27,
+A7,FAM,ent,Unkn,Sew Spike 3,23.27,
+A8,FAM,ent,Unkn,Sew Spike 3,23.27,
+A9,FAM,ent,Unkn,Sew Spike 3,23.27,
+A10,FAM,ent,Unkn,Sew Spike 4,23.27,
+A11,FAM,ent,Unkn,Sew Spike 4,23.27,
+A12,FAM,ent,Unkn,Sew Spike 4,23.27,
+B1,FAM,ent,Unkn,Sew Spike 5,23.27,
+B2,FAM,ent,Unkn,Sew Spike 5,23.27,
+B3,FAM,ent,Unkn,Sew Spike 5,23.27,
+B4,FAM,ent,Unkn,Sew Spike 6,23.27,
+B5,FAM,ent,Unkn,Sew Spike 6,23.27,
+B6,FAM,ent,Unkn,Sew Spike 6,23.27,
+B7,FAM,ent,Neg Ctrl,NEC1,N/A,N/A
+B8,FAM,ent,Neg Ctrl,NEC1,N/A,N/A
+B9,FAM,ent,Neg Ctrl,NEC1,N/A,N/A
+B10,FAM,ent,Neg Ctrl,NEC2,N/A,N/A
+B11,FAM,ent,Neg Ctrl,NEC2,N/A,N/A
+B12,FAM,ent,Neg Ctrl,NEC2,N/A,N/A
+C1,FAM,ent,Pos Ctrl-01,calibrator,23.27,4.00E+04
+C2,FAM,ent,Pos Ctrl-01,calibrator,23.27,4.00E+04
+C3,FAM,ent,Pos Ctrl-01,calibrator,23.42,4.00E+04
+C4,FAM,ent,Pos Ctrl-01,calibrator,23.27,4.00E+04
+C5,FAM,ent,Pos Ctrl-01,calibrator,23.27,4.00E+04
+C6,FAM,ent,Pos Ctrl-01,calibrator,23.42,4.00E+04
+C7,FAM,ent,Std-01,,23.27,4.00E+04
+C8,FAM,ent,Std-01,,23.27,4.00E+04
+C9,FAM,ent,Std-01,,23.42,4.00E+04
+C10,FAM,ent,Std-02,,26.21,4.00E+03
+C11,FAM,ent,Std-02,,26.21,4.00E+03
+C12,FAM,ent,Std-02,,26.21,4.00E+03
+D1,FAM,ent,Std-03,,29.66,4.00E+02
+D2,FAM,ent,Std-03,,29.66,4.00E+02
+D3,FAM,ent,Std-03,,30.01,4.00E+02
+D4,FAM,ent,Std-04,,33.33,4.00E+01
+D5,FAM,ent,Std-04,,33.33,4.00E+01
+D6,FAM,ent,Std-04,,33.22,4.00E+01
+D7,FAM,ent,NTC,NTC,N/A,N/A
+D8,FAM,ent,NTC,NTC,N/A,N/A
+D9,FAM,ent,NTC,NTC,N/A,N/A
+F1,FAM,sketa,Unkn,Sew Spike 1,23.27,
+F2,FAM,sketa,Unkn,Sew Spike 1,23.27,
+F3,FAM,sketa,Unkn,Sew Spike 1,23.27,
+F4,FAM,sketa,Unkn,Sew Spike 2,23.27,
+F5,FAM,sketa,Unkn,Sew Spike 2,23.27,
+F6,FAM,sketa,Unkn,Sew Spike 2,23.27,
+F7,FAM,sketa,Unkn,Sew Spike 3,23.27,
+F8,FAM,sketa,Unkn,Sew Spike 3,23.27,
+F9,FAM,sketa,Unkn,Sew Spike 3,23.27,
+F10,FAM,sketa,Unkn,Sew Spike 4,23.27,
+F11,FAM,sketa,Unkn,Sew Spike 4,23.27,
+F12,FAM,sketa,Unkn,Sew Spike 4,23.27,
+G1,FAM,sketa,Unkn,Sew Spike 5,23.27,
+G2,FAM,sketa,Unkn,Sew Spike 5,23.27,
+G3,FAM,sketa,Unkn,Sew Spike 5,23.27,
+G4,FAM,sketa,Unkn,Sew Spike 6,23.27,
+G5,FAM,sketa,Unkn,Sew Spike 6,23.27,
+G6,FAM,sketa,Unkn,Sew Spike 6,23.27,
+G7,FAM,sketa,Neg Ctrl,NEC1,N/A,N/A
+G8,FAM,sketa,Neg Ctrl,NEC1,N/A,N/A
+G9,FAM,sketa,Neg Ctrl,NEC1,N/A,N/A
+G10,FAM,sketa,Neg Ctrl,NEC2,N/A,N/A
+G11,FAM,sketa,Neg Ctrl,NEC2,N/A,N/A
+G12,FAM,sketa,Neg Ctrl,NEC2,N/A,N/A
+H1,FAM,sketa,Pos Ctrl-01,calibrator,25.25,2.34E+04
+H2,FAM,sketa,Pos Ctrl-01,calibrator,25.23,2.36E+04
+H3,FAM,sketa,Pos Ctrl-01,calibrator,25.23,2.36E+04
+H4,FAM,sketa,Pos Ctrl-01,calibrator,25.25,2.34E+04
+H5,FAM,sketa,Pos Ctrl-01,calibrator,25.23,2.36E+04
+H6,FAM,sketa,Pos Ctrl-01,calibrator,25.23,2.36E+04
+H7,FAM,sketa,NTC,NTC,N/A,N/A
+H8,FAM,sketa,NTC,NTC,N/A,N/A
+H9,FAM,sketa,NTC,NTC,N/A,N/A

@@ -1,62 +1,77 @@
-File Name,day1test,,,,,
-Created By User,admin,,,,,
-Notes,,,,,,
-ID,,,,,,
-Run Started,8/28/2013 2:16:47 PM UTC -07:00,,,,,
-Run Ended,8/28/2013 3:52:04 PM UTC -07:00,,,,,
-Sample Vol,25,,,,,
-Lid Temp,105,,,,,
-Protocol File Name,entero 1a.prcl,,,,,
-Plate Setup File Name,qPCR training entero.pltd,,,,,
-Base Serial Number,CC011698,,,,,
-Optical Head Serial Number,785BR4301,,,,,
-CFX Manager Version,3.0.1216.0723. ,,,,,
-,,,,,,
-Well group,top,,,,,
-Amplification step,4,,,,,
-Melt step,,,,,,
-,,,,,,
-,,,,,,
-Well,Fluor,Target,Content,Sample,Cq,Starting Quantity (SQ)
-C05,FAM,ent,NTC,NTC,N/A,N/A
-C06,FAM,ent,NTC,NTC,N/A,N/A
-B05,FAM,ent,Pos Ctrl-01,calibrator,25.25,2.34E+04
-B06,FAM,ent,Pos Ctrl-01,calibrator,25.23,2.36E+04
-A01,FAM,ent,Std-01,,23.27,1.00E+05
-A02,FAM,ent,Std-01,,23.42,1.00E+05
-A03,FAM,ent,Std-02,,26.21,1.00E+04
-A04,FAM,ent,Std-02,,26.21,1.00E+04
-A05,FAM,ent,Std-03,,29.66,1.00E+03
-A06,FAM,ent,Std-03,,30.01,1.00E+03
-B01,FAM,ent,Std-04,,33.33,1.00E+02
-B02,FAM,ent,Std-04,,33.22,1.00E+02
-B03,FAM,ent,Std-05,,N/A,1.00E+01
-B04,FAM,ent,Std-05,,36.74,1.00E+01
-C05,FAM,hf183,NTC,NTC,N/A,N/A
-C06,FAM,hf183,NTC,NTC,N/A,N/A
-A01,FAM,hf183,Std-01,,25.95,1.00E+06
-A02,FAM,hf183,Std-01,,24.3,1.00E+06
-A03,FAM,hf183,Std-02,,30.57,1.00E+05
-A04,FAM,hf183,Std-02,,N/A,1.00E+05
-A05,FAM,hf183,Std-03,,N/A,1.00E+04
-A06,FAM,hf183,Std-03,,N/A,1.00E+04
-B01,FAM,hf183,Std-04,,N/A,1.00E+03
-B02,FAM,hf183,Std-04,,N/A,1.00E+03
-B03,FAM,hf183,Std-05,,N/A,1.00E+02
-B04,FAM,hf183,Std-05,,N/A,1.00E+02
-B05,FAM,hf183,Std-06,,N/A,1.00E+01
-B06,FAM,hf183,Std-06,,N/A,1.00E+01
-C05,VIC,IAC,NTC,NTC,34.54,N/A
-C06,VIC,IAC,NTC,NTC,35.22,N/A
-A01,VIC,IAC,Std-01,,N/A,1.00E+06
-A02,VIC,IAC,Std-01,,N/A,1.00E+06
-A03,VIC,IAC,Std-02,,34.85,1.00E+05
-A04,VIC,IAC,Std-02,,33.78,1.00E+05
-A05,VIC,IAC,Std-03,,34.17,1.00E+04
-A06,VIC,IAC,Std-03,,34.84,1.00E+04
-B01,VIC,IAC,Std-04,,34.56,1.00E+03
-B02,VIC,IAC,Std-04,,33.77,1.00E+03
-B03,VIC,IAC,Std-05,,34.49,1.00E+02
-B04,VIC,IAC,Std-05,,34.41,1.00E+02
-B05,VIC,IAC,Std-06,,34.32,1.00E+01
-B06,VIC,IAC,Std-06,,33.82,1.00E+01
+File Name,day1test,,,,,,,,,,,,,,
+Created By User,admin,,,,,,,,,,,,,,
+Notes,,,,,,,,,,,,,,,
+ID,,,,,,,,,,,,,,,
+Run Started,8/28/2013 2:16:47 PM UTC -07:00,,,,,,,,,,,,,,
+Run Ended,8/28/2013 3:52:04 PM UTC -07:00,,,,,,,,,,,,,,
+Sample Vol,25,,,,,,,,,,,,,,
+Lid Temp,105,,,,,,,,,,,,,,
+Protocol File Name,entero 1a.prcl,,,,,,,,,,,,,,
+Plate Setup File Name,qPCR training entero.pltd,,,,,,,,,,,,,,
+Base Serial Number,CC011698,,,,,,,,,,,,,,
+Optical Head Serial Number,785BR4301,,,,,,,,,,,,,,
+CFX Manager Version,3.0.1216.0723. ,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+Well group,top,,,,,,,,,,,,,,
+Amplification step,4,,,,,,,,,,,,,,
+Melt step,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+Well,Fluor,Target,Content,Sample,Cq,Starting Quantity (SQ),,,,,,,,,
+A1,FAM,ent,Std-01,Ent Std,23.27,4.00E+04,,,,,,,,,
+A2,FAM,ent,Std-01,Ent Std,23.42,4.00E+04,,,,,,,,,
+A3,FAM,ent,Std-01,Ent Std,23.42,4.00E+04,,,,,,,,,
+A4,FAM,ent,Std-02,Ent Std,26.21,4.00E+03,,,,,,,,,
+A5,FAM,ent,Std-02,Ent Std,26.21,4.00E+03,,,,,,,,,
+A6,FAM,ent,Std-02,Ent Std,26.21,4.00E+03,,,,,,,,,
+A7,FAM,ent,Std-03,Ent Std,29.66,4.00E+02,,,,,,,,,
+A8,FAM,ent,Std-03,Ent Std,30.01,4.00E+02,,,,,,,,,
+A9,FAM,ent,Std-03,Ent Std,30.01,4.00E+02,,,,,,,,,
+A10,FAM,ent,Std-04,Ent Std,33.33,4.00E+01,,,,,,,,,
+A11,FAM,ent,Std-04,Ent Std,33.33,4.00E+01,,,,,,,,,
+A12,FAM,ent,Std-04,Ent Std,33.22,4.00E+01,,,,,,,,,
+B1,FAM,ent,NTC,NTC,N/A,N/A,,,,,,,,,
+B2,FAM,ent,NTC,NTC,N/A,N/A,,,,,,,,,
+B3,FAM,ent,NTC,NTC,N/A,N/A,,,,,,,,,
+G1,FAM,hf183,Std-01,HF183 Std,25.95,1.00E+06,,,,,,,,,
+G2,FAM,hf183,Std-01,HF183 Std,24.3,1.00E+06,,,,,,,,,
+G3,FAM,hf183,Std-01,HF183 Std,24.3,1.00E+06,,,,,,,,,
+G4,FAM,hf183,Std-02,HF183 Std,30.57,1.00E+05,,,,,,,,,
+G5,FAM,hf183,Std-02,HF183 Std,30.57,1.00E+05,,,,,,,,,
+G6,FAM,hf183,Std-02,HF183 Std,N/A,1.00E+05,,,,,,,,,
+G7,FAM,hf183,Std-03,HF183 Std,N/A,1.00E+04,,,,,,,,,
+G8,FAM,hf183,Std-03,HF183 Std,N/A,1.00E+04,,,,,,,,,
+G9,FAM,hf183,Std-03,HF183 Std,N/A,1.00E+04,,,,,,,,,
+G10,FAM,hf183,Std-04,HF183 Std,N/A,1.00E+03,,,,,,,,,
+G11,FAM,hf183,Std-04,HF183 Std,N/A,1.00E+03,,,,,,,,,
+G12,FAM,hf183,Std-04,HF183 Std,N/A,1.00E+03,,,,,,,,,
+H1,FAM,hf183,Std-05,HF183 Std,N/A,1.00E+02,,,,,,,,,
+H2,FAM,hf183,Std-05,HF183 Std,N/A,1.00E+02,,,,,,,,,
+H3,FAM,hf183,Std-05,HF183 Std,N/A,1.00E+02,,,,,,,,,
+H4,FAM,hf183,Std-06,HF183 Std,N/A,1.00E+01,,,,,,,,,
+H5,FAM,hf183,Std-06,HF183 Std,N/A,1.00E+01,,,,,,,,,
+H6,FAM,hf183,Std-06,HF183 Std,N/A,1.00E+01,,,,,,,,,
+H7,FAM,hf183,NTC,NTC,N/A,N/A,,,,,,,,,
+H8,FAM,hf183,NTC,NTC,N/A,N/A,,,,,,,,,
+H9,FAM,hf183,NTC,NTC,N/A,N/A,,,,,,,,,
+G1,VIC,IAC,Std-01,HF183 Std,34.85,1.00E+06,,,,,,,,,
+G2,VIC,IAC,Std-01,HF183 Std,33.78,1.00E+06,,,,,,,,,
+G3,VIC,IAC,Std-01,HF183 Std,34.85,1.00E+06,,,,,,,,,
+G4,VIC,IAC,Std-02,HF183 Std,33.78,1.00E+05,,,,,,,,,
+G5,VIC,IAC,Std-02,HF183 Std,34.17,1.00E+05,,,,,,,,,
+G6,VIC,IAC,Std-02,HF183 Std,34.84,1.00E+05,,,,,,,,,
+G7,VIC,IAC,Std-03,HF183 Std,34.56,1.00E+04,,,,,,,,,
+G8,VIC,IAC,Std-03,HF183 Std,33.77,1.00E+04,,,,,,,,,
+G9,VIC,IAC,Std-03,HF183 Std,34.49,1.00E+04,,,,,,,,,
+G10,VIC,IAC,Std-04,HF183 Std,34.41,1.00E+03,,,,,,,,,
+G11,VIC,IAC,Std-04,HF183 Std,34.32,1.00E+03,,,,,,,,,
+G12,VIC,IAC,Std-04,HF183 Std,33.82,1.00E+03,,,,,,,,,
+H1,VIC,IAC,Std-05,HF183 Std,34.56,1.00E+02,,,,,,,,,
+H2,VIC,IAC,Std-05,HF183 Std,33.77,1.00E+02,,,,,,,,,
+H3,VIC,IAC,Std-05,HF183 Std,34.49,1.00E+02,,,,,,,,,
+H4,VIC,IAC,Std-06,HF183 Std,34.41,1.00E+01,,,,,,,,,
+H5,VIC,IAC,Std-06,HF183 Std,34.32,1.00E+01,,,,,,,,,
+H6,VIC,IAC,Std-06,HF183 Std,33.82,1.00E+01,,,,,,,,,
+H7,VIC,IAC,NTC,NTC,N/A,N/A,,,,,,,,,
+H8,VIC,IAC,NTC,NTC,N/A,N/A,,,,,,,,,
+H9,VIC,IAC,NTC,NTC,N/A,N/A,,,,,,,,,

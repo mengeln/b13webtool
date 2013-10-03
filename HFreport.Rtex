@@ -95,7 +95,7 @@ Samples that failed either Sketa or IAC controls are labeled as "inhibited". Uni
 limit (set to a Ct of \rinline{m}) are denoted by ``ND''. Any detected inhibition among sample replicates causes the mean
 to be labeled as ``inhibited''. Remember that these CN estimates are reported on a logarithmic scale.
 
-%% begin.rcode echo=FALSE, results="asis"
+%% begin.rcode echo=FALSE, results="asis", warnings=FALSE
 % print(xtable(resultsTrim2), include.rownames=FALSE, sanitize.text.function=function(x){x}, tabular.environment="longtable", floating=FALSE)
 %% end.rcode
 

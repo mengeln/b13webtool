@@ -6,7 +6,10 @@
 \setlength\parindent{0pt} % Removes all indentation from paragraphs
 \renewcommand{\labelenumi}{\alph{enumi}.}
 
-
+%% begin.rcode echo=FALSE, results="hide"
+% options(warn=-1)
+% opts_chunk$set(warning=FALSE)
+%% end.rcode
 \title{qPCR Report \\ HF183 Assay  \\ \rinline{metadata["File Name"]}} % Title
 \date{\today} % Date for the report
 \author{}

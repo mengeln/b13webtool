@@ -93,7 +93,7 @@ process_HF183 <- function (file, org) {
     
     sk.calibrator <<- Ct.sk.calibrator
     sk.unkn$sk.dct <- sk.unkn$Cq - Ct.sk.calibrator
-    sk.unkn$Inhibition <- ifelse(sk.unkn$sk.dct > threshold,
+    sk.unkn$Inhibition <- ifelse(sk.unkn$sk.dct > threshold | sk.unkn$sk.dct < (-threshold),  # need to update variable name to "SketaQC"
                                  "FAIL", "PASS")
     names(sk.unkn)[names(sk.unkn)=="Cq"] <- "sk.Ct"
     sk.unkn
@@ -137,7 +137,7 @@ process_HF183 <- function (file, org) {
   names(IACinhib) <- c("Sample", "IAC Ct$_{mean}$", "Pass?")
   
   # CCE interpolation
-  directCT <- function(data, ulPerRxn=2, mlFiltered=100, ulCE=500, ulCErecovered=300, ulPE=100){
+  directCT <- function(data, ulPerRxn=2, mlFiltered=100, ulCE=600, ulCErecovered=380, ulPE=100){
     data$r2 <- HF.r2
     data$Eff <- HF.Efficiency
     data$Slope <- HF.Slope

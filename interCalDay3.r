@@ -1,3 +1,5 @@
+# This script is for analyzing bight13 intercal day 3 data (Enterococcus only, with CE)
+
 library(xtable)
 library(knitr)
 library(plyr)
@@ -26,7 +28,7 @@ interCalDay3 <- function (file, org) {
   
   # data Clean Up 
   
-  names(cfxtest)[names(cfxtest) == "Starting.Quantity..SQ."] <- "CopyPeruL"
+  names(cfxtest)[names(cfxtest) == "Starting.Quantity..SQ."] <- "CopyPeruL"  #For bite13, it is CopyPerRxn
   cfxtest$CopyPeruL <- as.numeric(cfxtest$CopyPeru)
   cfxtest$Cq[cfxtest$Cq == "N/A"] <- m
   cfxtest$Cq <- as.numeric(cfxtest$Cq)
@@ -85,22 +87,35 @@ interCalDay3 <- function (file, org) {
   
   calibratorQC <- data.frame(CalibratorCt = sketaData$Cq[grepl("calibrator", sketaData$Sample)])
   calibratorQC$delta <- calibratorQC$CalibratorCt - NECmean
-  calibratorQC$PASS <- ifelse(calibratorQC$delta > thres, "FAIL", "PASS")
+  calibratorQC$PASS <- ifelse(calibratorQC$delta > thres | calibratorQC$delta < (-thres), "FAIL", "PASS")
   names(calibratorQC) <- c("Calibrator Ct", "$\\Delta$ Ct", "PASS?")
   
-  sketaQC <- function(data=sketaData, threshold=thres){
+  sketaQC.cal <- function(data=sketaData, threshold=thres){
     sk.unkn <- data[grepl("Unkn", data$Content), ]
     Ct.sk.calibrator <- mean(data$Cq[grepl("calibrator", data$Sample)]) 
     
     sk.calibrator <<- Ct.sk.calibrator
     sk.unkn$sk.dct <- sk.unkn$Cq - Ct.sk.calibrator
-    sk.unkn$Inhibition <- ifelse(sk.unkn$sk.dct > threshold,
+    sk.unkn$Inhibition <- ifelse(sk.unkn$sk.dct > threshold | sk.unkn$sk.dct < (-threshold),  #yc: need to update variable name
                                  "FAIL", "PASS")
     names(sk.unkn)[names(sk.unkn)=="Cq"] <- "sk.Ct"
     sk.unkn
   }
   
-  sketaData <- sketaQC(sketaData)
+  sketaQC.nec <- function(data=sketaData, threshold=thres){
+    sk.unkn.nec <- data[grepl("Unkn", data$Content), ]
+    Ct.sk.calibrator <- mean(data$Cq[grepl("NEC", data$Sample)]) 
+    
+    sk.calibrator <<- Ct.sk.calibrator
+    sk.unkn.nec$sk.dct <- sk.unkn.nec$Cq - Ct.sk.calibrator
+    sk.unkn.nec$Inhibition <- ifelse(sk.unkn.nec$sk.dct > threshold | sk.unkn.nec$sk.dct < (-threshold),  #yc: need to update variable name
+                                 "FAIL", "PASS")
+    names(sk.unkn.nec)[names(sk.unkn.nec)=="Cq"] <- "sk.Ct"
+    sk.unkn.nec
+  }
+  
+  sketaData <- sketaQC.cal(sketaData)
+  # need to generate sketaData based on sketaQC.nec function (as a separate table in the report)
   
   sketaDataTrim <- sketaData[, c("Sample", "sk.Ct", "sk.dct", "Inhibition")]
   
@@ -108,16 +123,15 @@ interCalDay3 <- function (file, org) {
                          sk.dct = mean(sk.dct, na.rm=TRUE), Inhibtion = ifelse(all(Inhibition == "PASS"), "PASS", "FAIL"))
   names(sketaDataTrim) <- c("Sample", "sketaCt$_{mean}$", "$\\Delta$Ct$_{mean}$", "Pass?")
   
-  # Ct to copy number (dct quantification model)
+  # Ct to CE/filter number (dct quantification model)
   
-  dct <- function(data, ulPerRxn=5, mlFiltered=100, ulCE=500, ulCErecovered=300, ulPE=100, cal=1e5/500){
+  dct <- function(data, mlFiltered=100, cal=1e5){
     Ct.ent.calibrator <<- mean(data$Cq[data$Sample == "calibrator"])
     
     data$ent.dct <- data$Cq - Ct.ent.calibrator
-    data$cellPerRxn <- 10^(data$ent.dct/ent.Slope  + log10(cal))
-    data$cellPer100ml <- data$cellPerRxn/ulPerRxn * ulPE * (ulCE/ulCErecovered) * 100/mlFiltered
-    data$log10cellPer100ml <- round(log10(data$cellPer100ml), digits=3)
-    
+    data$log10cellPerFilter <- data$ent.dct/ent.Slope  + log10(cal)
+    data$log10cellPer100ml <- round((data$log10cellPerFilter + log10(100/mlFiltered)), digits=3)
+        
     data[data$Cq == m, c("log10cellPer100ml")] <- "ND"
     
     data[!grepl("Std", data$Content), ]

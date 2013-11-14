@@ -86,42 +86,51 @@ interCalDay3 <- function (file, org) {
   NECmean <- mean(sketaData$Cq[grepl("NEC", sketaData$Sample)], na.rm=TRUE)
   
   calibratorQC <- data.frame(CalibratorCt = sketaData$Cq[grepl("calibrator", sketaData$Sample)])
+  
+  calSD <- sd(calibratorQC$CalibratorCt)
+  
   calibratorQC$delta <- calibratorQC$CalibratorCt - NECmean
   calibratorQC$PASS <- ifelse(calibratorQC$delta > thres | calibratorQC$delta < (-thres), "FAIL", "PASS")
   names(calibratorQC) <- c("Calibrator Ct", "$\\Delta$ Ct", "PASS?")
   
-  sketaQC.cal <- function(data=sketaData, threshold=thres){
+  
+  
+  
+  sketaQC <- function(data=sketaData, threshold=thres){
     sk.unkn <- data[grepl("Unkn", data$Content), ]
     Ct.sk.calibrator <- mean(data$Cq[grepl("calibrator", data$Sample)]) 
     
     sk.calibrator <<- Ct.sk.calibrator
     sk.unkn$sk.dct <- sk.unkn$Cq - Ct.sk.calibrator
-    sk.unkn$Inhibition <- ifelse(sk.unkn$sk.dct > threshold | sk.unkn$sk.dct < (-threshold),  #yc: need to update variable name
+    sk.unkn$calQC <- ifelse(sk.unkn$sk.dct > threshold | sk.unkn$sk.dct < (-threshold),  #yc: need to update variable name
                                  "FAIL", "PASS")
+    
+    Ct.sk.nec <- mean(data$Cq[grepl("NEC", data$Sample)]) 
+    
+    sk.unkn$sk.dct.nec <- sk.unkn$Cq - Ct.sk.nec 
+    sk.unkn$necQC <- ifelse(sk.unkn$sk.dct.nec > threshold | sk.unkn$sk.dct.nec < (-threshold),  #yc: need to update variable name
+                                     "FAIL", "PASS")
+    
     names(sk.unkn)[names(sk.unkn)=="Cq"] <- "sk.Ct"
     sk.unkn
   }
   
-  sketaQC.nec <- function(data=sketaData, threshold=thres){
-    sk.unkn.nec <- data[grepl("Unkn", data$Content), ]
-    Ct.sk.calibrator <- mean(data$Cq[grepl("NEC", data$Sample)]) 
-    
-    sk.calibrator <<- Ct.sk.calibrator
-    sk.unkn.nec$sk.dct <- sk.unkn.nec$Cq - Ct.sk.calibrator
-    sk.unkn.nec$Inhibition <- ifelse(sk.unkn.nec$sk.dct > threshold | sk.unkn.nec$sk.dct < (-threshold),  #yc: need to update variable name
-                                 "FAIL", "PASS")
-    names(sk.unkn.nec)[names(sk.unkn.nec)=="Cq"] <- "sk.Ct"
-    sk.unkn.nec
-  }
-  
-  sketaData <- sketaQC.cal(sketaData)
+  sketaData <- sketaQC(sketaData)
   # need to generate sketaData based on sketaQC.nec function (as a separate table in the report)
   
-  sketaDataTrim <- sketaData[, c("Sample", "sk.Ct", "sk.dct", "Inhibition")]
+  sketaDataTrim <- sketaData[, c("Sample", "sk.Ct", "sk.dct", "calQC",
+                                 "sk.dct.nec", "necQC")]
   
-  sketaDataTrim <- ddply(sketaDataTrim, .(Sample), summarize, sk.Ct = mean(sk.Ct, na.rm=TRUE),
-                         sk.dct = mean(sk.dct, na.rm=TRUE), Inhibtion = ifelse(all(Inhibition == "PASS"), "PASS", "FAIL"))
-  names(sketaDataTrim) <- c("Sample", "sketaCt$_{mean}$", "$\\Delta$Ct$_{mean}$", "Pass?")
+  sketaDataTrim <- ddply(sketaDataTrim, .(Sample), summarize,
+                         sk.Ct = mean(sk.Ct, na.rm=TRUE),
+                         sk.dct = mean(sk.dct, na.rm=TRUE),
+                         qcCal = ifelse(all(calQC == "PASS"), "PASS", "FAIL"),
+                         sk.dct.nec = mean(sk.dct.nec, na.rm=TRUE),
+                         qcNec = ifelse(all(necQC == "PASS"), "PASS", "FAIL")
+                         )
+  sketaDataMean <- sketaDataTrim
+  names(sketaDataTrim) <- c("Sample", "sketaCt$_{mean}$", "$\\Delta$Ct$_{cal mean}$", "Pass?$_{cal}$",
+                            "$\\Delta$Ct$_{NEC mean}$", "Pass?$_{NEC}$")
   
   # Ct to CE/filter number (dct quantification model)
   
@@ -144,9 +153,9 @@ interCalDay3 <- function (file, org) {
     df
   })
   
-  sketaDataMean <- ddply(sketaData, .(Sample), summarize, sk.Ct = mean(sk.Ct, na.rm=TRUE),
-                         sk.dct = mean(sk.dct, na.rm=TRUE),
-                         Inhibition = ifelse(all(Inhibition == "PASS"), "PASS", "FAIL"))
+#   sketaDataMean <- ddply(sketaData, .(Sample), summarize, sk.Ct = mean(sk.Ct, na.rm=TRUE),
+#                          sk.dct = mean(sk.dct, na.rm=TRUE),
+#                          Inhibition = ifelse(all(Inhibition == "PASS"), "PASS", "FAIL"))
   result <- merge(entData, sketaDataMean)
   # result <- merge(entData, sketaData[, c("Sample", "sk.Ct", "sk.dct", "Inhibition")])
   

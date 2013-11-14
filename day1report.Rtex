@@ -38,9 +38,9 @@ and an efficiency that is between \rinline{eff.min} and \rinline{eff.max}. \\
 Measure & Result & Pass? \\ [0.5ex]
 \hline
 Ent $r^2$ & \rinline{ent.r2} & \rinline{ent.StdQC["r2"]} \\
-Ent efficiency & \rinline{ent.Efficiency} & \rinline{ent.StdQC["eff"]} \\
+Ent Amplification Factor & \rinline{ent.Efficiency} & \rinline{ent.StdQC["eff"]} \\
 HF183 $r^2$ & \rinline{HF183.r2} & \rinline{HF183.StdQC["r2"]} \\
-HF183 efficiency & \rinline{HF183.Efficiency} & \rinline{HF183.StdQC["eff"]} \\ [1ex]
+HF183 Amplification Factor & \rinline{HF183.Efficiency} & \rinline{HF183.StdQC["eff"]} \\ [1ex]
 \hline
 \end{tabular}
 \end{center}

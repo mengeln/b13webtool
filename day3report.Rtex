@@ -38,7 +38,7 @@ and an efficiency that is between \rinline{eff.min} and \rinline{eff.max}. \\
 Measure & Result & Pass? \\ [0.5ex]
 \hline
 Ent $r^2$ & \rinline{ent.r2} & \rinline{ent.StdQC["r2"]} \\
-Ent efficiency & \rinline{ent.Efficiency} & \rinline{ent.StdQC["eff"]} \\
+Ent Amplification Factor & \rinline{ent.Efficiency} & \rinline{ent.StdQC["eff"]} \\
 \hline
 \end{tabular}
 \end{center}
@@ -58,12 +58,13 @@ in any replicates will cause these tests to fail. \\
 \pagebreak
 \section{Sample Processing and Inhibition Control QC Results}
 
-The mean sketa control Ct (i.e., the NEC) on this plate was \rinline{sk.calibrator}. In order to pass,
+The mean sketa control Ct (i.e., the NEC) on this plate was \rinline{sk.calibrator}, with a standard deviation of \rinline{calSD}.
+In order to pass,
 the difference between the mean sample sketa Ct ($\text{sketaCt}_{mean}$) and the NEC Ct (i.e., $\Delta \text{Ct}_{mean}$)
 must be less than \rinline{thres}. Note that the threshold level and pass/fail designations assume that the sample has not
 been diluted. \\
 
-Additionally, the mean sketa Ct in the NECs was \rinline{NECmean}. A large difference between this value and the sketa calibrator would indicate some sort of problem.
+Additionally, the mean sketa Ct in the NECs was \rinline{NECmean}. A large difference between this value and the calibrator sketa would indicate some sort of problem.
 
 %% begin.rcode echo=FALSE, results="asis"
 % print(xtable(calibratorQC), include.rownames=FALSE, sanitize.text.function=function(x){x})

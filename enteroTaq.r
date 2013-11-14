@@ -95,6 +95,16 @@ process_enteroTaq <- function (file, org) {
   names(dbCtrl)[names(dbCtrl) %in% c("Assay", "Sample", "variable", "value")] <- c("Target", "Type", "Rep", "Ct")
   
   # Inhibition QC
+  NECmean <- mean(sketaData$Cq[grepl("NEC", sketaData$Sample)], na.rm=TRUE)
+  
+  calibratorQC <- data.frame(CalibratorCt = sketaData$Cq[grepl("calibrator", sketaData$Sample)])
+  
+  calSD <- sd(calibratorQC$CalibratorCt)
+  
+  calibratorQC$delta <- calibratorQC$CalibratorCt - NECmean
+  calibratorQC$PASS <- ifelse(calibratorQC$delta > thres | calibratorQC$delta < (-thres), "FAIL", "PASS")
+  names(calibratorQC) <- c("Calibrator Ct", "$\\Delta$ Ct", "PASS?")
+  
   
   sketaQC <- function(data=sketaData, threshold=thres){
     sk.unkn <- data[grepl("Unkn", data$Content), ]
@@ -118,13 +128,12 @@ process_enteroTaq <- function (file, org) {
   
   # Ct to copy number (dct quantification model)
   
-  dct <- function(data, ulPerRxn=5, mlFiltered=100, ulCE=500, ulCErecovered=300, ulPE=100, cal=1e5/500){
+  dct <- function(data, mlFiltered=100, cal=1e5){
     Ct.ent.calibrator <<- mean(data$Cq[data$Sample == "calibrator"])
     
     data$ent.dct <- data$Cq - Ct.ent.calibrator
-    data$cellPerRxn <- 10^(data$ent.dct/ent.Slope  + log10(cal))
-    data$cellPer100ml <- data$cellPerRxn/ulPerRxn * ulPE * (ulCE/ulCErecovered) * 100/mlFiltered
-    data$log10cellPer100ml <- round(log10(data$cellPer100ml), digits=3)
+    data$log10cellPerFilter <- data$ent.dct/ent.Slope  + log10(cal)
+    data$log10cellPer100ml <- round((data$log10cellPerFilter + log10(100/mlFiltered)), digits=3)
     
     data[data$Cq == m, c("log10cellPer100ml")] <- "ND"
     

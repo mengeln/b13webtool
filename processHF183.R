@@ -114,6 +114,9 @@ process_HF183 <- function (file, org) {
   
   # IAC Inhibition QC
   
+  IACNEC <- IACdata[IACdata$Sample == "NEC", c("Sample", "Cq")]
+  names(IACNEC) <- c("IAC NEC", "Ct")
+  
   IACstd <- IACdata[IACdata$Content == "Std", ]
   IACstd <- IACstd[order(IACstd$CopyPeruL, decreasing =FALSE), ]
   Istd <- ddply(IACstd, .(CopyPeruL), summarize, Cq = mean(Cq, na.rm=TRUE))

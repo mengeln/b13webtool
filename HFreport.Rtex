@@ -41,7 +41,7 @@ and an efficiency that is between \rinline{eff.min} and \rinline{eff.max}. \\
 Measure & Result & Pass? \\ [0.5ex]
 \hline
 HF183 $r^2$ & \rinline{HF.r2} & \rinline{HF.StdQC["r2"]} \\
-HF183 efficiency & \rinline{HF.Efficiency} & \rinline{HF.StdQC["eff"]} \\
+HF183 Amplification Factor & \rinline{HF.Efficiency} & \rinline{HF.StdQC["eff"]} \\
 \hline
 \end{tabular}
 \end{center}
@@ -81,6 +81,13 @@ than \rinline{IACcompetition}, which is the competition threshold determined bas
 
 %% begin.rcode echo=FALSE, results="asis"
 % print(xtable(IACinhib), include.rownames=FALSE, sanitize.text.function=function(x){x})
+%% end.rcode
+
+The Ct values of IAC in the NEC wells should be similar to the uninhibited IAC value reported above. Large deviations
+are indicative of problems with the IAC.
+
+%% begin.rcode echo=FALSE, results="asis"
+% print(xtable(IACNEC), include.rownames=FALSE, sanitize.text.function=function(x){x})
 %% end.rcode
 
 %----------------------------------------------------------------------------

@@ -38,11 +38,11 @@ and an efficiency that is between \rinline{eff.min} and \rinline{eff.max}. \\
 Measure & Result & Pass? \\ [0.5ex]
 \hline
 Ent Calibrator $r^2$ & \rinline{entCal.r2} & \rinline{entCal.StdQC["r2"]} \\
-Ent Calibrator efficiency & \rinline{entCal.Efficiency} & \rinline{entCal.StdQC["eff"]} \\
+Ent Calibrator Amplification Factor & \rinline{entCal.Efficiency} & \rinline{entCal.StdQC["eff"]} \\
 Ent Genomic $r^2$ & \rinline{entGen.r2} & \rinline{entGen.StdQC["r2"]} \\
-Ent Genomic efficiency & \rinline{entGen.Efficiency} & \rinline{entGen.StdQC["eff"]} \\
+Ent Genomic Amplification Factor & \rinline{entGen.Efficiency} & \rinline{entGen.StdQC["eff"]} \\
 Sketa $r^2$ & \rinline{sketa.r2} & \rinline{sketa.StdQC["r2"]} \\
-Sketa efficiency & \rinline{sketa.Efficiency} & \rinline{sketa.StdQC["eff"]} \\ [1ex]
+Sketa Amplification Factor & \rinline{sketa.Efficiency} & \rinline{sketa.StdQC["eff"]} \\ [1ex]
 \hline
 \end{tabular}
 \end{center}

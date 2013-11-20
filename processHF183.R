@@ -174,7 +174,7 @@ process_HF183 <- function (file, org) {
     
     res <- df[, c("Sample", "Target", "Cq", "log10copiesPer100ml", "copiesPer100ml")]
     res$Mean <- NA
-    res$Mean[1] <- ifelse(any(inhibition), "inhibited", round(log10(mean(res$copiesPer100ml)), digits=2))
+    res$Mean[1] <- ifelse(any(inhibition), "inhibited", round(mean(log10(res$copiesPer100ml)), digits=2))
     res$Cq[res$Cq == m] <- "N/A"
     res$Replicate <- 1:nrow(res)
     if(any(inhibition))res$log10copiesPer100ml <- "inhibited"
@@ -186,12 +186,21 @@ process_HF183 <- function (file, org) {
   
   rmelt <- melt(resultsTrim, id.vars=c("Sample", "Target", "Replicate"))
   resultsTrim2 <- dcast(rmelt, Sample + Target  ~ Replicate + variable, value.var="value")
-  
-  resultsTrim2 <- resultsTrim2[, c("Sample", "Target", "1_Ct", "2_Ct", "1_log10copiesPer100ml", "2_log10copiesPer100ml",
+  print(resultsTrim2)
+  resultsTrim2 <- resultsTrim2[, c("Sample", "Target", "1_Ct",
+                                   "2_Ct", "3_Ct", "1_log10copiesPer100ml",
+                                   "2_log10copiesPer100ml",
+                                   "3_log10copiesPer100ml",
                                    "1_Mean")]
   resultsTrim2[is.na(resultsTrim2$"1_Ct") & is.na(resultsTrim2$"2_Ct"), c("1_Mean")] <- "ND"
-  names(resultsTrim2) <- c("Sample", "Target", "Ct$_{Rep 1}$", "Ct$_{Rep 2}$", "$\\log_{10}$ copies/100 \\si{\\milli\\litre}$_{Rep1}$",
-                           "$\\log_{10}$ copies/100 \\si{\\milli\\litre}$_{Rep2}$", "Mean $\\log_{10}$ copies/100 \\si{\\milli\\litre}")
+  names(resultsTrim2) <- c("Sample", "Target",
+                           "Ct$_{Rep 1}$",
+                           "Ct$_{Rep 2}$",
+                           "Ct$_{Rep 3}$",
+                           "$\\log_{10}$ copies/100 \\si{\\milli\\litre}$_{Rep1}$",
+                           "$\\log_{10}$ copies/100 \\si{\\milli\\litre}$_{Rep2}$",
+                           "$\\log_{10}$ copies/100 \\si{\\milli\\litre}$_{Rep3}$",
+                           "Mean $\\log_{10}$ copies/100 \\si{\\milli\\litre}")
   
   # Generate report
   oname <- tail(strsplit(file, "/")[[1]], 1)

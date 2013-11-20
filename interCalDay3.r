@@ -151,7 +151,7 @@ interCalDay3 <- function (file, org) {
   entData <- ddply(entData, .(Sample), function(df){
     cells <- as.numeric(df$log10cellPer100ml)
     cells[is.na(cells)] <- m
-    df$Mean <- round(log10(mean(10^cells)), digits=3)
+    df$Mean <- round(mean(log10(cells)), digits=3)
     df
   })
   

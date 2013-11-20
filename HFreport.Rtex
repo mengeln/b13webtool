@@ -103,10 +103,10 @@ where $slope$ is the slope of the HF183 standard curve (\rinline{HF.Slope} for t
 $yint$ is the y-intercept of the HF183 standard curve. These values are then transformed to CN per filter (assumed to be 100 ml), and are reported below.
 Samples that failed either Sketa or IAC controls are labeled as "inhibited". Uninhibited CN estimates that are below the detection 
 limit (set to a Ct of \rinline{m}) are denoted by ``ND''. Any detected inhibition among sample replicates causes the mean
-to be labeled as ``inhibited''. Remember that these CN estimates are reported on a logarithmic scale.
+to be labeled as ``inhibited''. Remember that these CN estimates are reported on a logarithmic scale. \\
 
 %% begin.rcode echo=FALSE, results="asis", warnings=FALSE
-% print(xtable(resultsTrim2), include.rownames=FALSE, sanitize.text.function=function(x){x}, tabular.environment="longtable", floating=FALSE)
+% print(xtable(resultsTrim2), include.rownames=FALSE, sanitize.text.function=function(x){x}, floating=FALSE, scale=.75)
 %% end.rcode
 
 \end{document}

@@ -114,7 +114,7 @@ process_HF183 <- function (file, org) {
   
   # IAC Inhibition QC
   
-  IACNEC <- IACdata[IACdata$Sample == "NEC", c("Sample", "Cq")]
+  IACNEC <- IACdata[grepl("NEC", IACdata$Sample), c("Sample", "Cq")]
   names(IACNEC) <- c("IAC NEC", "Ct")
   
   IACstd <- IACdata[IACdata$Content == "Std", ]
@@ -170,7 +170,7 @@ process_HF183 <- function (file, org) {
   IACinhib$Competition <- ifelse(result$Competition[match(IACinhib$Sample, result$Sample)], "Yes", NA)
   
   resultsTrim <- rbind.fill(lapply(split(result, result$Sample), function(df){
-    inhibition <- !all(rbind(df$"Pass?.x" == "PASS", df$"Pass?.y" == "PASS"))
+    inhibition <- !all(rbind(df$"Pass?.x" == "PASS", df$"Pass?.y" == "PASS")) & !df$Competition
     
     res <- df[, c("Sample", "Target", "Cq", "log10copiesPer100ml", "copiesPer100ml")]
     res$Mean <- NA

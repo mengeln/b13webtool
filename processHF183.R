@@ -102,7 +102,7 @@ process_HF183 <- function (file, org) {
   sketaData <- sketaQC(sketaData)
   
   sketaDataTrim <- sketaData[, c("Sample", "sk.Ct", "sk.dct", "Inhibition")]
-  
+
   sketaDataTrim <- ddply(sketaDataTrim, .(Sample), function(df){
     data.frame(Sample = unique(df$Sample),
                sk.Ct = mean(df$sk.Ct, na.rm=TRUE),
@@ -126,11 +126,12 @@ process_HF183 <- function (file, org) {
   
   IACcompetition <- predict(HF.model, data.frame(Log10CopyPeruL = log10(Max.comp)))
   
-  IACinterference <- mean(ROQ) + 4*sd(ROQ, na.rm=TRUE)
+  iacsd <- sd(ROQ, na.rm=TRUE)
+  IACinterference <- mean(ROQ) + 4*ifelse(is.na(iacsd), 0, iacsd)
   
   IACinhib <- ddply(IACdata[IACdata$Content == "Unkn", ], .(Sample), function(df){ 
     mean <- mean(df$Cq, na.rm=TRUE)
-    inhibited <- mean > IACinterference 
+    inhibited <- mean >= IACinterference 
     data.frame(Sample = unique(df$Sample),
                Ctmean = mean,
                "PASS?" = ifelse(!inhibited, "PASS", "FAIL")
@@ -171,7 +172,7 @@ process_HF183 <- function (file, org) {
   
   resultsTrim <- rbind.fill(lapply(split(result, result$Sample), function(df){
     inhibition <- !all(rbind(df$"Pass?.x" == "PASS", df$"Pass?.y" == "PASS")) & !df$Competition
-    
+   
     res <- df[, c("Sample", "Target", "Cq", "log10copiesPer100ml", "copiesPer100ml")]
     res$Mean <- NA
     res$Mean[1] <- ifelse(any(inhibition), "inhibited", round(mean(log10(res$copiesPer100ml)), digits=2))
@@ -186,7 +187,7 @@ process_HF183 <- function (file, org) {
   
   rmelt <- melt(resultsTrim, id.vars=c("Sample", "Target", "Replicate"))
   resultsTrim2 <- dcast(rmelt, Sample + Target  ~ Replicate + variable, value.var="value")
-  print(resultsTrim2)
+
   resultsTrim2 <- resultsTrim2[, c("Sample", "Target", "1_Ct",
                                    "2_Ct", "3_Ct", "1_log10copiesPer100ml",
                                    "2_log10copiesPer100ml",

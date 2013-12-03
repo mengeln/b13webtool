@@ -1,0 +1,68 @@
+File Name,day2test,,,,,
+Created By User,admin,,,,,
+Notes,,,,,,
+ID,,,,,,
+Run Started,8/28/2013 2:16:47 PM UTC -07:00,,,,,
+Run Ended,8/28/2013 3:52:04 PM UTC -07:00,,,,,
+Sample Vol,25,,,,,
+Lid Temp,105,,,,,
+Protocol File Name,entero 1a.prcl,,,,,
+Plate Setup File Name,qPCR training entero.pltd,,,,,
+Base Serial Number,CC011698,,,,,
+Optical Head Serial Number,785BR4301,,,,,
+CFX Manager Version,3.0.1216.0723. ,,,,,
+,,,,,,
+Well group,top,,,,,
+Amplification step,4,,,,,
+Melt step,,,,,,
+,,,,,,
+,,,,,,
+Well,Fluor,Target,Content,Sample,Cq,Starting Quantity (SQ)
+A1,FAM,ent,Std,Cal,23.27,4.00E+04
+A2,FAM,ent,Std,Cal,23.42,4.00E+04
+A3,FAM,ent,Std,Cal,23.42,4.00E+04
+A4,FAM,ent,Std,Cal,26.21,4.00E+03
+A5,FAM,ent,Std,Cal,26.21,4.00E+03
+A6,FAM,ent,Std,Cal,26.21,4.00E+03
+A7,FAM,ent,Std,Cal,29.66,4.00E+02
+A8,FAM,ent,Std,Cal,29.66,4.00E+02
+A9,FAM,ent,Std,Cal,30.01,4.00E+02
+A10,FAM,ent,Std,Cal,33.33,4.00E+01
+A11,FAM,ent,Std,Cal,33.33,4.00E+01
+A12,FAM,ent,Std,Cal,33.22,4.00E+01
+B1,FAM,ent,Neg Ctrl,NEC,N/A,N/A
+B2,FAM,ent,Neg Ctrl,NEC,N/A,N/A
+B3,FAM,ent,Neg Ctrl,NEC,N/A,N/A
+B4,FAM,ent,Std-01,Ent Std,23.27,4.00E+04
+B5,FAM,ent,Std-01,Ent Std,23.42,4.00E+04
+B6,FAM,ent,Std-01,Ent Std,23.42,4.00E+04
+B7,FAM,ent,Std-02,Ent Std,26.21,4.00E+03
+B8,FAM,ent,Std-02,Ent Std,26.21,4.00E+03
+B9,FAM,ent,Std-02,Ent Std,26.21,4.00E+03
+B10,FAM,ent,Std-03,Ent Std,29.66,4.00E+02
+B11,FAM,ent,Std-03,Ent Std,29.66,4.00E+02
+B12,FAM,ent,Std-03,Ent Std,30.01,4.00E+02
+C1,FAM,ent,Std-04,Ent Std,33.33,4.00E+01
+C2,FAM,ent,Std-04,Ent Std,33.33,4.00E+01
+C3,FAM,ent,Std-04,Ent Std,33.22,4.00E+01
+C05,FAM,ent,NTC,NTC,N/A,N/A
+C06,FAM,ent,NTC,NTC,N/A,N/A
+C06,FAM,ent,NTC,NTC,N/A,N/A
+G1,FAM,sketa,Std-07,Cal,22.89,4.00E+04
+G2,FAM,sketa,Std-07,Cal,22.89,4.00E+04
+G3,FAM,sketa,Std-07,Cal,22.99,4.00E+04
+G4,FAM,sketa,Std-08,Cal,26.39,4.00E+03
+G5,FAM,sketa,Std-08,Cal,26.39,4.00E+03
+G6,FAM,sketa,Std-08,Cal,26.36,4.00E+03
+G7,FAM,sketa,Std-09,Cal,30.32,4.00E+02
+G8,FAM,sketa,Std-09,Cal,30.18,4.00E+02
+G9,FAM,sketa,Std-09,Cal,30.18,4.00E+02
+G10,FAM,sketa,Std-10,Cal,33.68,4.00E+01
+G11,FAM,sketa,Std-10,Cal,33.5,4.00E+01
+G12,FAM,sketa,Std-10,Cal,33.5,4.00E+01
+H1,FAM,sketa,Neg Ctrl,NEC,22.84,2.09E-01
+H2,FAM,sketa,Neg Ctrl,NEC,22.99,1.91E-01
+H3,FAM,sketa,Neg Ctrl,NEC,22.99,1.91E-01
+H4,FAM,sketa,NTC,NTC,N/A,N/A
+H5,FAM,sketa,NTC,NTC,N/A,N/A
+H6,FAM,sketa,NTC,NTC,N/A,N/A

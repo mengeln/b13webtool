@@ -60,7 +60,8 @@ in any replicates will cause these tests to fail. \\
 \pagebreak
 \section{Sample Processing and Inhibition Control QC Results} 
 \subsection{Sketa}
-The mean sketa control Ct (i.e., the NEC) on this plate was \rinline{sk.calibrator}. In order to pass,
+The mean sketa control Ct (i.e., the NEC) on this plate was \rinline{sk.calibrator} with
+a standard deviation of \rinline{Ct.sk.sd}. In order to pass,
 the difference between the mean sample sketa Ct ($\text{sketaCt}_{mean}$) and the NEC Ct (i.e., $\Delta \text{Ct}_{mean}$)
 must be less than \rinline{thres}. Note that the threshold level and pass/fail designations assume that the sample has not
 been diluted. \\

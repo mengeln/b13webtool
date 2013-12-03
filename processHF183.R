@@ -85,11 +85,12 @@ process_HF183 <- function (file, org) {
   dbCtrl$variable <- as.numeric(gsub(".*?Rep(\\d).*", "\\1", dbCtrl$variable))
   names(dbCtrl)[names(dbCtrl) %in% c("Assay", "Sample", "variable", "value")] <- c("Target", "Type", "Rep", "Ct")
   # Sketa Inhibition QC
-  
+        
   sketaQC <- function(data=sketaData, threshold=thres){
     sk.unkn <- data[grepl("Unkn", data$Content), ]
     calibrators <- sketaData$Cq[grepl("NEC", toupper(sketaData$Sample))]
     Ct.sk.calibrator <- mean(calibrators)
+    Ct.sk.sd <<- sd(calibrators)
     
     sk.calibrator <<- Ct.sk.calibrator
     sk.unkn$sk.dct <- sk.unkn$Cq - Ct.sk.calibrator
